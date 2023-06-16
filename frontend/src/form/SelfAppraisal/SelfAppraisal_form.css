@@ -1,0 +1,333 @@
+<<<<<<< HEAD
+.inp {
+    width: 90%;
+    padding: 0.5rem;
+  height: 46px;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  background-blend-mode: multiply;
+  border: 1px solid #9fc8fe;
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+
+
+.submitbtn{
+=======
+.parent_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container2 {
+    background-color: #f2f2f2;
+    justify-content: center;
+    width: 60%;
+    margin-top: 2%;
+    text-align: center;
+    border: 2px solid rgb(235, 231, 231);
+
+}
+
+.inp {
+    width: 90%;
+    padding: 0.5rem;
+    height: 46px;
+    border: 1px solid #9fc8fe;
+    background: #ffffff;
+    background-blend-mode: multiply;
+    border: 1px solid #9fc8fe;
+    border-radius: 10px;
+    margin: 8px 0;
+}
+
+.btn_saf{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitbtn {
+  
+
+>>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+    width: 30%;
+    background-color: #5b91d9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+<<<<<<< HEAD
+.submitbtn:hover{
+=======
+
+.submitbtn:hover {
+>>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+    background-color: #5b91d9;
+}
+.heading{
+
+<<<<<<< HEAD
+
+    background-color: #5b91d9;
+    color: white;
+  border-radius: 20px;
+
+    padding: 3px;
+=======
+.heading {
+
+    display: flex;
+    justify-content: center;
+    background-color: #5b91d9;
+    color: white;
+    border-radius: 20px;
+    padding: 2px;
+>>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+
+}
+
+
+#SpecificAchievementByTheEmployee {
+    height: 80px;
+}
+
+#JobAsssigned {
+    height: 80px;
+
+}
+<<<<<<< HEAD
+.row{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.inp1{
+    /* width: 100%; */
+    padding: 0.5rem;
+  height: 46px;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  background-blend-mode: multiply;
+  border: 1px solid #9fc8fe;
+  border-radius: 10px;
+  margin: 8px 0;
+  flex-grow: 1;
+}
+.row2{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    /* gap: 1em; */
+}
+.title_saf{
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.period_saf{
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+.row1{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 1em;
+
+
+}
+.emp_id{
+    display: flex;
+    gap: 1em;
+}
+.pos{
+    display: flex;
+    gap: 1em;
+
+}
+.title_empid{
+   
+
+    display: flex;
+
+    align-items: center;
+}
+.title_pos{
+ 
+    display: flex;
+    align-items: center;
+
+}
+.row4{
+    display: flex;
+    justify-content:space-around;
+    width: 100%;
+    gap: 2em;
+
+
+}
+.sign{
+    display: flex;
+    gap: 1em;
+}
+.title_sign{
+    display: flex;
+    align-items: center;
+}
+.date{
+    display: flex;
+    gap: 1em;
+}
+.title_date{
+    
+    display: flex;
+=======
+
+
+.inp1 {
+    /* width: 100%; */
+    padding: 0.5rem;
+    height: 46px;
+    border: 1px solid #9fc8fe;
+    background: #ffffff;
+    background-blend-mode: multiply;
+    border: 1px solid #9fc8fe;
+    border-radius: 10px;
+    margin: 8px 0;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.row2 {
+
+    display: flex;
+    justify-content: space-evenly;
+    width: 95%;
+
+}
+
+.title_saf {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.period_saf {
+    display: flex;
+    justify-content: flex-start;
+   
+   
+    gap: 0.5em;
+    width: 70%;
+}
+
+.row1 {
+    display: flex;
+    justify-content: space-around;
+    width: 92%;
+    gap: 1em;
+    margin-left: 4%;
+
+
+
+}
+
+.emp_id {
+    
+    display: flex;
+    justify-content: space-around;
+    gap: 0.3em;
+    width:50%;
+}
+
+.pos {
+    display: flex;
+    gap: 0.3em;
+   
+    width: 50%;
+
+}
+
+.title_empid {
+
+
+    display: flex;
+
+    align-items: center;
+}
+
+.title_pos {
+
+    display: flex;
+    align-items: center;
+
+}
+
+.row3 {
+    display: flex;
+    justify-content: space-around;
+    width: 94%;
+    gap: 1em;
+    margin-left: 4%;
+}
+.job_ass{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.spe_ach{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.row4 {
+    display: flex;
+    justify-content: space-around;
+    width: 94%;
+    gap: 1em;
+    margin-left: 4%;
+
+
+}
+
+.sign {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    gap: 0.3em;
+}
+
+.title_sign {
+
+    display: flex;
+
+}
+
+.date {
+
+    display: flex;
+    width: 50%;
+    gap: 0.3em;
+}
+
+.title_date {
+
+    display: flex;
+>>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+    align-items: center;
+}

@@ -1,0 +1,46 @@
+@import './variable';
+.side-bar{
+    padding-top: 0.5rem;
+    box-shadow: 0 1px 2px rgba(51, 51, 51, 0.397);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-transform: capitalize;
+    overflow: hidden;
+    width: 3.5rem;
+    &:hover{
+        width: 12rem;
+    }
+    .sidebar-item{
+        padding: 0 0.5rem;
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+        border-radius: 30px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        text-decoration: none;
+        color: #333;
+
+        &:hover{
+            background: $hover-color;
+        }
+        i{
+            font-size: 1.2rem;
+            padding: 0.7rem 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s linear;
+        }
+    }
+    .active{
+        background: #feefc3;
+        &:hover{
+            background: #feefc3;
+        }
+    }
+   
+}
+.open{
+    width: 12rem;
+}

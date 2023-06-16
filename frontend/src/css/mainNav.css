@@ -1,0 +1,131 @@
+.main-nav {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-between;
+  box-shadow: 0 1px 2px rgba(51, 51, 51, 0.397);
+}
+.main-nav i {
+  color: #6a6a6a;
+  font-size: 1.2rem;
+  padding: 0.7rem;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+.main-nav i:hover {
+  color: #333;
+  background-color: rgba(90, 91, 92, 0.1568627451);
+}
+.main-nav i:nth-child(1) {
+  padding: 0.7rem 0.8rem;
+}
+.main-nav .nav-left {
+  display: flex;
+  align-items: center;
+}
+.main-nav .nav-left .logo img {
+  width: 40px;
+}
+.main-nav .searchbar {
+  border: 2px solid #eee;
+  border-radius: 5px;
+  background: rgba(90, 91, 92, 0.1568627451);
+  max-width: 25rem;
+  width: 100%;
+}
+.main-nav .searchbar input {
+  background: transparent;
+  outline: none;
+  border: none;
+}
+.main-nav .searchbar .fa-magnifying-glass {
+  font-size: 1rem;
+}
+.main-nav .searchbar .fa-magnifying-glass:hover {
+  cursor: auto;
+  background-color: transparent;
+}
+.main-nav .nav-right {
+  display: flex;
+  align-items: center;
+}
+.main-nav .nav-right img {
+  cursor: pointer;
+  width: 35px;
+  border-radius: 50%;
+}
+.main-nav .nav-right .loader {
+  margin: 0 0.7rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid #333;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.main-nav .nav-right .rotate-refresh {
+  animation: rotate 1.5s ease-in-out infinite;
+  transform: rotate(0);
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.main-nav .nav-right .settings, .main-nav .nav-right .profile {
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  background: #fff;
+  padding: 0.5rem 0;
+  border-radius: 5px;
+  position: absolute;
+  min-width: 10rem;
+  top: 10%;
+  right: 0;
+  z-index: 9999;
+}
+.main-nav .nav-right .settings p, .main-nav .nav-right .profile p {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  margin: 0;
+  cursor: pointer;
+}
+.main-nav .nav-right .settings p:hover, .main-nav .nav-right .profile p:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.main-nav .nav-right .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+.main-nav .nav-right .profile p {
+  padding-bottom: 0;
+}
+.main-nav .nav-right .profile p:hover {
+  background: transparent;
+  cursor: auto;
+}
+.main-nav .nav-right .profile img {
+  border-radius: 50%;
+  width: 50px;
+}
+.main-nav .nav-right .profile .logout {
+  cursor: pointer;
+}
+.main-nav .nav-right .profile .logout i {
+  font-size: 1rem;
+}
+.main-nav .nav-right .profile .logout i:hover {
+  background: transparent;
+}/*# sourceMappingURL=mainNav.css.map */
