@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import StateContext from '../../StateContext.js';
 import axios from 'axios';
 
+
 export const HR = () => {
   const navigate = useNavigate();
   const { user } = useContext(StateContext);
@@ -18,7 +19,7 @@ export const HR = () => {
       })
   }, [])
   const fillForrm = () => {
-    navigate("/form/APAR_form");
+    navigate("/form/APAR");
   }
    
   return (

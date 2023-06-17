@@ -34,21 +34,21 @@ export default function SignIn() {
       const code = data.status;
       if(code === 400) alert("All inputs are required");
       else if(code === 401) alert("Invalid Credientials");
-      else if(code === 200 & data.user.email == "emp@gmail.com") {
+      else if(code === 200 & data.user.email === "emp@gmail.com") {
     
         navigate('/main/employee')
       }
-      else if(code==200 & data.user.email == "hr@gmail.com") {
+      else if(code === 200 & data.user.email === "hr@gmail.com") {
       
         navigate('/main2/HR')
       }
-      else if(code==200 & data.user.email == "rpo@gmail.com") {
+      else if(code === 200 & data.user.email === "rpo@gmail.com") {
       
         navigate('/main3/RPO')
       }
    
     } catch (error) {
-      console.log(error.message);
+      
       alert(error.message)
     }
   };

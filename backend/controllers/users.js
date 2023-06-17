@@ -1,24 +1,28 @@
 import User from '../models/user.js';
 
-export const Login = async (req, res) => {
+
+  export const Login = async (req, res) => {
     try {
-        const { email, password } = req.body
-        console.log({ email, password });
-        const user = await User.findOne({ email  });
-        console.log({user});
-        if (user) {
-            if (password === user.password) {
-                res.send({status : 200, message: "Login Successfull", user: user })
-            } else {
-                res.send({ message: "Password didn't match" })
-            }
+      const { email, password } = req.body;
+      console.log({ email, password });
+  
+      const user = await User.findOne({ email });
+      console.log({ user });
+  
+      if (user) {
+        if (password === user.password) {
+          res.send({ status: 200, message: "Login Successfull", user: user });
         } else {
-            res.send({ message: "User not registered" })
+          res.send({ message: "Password didn't match" });
         }
+      } else {
+        res.send({ message: "User not registered" });
+      }
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
-};
+  };
+  
 
 export const updateRequest = async (req, res) => {
     const { email } = req.body;
