@@ -9,7 +9,7 @@ import { Main3 } from "./Components/main3/Main3";
 import { Employee } from "./Components/main/Employee";
 import { HR } from "./Components/main2/HR";
 import { RPO } from "./Components/main3/RPO";
-// import APAR_form from './Components/form/APAR/APAR_form';
+import APAR_form from './Components/form/APAR/APAR_form';
 import SelfAppraisalForm from './Components/form/SelfAppraisal/SelfAppraisal_form'
 import LandingPage from './Components/LandingPage/LandingPage'
 
@@ -32,7 +32,7 @@ function App() {
             <Route path="RPO" element={<RPO />} />
           </Route>
           <Route path="/form/selfappraisal" element={<SelfAppraisalForm/>} />
-          {/* <Route path="/form/APAR" element={<APAR_form/>} /> */}
+          <Route path="/form/APAR" element={<APAR_form/>} />
           <Route path="/form/Evaluation" element={<Evaluation_form/>} />
           <Route path="/LandingPage" element={<LandingPage/>} />
           </Routes>
