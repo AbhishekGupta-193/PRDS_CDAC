@@ -1,7 +1,6 @@
 import './App.css';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import StateContext from './StateContext';
 import {Evaluation_form} from './Components/form/Evaluation/Evaluation_form';
 import Login from './Components/LoginPage/Login';
 import { Main } from "./Components/main/Main";
@@ -15,43 +14,9 @@ import SelfAppraisalForm from './Components/form/SelfAppraisal/SelfAppraisal_for
 import LandingPage from './Components/LandingPage/LandingPage'
 
 function App() {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-
-    request: false,
-    filledByHr: false,
-    filledByEmployee: false,
-
-    username: "",
-    EmployeeID: "",
-    SelfAppraisalPeriod_from: "",
-    SelfAppraisalPeriod_to: "",
-    ProjectName: "",
-    CurrentResponsiblities: "",
-    JobAsssigned: "",
-    SpecificAchievementByTheEmployee: "",
-    SingnatureOfEmployee: "",
-    Date: "",
-
-    entrydate: "",
-    dob: "",
-    designation: "",
-    pay: "",
-    grp: "",
-    leave: "",
-    otherleave: "",
-    Aparfrom: "",
-    Aparupto: "",
-    Apardate: "",
-
-  })
-  const [empReq, setEmpReq] = useState([]);
-  const [requserId, setReqUserId] = useState();
 
   return (
     <div className="App">
-      <StateContext.Provider value={{ user, setUser, empReq, setEmpReq, requserId, setReqUserId }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navigate replace to="/Login" />} />
@@ -72,7 +37,6 @@ function App() {
           <Route path="/LandingPage" element={<LandingPage/>} />
           </Routes>
         </BrowserRouter>
-      </StateContext.Provider>
     </div>
   );
 }
