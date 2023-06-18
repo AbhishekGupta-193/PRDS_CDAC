@@ -1,21 +1,31 @@
 import '../../css/notes.css'
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import StateContext from '../../StateContext.js';
+// import StateContext from '../../StateContext.js';
 import axios from 'axios';
+import { useGlobalContext } from '../../StateContext';
 
 
 export const HR = () => {
   const navigate = useNavigate();
-  const { user } = useContext(StateContext);
-  const [show, setShow] = useState([]);
-
+  const { user,setuser } = useGlobalContext();
+  // const [show, setShow] = useState([]);
+  const {alluser, setalluser} = useGlobalContext();
+  const btnhandler = ()=>{
+    navigate('/form/APAR')
+  }
   useEffect(() => {
+    // axios
+    //   .get("http://localhost:5000/getRequests")
+    //   .then(({ data }) => {
+    //     console.log('data ---> ', data);
+    //     setShow(data);
+    //   })
     axios
-      .get("http://localhost:5000/getRequests")
+      .get("http://localhost:5000/getUsers")
       .then(({ data }) => {
-        console.log('data ---> ', data);
-        setShow(data);
+        console.log(data);
+        setalluser(data);
       })
   }, [])
   const fillForrm = () => {
@@ -27,14 +37,14 @@ export const HR = () => {
     <div className='notes-wrapper'>
        <div className="container">
         <div className="card">
-          <h2>Welcome, {user.email}</h2>
-          <p>You have 50 employees in your company.</p>
+          <h2>Welcome</h2>
+          {/* <p>You have 50 employees in your company.</p> */}
           <div className="action">
-            <button>View Employees</button>
-            <a href="/">Manage Departments</a>
+            <button onClick={btnhandler}>APAR</button>
+            {/* <a href="/">Manage Departments</a> */}
           </div>
         </div>
-        <div className="card">
+        {/* <div className="card">
           <h2>Recent Requests</h2>
 
           {show.map((employee) =>
@@ -44,7 +54,7 @@ export const HR = () => {
               <br />
             </>
           )}
-        </div>
+        </div> */}
       </div>  
     </div>
   )

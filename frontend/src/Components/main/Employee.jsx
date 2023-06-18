@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import StateContext from '../../StateContext.js';
+import  { useGlobalContext } from '../../StateContext.js';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import './Dash1.css'
@@ -8,7 +8,8 @@ import './Dash1.css'
 
 export const Employee = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(StateContext);
+  // const { user, setUser } = useContext(StateContext);
+  const {user,setUser} = useGlobalContext();
 
   const generate = () => {
     axios.post("http://localhost:5000/updateRequest", user)

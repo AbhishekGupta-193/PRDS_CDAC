@@ -73,16 +73,23 @@ export const submitSelfAppraisel = async (req, res) => {
 };
 
 export const submitAparForm = async (req, res) => {
-    const { email } = req.body;
+    const {empId} = req.body;
+    console.log(req.body," lelo");
     try {
-        const user = await User.findOne({ email: email });
-        if (user) {
-            user.filledByHr = !user.filledByHr;
-            user.request = !user.request;
-            await user.save();
-            res.json(user);
-        } else {
-            res.status(404).send('Employee not found');
+        const user_ = await User.findOneAndUpdate( { empId }, 
+        req.body, // New data to update
+        { new: true } );
+        console.log({user_});
+        if (user_) {
+            // Object.keys(newData).forEach(key => {
+            //     if (user[key] !== undefined) {
+            //         user[key] = newData[key];
+            //     }
+            // });
+            // const updted_user = {...user,...newData};
+            // const updatedData = await user.save();
+            // console.log({updatedData});
+            // res.json(updatedData);
         }
     } catch (error) {
         console.error(error);

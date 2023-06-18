@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import "./SelfAppraisal_form.css"
-import StateContext from '../../../StateContext.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import { useGlobalContext } from '../../../StateContext';
 
 const SelfAppraisalForm = () => {
     const navigate = useNavigate();
-    const { user, setUser } = useContext(StateContext);
+    const { user, setUser } = useGlobalContext();
 
     const handleInput = (e) => {
         const { name, value } = e.target;
