@@ -1,9 +1,16 @@
 import React from 'react';
-import './LandingPage.css'; // Import the CSS file for styling
-import logo from './imgs/cdac_logo.png'; // Import your logo image
-import bg_image from './imgs/hrmis1.jpg'; // Import your logo image
+import './LandingPage.css'; 
+import logo from './imgs/cdac_logo.png'; 
+import bg_image from './imgs/hrmis1.jpg'; 
+import { useNavigate } from 'react-router-dom'
+
 
 const LandingPage = () => {
+    const navigate = useNavigate();
+
+    const loginhandler = ()=>{
+        navigate("/Login")
+    }
     return (
         <div className="landing-page">
             <div className="navbar_lp">
@@ -34,15 +41,15 @@ const LandingPage = () => {
                     <div className="login-buttons">
                         <div className="login-card hr">
                             <h2>HR Login</h2>
-                            <button>Login</button>
+                            <button onClick={loginhandler}>Login</button>
                         </div>
                         <div className="login-card employee">
                             <h2>Employee Login</h2>
-                            <button>Login</button>
+                            <button onClick={loginhandler}>Login</button>
                         </div>
                         <div className="login-card reporting-officer">
                             <h2>Reporting Officer Login</h2>
-                            <button>Login</button>
+                            <button onClick={loginhandler}>Login</button>
                         </div>
                     </div>
                 </div>

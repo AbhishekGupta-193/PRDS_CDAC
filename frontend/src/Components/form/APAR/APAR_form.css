@@ -94,3 +94,10 @@
   display: flex;
   width: 100%;
 }
+.Edit_lock{
+   display: flex;
+   gap: 1rem;
+   justify-content: center;
+   align-items: center;
+   width: 50%;
+}

@@ -1,210 +1,270 @@
-.parent_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.body {
+  display: flex;
 }
-.container2 {
-    background-color: #f2f2f2;
-    justify-content: center;
-    width: 60%;
-    margin-top: 2%;
-    text-align: center;
-    border: 2px solid rgb(235, 231, 231);
+.header {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 70%;
+  margin-left: 15%;
+  gap: 1.5em;
 
+  border: 2px solid rgb(169, 164, 164);
 }
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
-.inp {
-    width: 90%;
-    padding: 0.5rem;
-    height: 46px;
-    border: 1px solid #9fc8fe;
-    background: #ffffff;
-    background-blend-mode: multiply;
-    border: 1px solid #9fc8fe;
-    border-radius: 10px;
-    margin: 8px 0;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  /* margin-top: 0.2em; */
 }
+.head_saf {
+  display: flex;
+  justify-content: center;
 
-.btn_saf{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* border: 2px solid blue; */
+
+  background: #5b91d9;
+
+  border-radius: 20px;
+
+  align-items: center;
+  text-align: center;
 }
-
-.submitbtn {
-  
-
-    width: 30%;
-    background-color: #5b91d9;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    
+.one {
+  display: flex;
+  gap: 2em;
 }
-
-.submitbtn:hover {
-    background-color: #5b91d9;
+.employeename {
+  display: flex;
+  width: 50%;
+  gap: 2em;
 }
-
-.heading {
-
-    display: flex;
-    justify-content: center;
-    background-color: #5b91d9;
-    color: white;
-    border-radius: 20px;
-    padding: 2px;
-
+.title1 {
+  display: flex;
+  width: 30%;
+  align-items: center;
 }
+.title2 {
+  display: flex;
+  width: 20%;
 
-
-#SpecificAchievementByTheEmployee {
-    height: 80px;
+  align-items: center;
 }
+.text1 {
+  display: flex;
+  width: 70%;
 
-#JobAsssigned {
-    height: 80px;
-
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
 }
+.text2 {
+  display: flex;
+  width: 80%;
 
-
-.inp1 {
-    /* width: 100%; */
-    padding: 0.5rem;
-    height: 46px;
-    border: 1px solid #9fc8fe;
-    background: #ffffff;
-    background-blend-mode: multiply;
-    border: 1px solid #9fc8fe;
-    border-radius: 10px;
-    margin: 8px 0;
-    flex-grow: 1;
-    width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
 }
+.employeeid {
+  display: flex;
 
-.row2 {
-
-    display: flex;
-    justify-content: space-evenly;
-    width: 95%;
-
+  width: 50%;
+  gap: 2em;
 }
-
-.title_saf {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
+.two {
+  display: flex;
+  gap: 1em;
 }
+.period_saf{
+  display: flex;
+  align-items: center;
 
-.period_saf {
-    display: flex;
-    justify-content: flex-start;
-   
-   
-    gap: 0.5em;
-    width: 70%;
+  width: 25%;
 }
+.textfill {
+  display: flex;
+  width: 75%;
 
-.row1 {
-    display: flex;
-    justify-content: space-around;
-    width: 92%;
-    gap: 1em;
-    margin-left: 4%;
+  gap: 1em;
+}
+.from1 {
+  display: flex;
+  width: 50%;
 
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
+}
+.from2 {
+  display: flex;
+  width: 50%;
 
-
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
 }
 
-.emp_id {
-    
-    display: flex;
-    justify-content: space-around;
-    gap: 0.3em;
-    width:50%;
+.three {
+  display: flex;
+  gap: 2em;
 }
-
-.pos {
-    display: flex;
-    gap: 0.3em;
-   
-    width: 50%;
-
+.projectname {
+  display: flex;
+  align-items: center;
+  width: 20%;
 }
+.Text3 {
+  display: flex;
+  width: 80%;
 
-.title_empid {
-
-
-    display: flex;
-
-    align-items: center;
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
 }
-
-.title_pos {
-
-    display: flex;
-    align-items: center;
-
+.parent_jasa {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-
-.row3 {
-    display: flex;
-    justify-content: space-around;
-    width: 94%;
-    gap: 1em;
-    margin-left: 4%;
+.ja_sa {
+  display: flex;
+  width: 100%;
+  border: 1px solid grey;
 }
-.job_ass{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
+.title_ja_sa {
+  display: flex;
+  justify-content: center;
 }
-.spe_ach{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+.row-container {
+  display: flex;
+  width: 100%;
+  gap: 1em;
 }
-.row4 {
-    display: flex;
-    justify-content: space-around;
-    width: 94%;
-    gap: 1em;
-    margin-left: 4%;
-
-
+.serial-number {
+  display: flex;
+  width: 4%;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  /* border-radius: 10px; */
+  background-color: #5b91d9;
+  color: white;
 }
+.job_ass {
+  display: flex;
+  width: 48%;
 
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
+}
+.spe_ach {
+  display: flex;
+  width: 48%;
+
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
+}
+.initial_msg {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.parent_jasa_btn {
+  display: flex;
+  justify-content: center;
+}
+.btn_ja_sa {
+  display: flex;
+
+  justify-content: center;
+  width: 20%;
+  background-color: #5b91d9;
+  color: white;
+  padding: 6px 10px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.bottom {
+  display: flex;
+  border: 1px solid grey;
+}
+.last {
+  display: flex;
+  gap: 1em;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.signature {
+  display: flex;
+  width: 70%;
+  gap: 1em;
+}
+.sign_title {
+  display: flex;
+  width: 30%;
+  align-items: center;
+}
 .sign {
+  display: flex;
+  width: 70%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    gap: 0.3em;
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
 }
-
-.title_sign {
-
-    display: flex;
-
+.Date {
+  display: flex;
+  width: 30%;
+  gap: 1em;
 }
-
-.date {
-
-    display: flex;
-    width: 50%;
-    gap: 0.3em;
+.Date_title {
+  display: flex;
+  width: 20%;
+  align-items: center;
 }
+.date1 {
+  display: flex;
+  width: 80%;
 
-.title_date {
-
-    display: flex;
-    align-items: center;
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  border-radius: 10px;
+}
+.btn_saf {
+  display: flex;
+  justify-content: center;
+}
+.last_btn {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  background-color: #5b91d9;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

@@ -19,7 +19,7 @@ function App() {
     <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate replace to="/Login" />} />
+            <Route path="/" element={<Navigate replace to="/LandingPage" />} />
             <Route path="/Login" element={<Login/>} />
             <Route path="main" element={<Main />}>
             <Route path="employee" element={<Employee />} />

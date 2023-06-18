@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./APAR_form.css";
-// import StateContext from "../../../StateContext.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../StateContext";
 
 function APAR_form() {
   const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
+  const {isSubmitted,setisSubmitted} = useGlobalContext();
+  const {curuser,setcuruser} = useGlobalContext();
+
     // const { user, setuser } = useGlobalContext();
     const [user,setuser] = useState({
         appraiselPeriodFrom : "",
@@ -23,32 +26,30 @@ function APAR_form() {
         group : ""
     })
   const {alluser, setalluser} =  useGlobalContext();
-//   console.log(user);
-//     const [curUser, setCurUser] = useState(empReq[requserId]);
-//   console.log(curUser);
-  const [flag, setFlag] = useState(true);
 
-  useEffect(() => {
-      console.log("Submitted Successfully")
-      console.log(flag);
-  }, [flag])
-console.log({...user});
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log({ user });
 
-
-  const  handleSubmit =  (e) =>{
-    e.preventDefault();
-    console.log({user});
-     axios.post("http://localhost:5000/submitAparForm",user).then(response => {
-        console.log('Request sent successfully');
-      })
-      .catch(error => {
-        console.error('Error sending request:', error);
-      }); 
+  try {
+    const { data } = await axios.post("http://localhost:5000/submitAparForm", user);
+    setcuruser(user);
+    console.log(isSubmitted);
+    setisSubmitted(true);
+    console.log(isSubmitted);
+    navigate("/main2/HR");
+  } catch (error) {
+    console.error('Error sending request:', error);
   }
+};
+useEffect(() => {
+  console.log("isSubmitted changed:", isSubmitted);
+}, [isSubmitted]);
+
   return (
     <>
 
-      <form className="container_apar" onSubmit={handleSubmit}>
+      <form className="container_apar" >
         <div className="head">
           <h3>APAR Management : Employee details</h3>
         </div>
@@ -59,21 +60,23 @@ console.log({...user});
           <div className="content">
             <div className="from">
               <input
-                type="text"
+                type="date"
                 placeholder="FROM : DD / MM / YYYY"
                 name="Aparfrom"
                 value={user.appraiselPeriodFrom}
                 onChange={(e)=>setuser({...user,appraiselPeriodFrom : e.target.value})}
+                disabled={!isEditing}
                 className="inpt"
               ></input>
             </div>
             <div className="upto">
               <input
-                type="text"
+                type="date"
                 placeholder="TO : DD / MM / YYYY"
                 name="Aparupto"
                 value={user.appraiselPeriodTo}
                 onChange={(e)=>setuser({...user,appraiselPeriodTo: e.target.value})}
+                disabled={!isEditing}
                 className="inpt"
               ></input>
             </div>
@@ -89,6 +92,7 @@ console.log({...user});
                 value={user.userName}
               onChange={(e)=>setuser({...user,userName : e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
@@ -100,18 +104,20 @@ console.log({...user});
                 value={user.empId}
               onChange={(e)=>setuser({...user,empId : e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
             <span>Date of Birth :</span>
 
             <input
-              type="text"
+              type="date"
               placeholder="Date of birth"
               name="dob"
                 value={user.dateOBirth}
               onChange={(e)=>setuser({...user,dateOBirth : e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
@@ -124,6 +130,7 @@ console.log({...user});
                 value={user.designation}
               onChange={(e)=>setuser({...user,designation : e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
@@ -136,6 +143,7 @@ console.log({...user});
                 value={user.presentpay}
               onChange={(e)=>setuser({...user,presentpay : e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
@@ -147,28 +155,31 @@ console.log({...user});
                 value={user.group}
               onChange={(e)=>setuser({...user,group : e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
             <span>Date of entry in CDAC :</span>
             <input
-              type="text"
+              type="date"
               placeholder=" DD / MM / YYYY"
               name="entrydate"
                 value={user.dateOfEntryInCdac}
               onChange={(e)=>setuser({...user,dateOfEntryInCdac: e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
             <span>Date of entry to the current designation :</span>
             <input
-              type="text"
+              type="date"
               placeholder="Date of entry to the current designation"
               name="Apardate"
                 value={user.dateOfFillingAparForm}
               onChange={(e)=>setuser({...user,dateOfFillingAparForm: e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
@@ -180,6 +191,7 @@ console.log({...user});
                 value={user.leaveAvailed}
               onChange={(e)=>setuser({...user,leaveAvailed: e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
           <div className="Table_rows">
@@ -191,13 +203,23 @@ console.log({...user});
                 value={user.absenceOtherThanLeave}
               onChange={(e)=>setuser({...user,absenceOtherThanLeave: e.target.value})}
               className="inpt"
+              disabled={!isEditing}
             ></input>
           </div>
         </div>
         <div className="btn_class">
-          <button type="submit" className="submitbtn_apar">
+          {isEditing? <button onClick={()=>setIsEditing(!isEditing)} type="submit" className="submitbtn_apar">
             submit
+          </button>: <div className="Edit_lock">
+          <button onClick={()=>setIsEditing(!isEditing)} type="submit" className="submitbtn_apar">
+            Edit
           </button>
+          <button type="submit" className="submitbtn_apar" onClick={handleSubmit}>
+            Lock & Submit
+          </button>
+          </div>}
+         
+         
         </div>
       </form>
     </>
