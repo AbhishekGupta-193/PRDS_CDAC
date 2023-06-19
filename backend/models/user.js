@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
     appraiselPeriodFrom: Date,
     appraiselPeriodTo: Date,
     projectName: String,
+    APAR_status: Boolean,
+    SelfAppraisal_status : Boolean,
+    Evalutation_status : Boolean,
     selfAppFormData1: [
       {
         jobAssigned: String,
