@@ -1,4 +1,6 @@
 import User from "../models/user.js";
+// const WebSocket = require("ws");
+// const wss = new WebSocket.Server({ port: 5000 });
 
 export const Login = async (req, res) => {
   try {
@@ -6,7 +8,8 @@ export const Login = async (req, res) => {
     console.log({ email, password });
 
     const user = await User.findOne({ email });
-    console.log({ user });
+    // console.log({ user });
+
 
     if (user) {
       if (password === user.password) {
@@ -71,31 +74,43 @@ export const submitSelfAppraisel = async (req, res) => {
 };
 
 export const submitAparForm = async (req, res) => {
-  const { empId } = req.body;
-//   const { userName } = req.body;
-  console.log(empId);
+  const { empId} = req.body;
+ 
+  // console.log(empId);
   try {
     const user_ = await User.findOneAndUpdate(
-      { empId : empId },
-      req.body, // New data to updates
+      { empId: empId },
+      { $set: { APAR_status: true, ...req.body } }, 
       { new: true }
     );
-    console.log({ user_ });
+    // console.log({ user_ });
     if (user_) {
-      // Object.keys(newData).forEach(key => {
-      //     if (user[key] !== undefined) {
-      //         user[key] = newData[key];
-      //     }
-      // });
-      // const updted_user = {...user,...newData};
-      // const updatedData = await user.save();
-      // console.log({updatedData});
-      // res.json(updatedData);
-    res.send({msg : "successfully registered"})
-    
+      res.send({ msg: "successfully registered" });
+    } else {
+      res.status(404).send({ msg: "User not found" });
     }
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred");
   }
 };
+
+export const checkAPAR = async (req, res) => {
+  console.log(req.body , "Hello");
+  res.send("send")
+  // try {
+//     const user_ = await User.find(
+//     { empId: empId },
+//  );
+  //   console.log({ user_ });
+  //   if (user_) {
+  //     res.send({ msg: "successfully registered" });
+  //   } else {
+  //     res.status(404).send({ msg: "User not found" });
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).send("An error occurred");
+  // }
+};
+
