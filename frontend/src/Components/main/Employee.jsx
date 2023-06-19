@@ -4,7 +4,6 @@ import { useGlobalContext } from "../../StateContext.js";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dash1.css";
-import SelfAppraisalForm from "../form/SelfAppraisal/SelfAppraisal_form.jsx";
 
 export const Employee = () => {
   const navigate = useNavigate();
