@@ -4,6 +4,7 @@ import { useGlobalContext } from "../../StateContext.js";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dash1.css";
+import SelfAppraisalForm from "../form/SelfAppraisal/SelfAppraisal_form.jsx";
 
 export const Employee = () => {
   const navigate = useNavigate();
@@ -27,7 +28,9 @@ export const Employee = () => {
   // const fillForrm = () => {
   //   navigate("/form/selfappraisal ");
   // }
-
+const SelfAppraisalFormHandler = ()=>{
+  navigate('/form/SelfAppraisal')
+}
   return (
     <div className="notes-wrapper">
       {curuser.APAR_status ? (
@@ -47,6 +50,7 @@ export const Employee = () => {
           <span>Leave availed :{curuser.leaveAvailed}</span>
           <span>Date of filling APAR form : {curuser.dateOfFillingAparForm}</span>
           <span>Group : {curuser.group}</span>
+          <button onClick={SelfAppraisalFormHandler} className="SAbtn">Fill Self Appraisal</button>
         </div>
       ) : (
         <div></div>
