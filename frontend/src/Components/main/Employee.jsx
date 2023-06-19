@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useGlobalContext } from "../../StateContext.js";
 import { useContext } from "react";
@@ -8,10 +8,16 @@ import "./Dash1.css";
 export const Employee = () => {
   const navigate = useNavigate();
   // const { user, setUser } = useContext(StateContext);
-  const { isSubmitted, setisSubmitted } = useGlobalContext();
-  console.log(isSubmitted);
+  // const { isSubmitted, setisSubmitted } = useGlobalContext();
+  const APAR_status = false;
+  // console.log(isSubmitted);
   const { curuser, setcuruser } = useGlobalContext();
+   useState( async()=>{
+    console.log(APAR_status);
+     const data = await axios.post("http://localhost:5000/checkAPAR")
+    console.log(data);
 
+   })
   // const generate = () => {
   //   axios.post("http://localhost:5000/updateRequest", user)
   //     .then(res => {
@@ -28,10 +34,9 @@ export const Employee = () => {
 
   return (
     <div className="notes-wrapper">
-      {isSubmitted ? (
+      { APAR_status? (
         <div className="container">
           Name : {curuser.name}
-          {(isSubmitted = !isSubmitted)}
         </div>
       ) : (
         <div></div>
