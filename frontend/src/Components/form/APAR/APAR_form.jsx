@@ -25,7 +25,8 @@ function APAR_form() {
         absenceOtherThanLeave: "",
         leaveAvailed: "",
         dateOfFillingAparForm: "",
-        group : ""
+        group : "",
+        APAP_status : false
     })
   const {alluser, setalluser} =  useGlobalContext();
 

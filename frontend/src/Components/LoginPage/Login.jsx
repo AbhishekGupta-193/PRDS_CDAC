@@ -11,11 +11,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { useGlobalContext } from '../../StateContext';
 
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const {curuser,setcuruser} = useGlobalContext();
+
 
    const navigate = useNavigate();
 
@@ -35,7 +38,7 @@ export default function SignIn() {
       if(code === 400) alert("All inputs are required");
       else if(code === 401) alert("Invalid Credientials");
       else if(code === 200 & data.user.email === "emp@gmail.com") {
-    
+      setcuruser(data.user)
         navigate('/main/employee')
       }
       else if(code === 200 & data.user.email === "hr@gmail.com") {

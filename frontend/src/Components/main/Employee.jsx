@@ -9,15 +9,11 @@ export const Employee = () => {
   const navigate = useNavigate();
   // const { user, setUser } = useContext(StateContext);
   // const { isSubmitted, setisSubmitted } = useGlobalContext();
-  const APAR_status = false;
+
   // console.log(isSubmitted);
   const { curuser, setcuruser } = useGlobalContext();
-   useState( async()=>{
-    console.log(APAR_status);
-     const data = await axios.post("http://localhost:5000/checkAPAR")
-    console.log(data);
+  console.log(curuser);
 
-   })
   // const generate = () => {
   //   axios.post("http://localhost:5000/updateRequest", user)
   //     .then(res => {
@@ -34,9 +30,23 @@ export const Employee = () => {
 
   return (
     <div className="notes-wrapper">
-      { APAR_status? (
+      {curuser.APAR_status ? (
         <div className="container">
-          Name : {curuser.name}
+          <span>
+            Apprsial to be filled for session : {curuser.appraiselPeriodFrom} to{" "}
+            {curuser.appraiselPeriodTo}
+          </span>
+
+          <span>Name : {curuser.userName}</span>
+          <span>Employee Id : {curuser.empId}</span>
+          <span>Date of Birth :{curuser.dateOBirth}</span>
+          <span>Designation : {curuser.designation}</span>
+          <span>Present Pay :{curuser.presentpay}</span>
+          <span>Date of entry in CDAC{curuser.dateOfEntryInCdac}</span>
+          <span>Absence other than leave{curuser.absenceOtherThanLeave}</span>
+          <span>Leave availed :{curuser.leaveAvailed}</span>
+          <span>Date of filling APAR form : {curuser.dateOfFillingAparForm}</span>
+          <span>Group : {curuser.group}</span>
         </div>
       ) : (
         <div></div>
