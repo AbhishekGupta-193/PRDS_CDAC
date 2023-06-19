@@ -9,6 +9,8 @@ import { useGlobalContext } from '../../StateContext';
 export const HR = () => {
   const navigate = useNavigate();
   const { user,setuser } = useGlobalContext();
+  const {isSubmitted,setisSubmitted} = useGlobalContext();
+  console.log(isSubmitted);
   // const [show, setShow] = useState([]);
   const {alluser, setalluser} = useGlobalContext();
   const btnhandler = ()=>{

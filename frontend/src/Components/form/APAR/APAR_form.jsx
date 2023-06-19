@@ -7,8 +7,10 @@ import { useGlobalContext } from "../../../StateContext";
 function APAR_form() {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
-  const {isSubmitted,setisSubmitted} = useGlobalContext();
   const {curuser,setcuruser} = useGlobalContext();
+  const {isSubmitted,setisSubmitted} = useGlobalContext();
+  console.log(isSubmitted);
+
 
     // const { user, setuser } = useGlobalContext();
     const [user,setuser] = useState({
