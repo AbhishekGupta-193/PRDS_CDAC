@@ -13,7 +13,8 @@ const AppContext = React.createContext();
 
 const AppProvider = ({children}) =>{
     const [user, setuser] = useState({ })
-    const [curuser, setcuruser] = useState({ })
+    var [curuser, setcuruser] = useState({ })
+    const [isReporting,setisReporting] = useState(false);
     const getusers = async ()=>{
         const {data} =  await axios.get("http://localhost:5000/getUsers")
         setuser(data);

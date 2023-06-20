@@ -1,0 +1,132 @@
+.self-appraisal-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .self-appraisal-form h1,
+  .self-appraisal-form h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .self-appraisal-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .self-appraisal-form .form-group {
+    flex-basis: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .self-appraisal-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .self-appraisal-form input[type="text"],
+  .self-appraisal-form input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .self-appraisal-form input[type="date"] {
+    height: 30px;
+  }
+  
+  .self-appraisal-form table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .self-appraisal-form th,
+  .self-appraisal-form td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .self-appraisal-form .small-column {
+    width: 60px;
+  }
+  
+  .self-appraisal-form .add-row-cell {
+    position: relative;
+    width: 1%;
+    white-space: nowrap;
+  }
+  
+  .self-appraisal-form .add-row-symbol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: #4caf50;
+    cursor: pointer;
+  }
+  
+  .self-appraisal-form .table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+  }
+  
+  .self-appraisal-form .add-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .self-appraisal-form .add-row:hover {
+    background-color: #45a049;
+  }
+  
+  .self-appraisal-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .self-appraisal-form .form-actions button {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 3px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .self-appraisal-form .form-actions button:not(:last-child) {
+    margin-right: 10px;
+  }
+  
+  .self-appraisal-form .form-actions button:hover {
+    background-color: #45a049;
+  }
+  
+  .self-appraisal-form .locked input[type="text"],
+  .self-appraisal-form .locked input[type="date"] {
+    background-color: #f1f1f1;
+    cursor: not-allowed;
+  }
+  

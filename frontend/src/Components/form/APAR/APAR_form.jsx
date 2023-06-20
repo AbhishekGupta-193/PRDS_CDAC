@@ -36,7 +36,7 @@ const handleSubmit = async (e) => {
 
   try {
     const { data } = await axios.post("http://localhost:5000/submitAparForm", user);
-    setcuruser(user);
+    setcuruser(data.user);
     console.log(isSubmitted);
     setisSubmitted(true);
     console.log(isSubmitted);
@@ -45,9 +45,9 @@ const handleSubmit = async (e) => {
     console.error('Error sending request:', error);
   }
 };
-useEffect(() => {
-  console.log("isSubmitted changed:", isSubmitted);
-}, [isSubmitted]);
+// useEffect(() => {
+//   console.log("isSubmitted changed:", isSubmitted);
+// }, [isSubmitted]);
 
   return (
     <>

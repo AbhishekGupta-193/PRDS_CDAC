@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     APAR_status: Boolean,
     SelfAppraisal_status : Boolean,
     Evalutation_status : Boolean,
+    Role:{
+        HR:Boolean,
+        Reporting_Officer:Boolean
+    },
     selfAppFormData1: [
       {
         jobAssigned: String,

@@ -53,19 +53,20 @@ export const getRequests = async (req, res) => {
 };
 
 export const submitSelfAppraisel = async (req, res) => {
-  const { email } = req.body;
-  const newData = req.body;
+  const { empId} = req.body;
+ console.log(empId,"empid");
   try {
-    const user = await User.findOne({ email: email });
-    if (user) {
-      Object.keys(newData).forEach((key) => {
-        if (user[key] !== undefined) {
-          user[key] = newData[key];
-        }
-      });
-      user.filledByEmployee = !user.filledByEmployee;
-      const updatedData = await user.save();
-      res.json(updatedData);
+    const user_ = await User.findOneAndUpdate(
+      { empId: empId },
+      req.body , 
+      { new: true }
+    );
+  
+    if (user_) {
+      res.send({ msg: "successfully registered" , user_ });
+
+    } else {
+      res.status(404).send({ msg: "User not found" });
     }
   } catch (error) {
     console.error(error);
