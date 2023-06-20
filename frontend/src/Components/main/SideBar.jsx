@@ -11,7 +11,7 @@ export const SideBar = () => {
     <aside className="side-bar">
       <Link
         className={`sidebar-item ${active === "employee" ? "active" : ""}`}
-        to="/EmployeeSection"
+        to="EmployeeSection"
         onClick={() => setActive("EmployeeSection")}
       >
         <i>
@@ -21,7 +21,7 @@ export const SideBar = () => {
       </Link>
       <Link
         className={`sidebar-item ${active === "reporting" ? "active" : ""}`}
-        to="/Reporting"
+        to="Reporting"
         onClick={() => setActive("Reporting")}
       >
         <i>

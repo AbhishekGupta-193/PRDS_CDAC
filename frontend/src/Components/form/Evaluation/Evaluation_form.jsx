@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Evaluation_form.css"
 import kk from "../../../Assets/Employee.png"
 import { FaStar } from "react-icons/fa";
+import { useGlobalContext } from "../../../StateContext";
+import { useNavigate } from "react-router-dom";
 
 export const Evaluation_form = () => {
   const [scores, setScores] = useState([0, 0, 0, 0, 0, 0]);
-
+  const {curuser,setcuruser} = useGlobalContext();
+  
   const totalScore = scores.reduce((total, score) => total + score, 0);
   const overallScore = scores.reduce((total, score) => total + score, 0);
   const textarray = [
@@ -17,6 +20,7 @@ export const Evaluation_form = () => {
     "Communication Skills - oral and written",
   ];
 
+  
   const [rating, setRating] = useState(0);
 
   const handleRating = (value) => {
@@ -47,7 +51,9 @@ export const Evaluation_form = () => {
       <FaStar />
     </span>
   );
-
+  const EvaluationFormHandler = ()=>[
+    setcuruser({...curuser,})
+  ]
   const handleScoreChange = (index, value) => {
     const updatedScores = [...scores];
     const newScore = updatedScores[index] + value;
@@ -238,6 +244,10 @@ export const Evaluation_form = () => {
                 cols="30"
                 rows="10"
                 placeholder="Type here .."
+                value={curuser.additionalComments}
+                onChange={(e)=>{
+                  setcuruser({...curuser,additionalComments : e.target.value})
+                }}
               ></textarea>
             </div>
             <div className="rating">
@@ -256,6 +266,7 @@ export const Evaluation_form = () => {
               </div>
               <p className="rating__remark">{getRemark()}</p>
             </div>
+            <button onClick={EvaluationFormHandler}>Submit</button>
           </div>
         </div>
       </div>
