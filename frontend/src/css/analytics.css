@@ -1,0 +1,64 @@
+.tc {
+    width: 70vw;
+    height: 60vh;
+    margin: 40px auto;
+    overflow: auto;
+    position: relative;
+}
+
+.cp {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    background-color: aqua;
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    padding: 8px;
+
+    z-index: 1;
+    margin: 10px 0 10px 0;
+}
+
+.tb {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
+
+.trr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.thh,
+.tdd {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.thh {
+    width: 10%;
+}
+
+.tdd {
+    width: 15%;
+    height: 1%;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .cp {
+        font-size: 1rem;
+    }
+
+    .tdd,
+    .thh {
+        padding: 4px;
+    }
+}

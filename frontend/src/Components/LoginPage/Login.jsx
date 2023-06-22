@@ -1,58 +1,56 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { Link, useNavigate } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
-import { useGlobalContext } from '../../StateContext';
-
+import * as React from "react";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import { Link, useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { useGlobalContext } from "../../StateContext";
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const {curuser,setcuruser} = useGlobalContext();
+  const { curuser, setcuruser } = useGlobalContext();
 
-
-   const navigate = useNavigate();
+  console.log(curuser, "curuser ");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const Data = new FormData(event.currentTarget);
     const userData = {
-      email: Data.get('email'),
-      password: Data.get('password'),
+      email: Data.get("email"),
+      password: Data.get("password"),
     };
     const myurl = "http://localhost:5000/login";
-  
+
     try {
-      const {data} = await axios.post(myurl,userData)
+      const { data } = await axios.post(myurl, userData);
       console.log(data);
       const code = data.status;
-      if(code === 400) alert("All inputs are required");
-      else if(code === 401) alert("Invalid Credientials");
-      else if(code === 200 & data.user.email === "emp@gmail.com") {
-      setcuruser(data.user)
-        navigate('/main/employee')
+      if (code === 400) alert("All inputs are required");
+      else if (code === 401) alert("Invalid Credientials");
+      else if (
+        (code === 200) & (data.user.email === "emp@gmail.com") ||
+        data.user.email === "rpo@gmail.com"
+      ) {
+        setcuruser(data.user);
+        
+        localStorage.setItem("email", JSON.stringify(data.user.email));
+        console.log(data.user.email, "daata.emaidl");
+
+        navigate("/main/EmployeeSection");
+      } else if ((code === 200) & (data.user.email === "hr@gmail.com")) {
+        navigate("/main2/HR");
       }
-      else if(code === 200 & data.user.email === "hr@gmail.com") {
-      
-        navigate('/main2/HR')
-      }
-      else if(code === 200 & data.user.email === "rpo@gmail.com") {
-      
-        navigate('/main3/RPO')
-      }
-   
     } catch (error) {
-      
-      alert(error.message)
+      alert(error.message);
     }
   };
 
@@ -63,15 +61,20 @@ export default function SignIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required

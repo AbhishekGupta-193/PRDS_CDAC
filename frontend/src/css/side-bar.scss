@@ -8,6 +8,9 @@
     text-transform: capitalize;
     overflow: hidden;
     width: 3.5rem;
+    background-color: #404e67;
+    min-height: 100vh;
+
     &:hover{
         width: 12rem;
     }
@@ -16,14 +19,16 @@
         display: flex;
         gap: 0.8rem;
         align-items: center;
-        border-radius: 30px;
+        border-radius: 25px;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         text-decoration: none;
-        color: #333;
+        color: #fff;
 
         &:hover{
             background: $hover-color;
+            background: #fff;
+            color: #1c1c1c;
         }
         i{
             font-size: 1.2rem;
@@ -33,12 +38,7 @@
             transition: all 0.2s linear;
         }
     }
-    .active{
-        background: #feefc3;
-        &:hover{
-            background: #feefc3;
-        }
-    }
+
    
 }
 .open{

@@ -1,6 +1,4 @@
 import User from "../models/user.js";
-// const WebSocket = require("ws");
-// const wss = new WebSocket.Server({ port: 5000 });
 
 export const Login = async (req, res) => {
   try {
@@ -8,12 +6,10 @@ export const Login = async (req, res) => {
     console.log({ email, password });
 
     const user = await User.findOne({ email });
-    // console.log({ user });
-
 
     if (user) {
       if (password === user.password) {
-        res.send({ status: 200, message: "Login Successfull", user: user });
+        res.send({ status: 200, message: "Login Successful", user });
       } else {
         res.send({ message: "Password didn't match" });
       }
@@ -22,13 +18,15 @@ export const Login = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    res.status(500).send("An error occurred");
   }
 };
 
 export const updateRequest = async (req, res) => {
   const { email } = req.body;
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email });
+
     if (user) {
       user.request = !user.request;
       await user.save();
@@ -44,27 +42,24 @@ export const updateRequest = async (req, res) => {
 
 export const getRequests = async (req, res) => {
   try {
-    const user = await User.find({ request: true });
-    res.json(user);
+    const users = await User.find({ request: true });
+    res.json(users);
   } catch (error) {
-    console.error("Error retrieving user:", error);
+    console.error("Error retrieving users:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
-export const submitSelfAppraisel = async (req, res) => {
-  const { empId} = req.body;
- console.log(empId,"empid");
+export const submitSelfAppraisal = async (req, res) => {
+  const { empId } = req.body;
+  console.log(empId, "empid");
   try {
-    const user_ = await User.findOneAndUpdate(
-      { empId: empId },
-      req.body , 
-      { new: true }
-    );
-  
-    if (user_) {
-      res.send({ msg: "successfully registered" , user_ });
+    const user = await User.findOneAndUpdate({ empId }, req.body, {
+      new: true,
+    });
 
+    if (user) {
+      res.send({ msg: "successfully registered", user });
     } else {
       res.status(404).send({ msg: "User not found" });
     }
@@ -75,17 +70,16 @@ export const submitSelfAppraisel = async (req, res) => {
 };
 
 export const submitAparForm = async (req, res) => {
-  const { empId} = req.body;
- 
+  const { empId } = req.body;
 
   try {
-    const user_ = await User.findOneAndUpdate(
-      { empId: empId },
-      { $set: { APAR_status: true, ...req.body } }, 
+    const user = await User.findOneAndUpdate(
+      { empId },
+      { $set: { APAR_status: true, ...req.body } },
       { new: true }
     );
-  
-    if (user_) {
+
+    if (user) {
       res.send({ msg: "successfully registered" });
     } else {
       res.status(404).send({ msg: "User not found" });
@@ -96,5 +90,26 @@ export const submitAparForm = async (req, res) => {
   }
 };
 
+export const submitEvalutaionForm = async (req, res) => {
+  const { userName } = req.body;
+  console.log(req.body);
 
+  try {
+    const user = await User.findOneAndUpdate(
+      { userName: "xyz" },
+      req.body,
+      {
+        new: true,
+      }
+    );
 
+    if (user) {
+      res.send({ msg: "successfully registered", user });
+    } else {
+      res.status(404).send({ msg: "User not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred");
+  }
+};

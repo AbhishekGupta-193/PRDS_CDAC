@@ -36,7 +36,7 @@ const LandingPage = () => {
 
                 </div>
 
-                <div className="content">
+                <div className="Landing_content">
 
                     <div className="login-buttons">
                         <div className="login-card hr">
@@ -47,10 +47,10 @@ const LandingPage = () => {
                             <h2>Employee Login</h2>
                             <button onClick={loginhandler}>Login</button>
                         </div>
-                        <div className="login-card reporting-officer">
+                        {/* <div className="login-card reporting-officer">
                             <h2>Reporting Officer Login</h2>
                             <button onClick={loginhandler}>Login</button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -76,12 +76,12 @@ const SelfAppraisalForm = () => {
       "http://localhost:5000/submitSelfAppraisel",
       curuser
     );
-    navigate("/main/employee");
+    navigate("/main/EmployeeSection");
   };
 
   return (
     <form className="self-appraisal-form">
-      <h1>Self Appraisal</h1>
+     <div className="Self_Appraisal_heading">Self Appraisal</div>
 
       <div className="form-row">
         <div className="form-group">
@@ -109,11 +109,12 @@ const SelfAppraisalForm = () => {
         </div>
       </div>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label>Self Appraisal for the period:</label>
+      <div className="form-row_date">
+        <div className="form-group_date">
+          <div className="title_date">Self Appraisal for the period:</div>
           <div className="form-date-inputs">
             <input
+              className="fromdate_saf"
               type="date"
               id="fromDate"
               name="fromDate"
@@ -122,6 +123,7 @@ const SelfAppraisalForm = () => {
               disabled={!isEditable}
             />
             <input
+              className="todate_saf"
               type="date"
               id="toDate"
               name="toDate"
@@ -151,11 +153,11 @@ const SelfAppraisalForm = () => {
                   <input
                     type="text"
                     name="serialNumber"
-                    value={assignment.serialNumber}
+                    value={index + 1}
                     onChange={(event) =>
                       handleJobAssignmentChange(index, event)
                     }
-                    disabled={!isEditable}
+                    disabled={true}
                   />
                 </td>
                 <td>
@@ -182,18 +184,18 @@ const SelfAppraisalForm = () => {
                 </td>
                 {isEditable && (
                   <td className="add-row-cell">
-                    {index === jobAssignments.length - 1 && "+"}
+                    {index === jobAssignments.length - 1}
                   </td>
+                )}
+                {isEditable && (
+                  <div className="add-row" onClick={addJobAssignmentRow}>
+                    +
+                  </div>
                 )}
               </tr>
             ))}
           </tbody>
         </table>
-        {isEditable && (
-          <div className="add-row" onClick={addJobAssignmentRow}>
-            +
-          </div>
-        )}
       </div>
 
       <h2>Achievements beyond normal scope of work</h2>
@@ -214,9 +216,9 @@ const SelfAppraisalForm = () => {
                   <input
                     type="text"
                     name="serialNumber"
-                    value={achievement.serialNumber}
+                    value={index + 1}
                     onChange={(event) => handleAchievementChange(index, event)}
-                    disabled={!isEditable}
+                    disabled={true}
                   />
                 </td>
                 <td>
@@ -239,26 +241,29 @@ const SelfAppraisalForm = () => {
                 </td>
                 {isEditable && (
                   <td className="add-row-cell">
-                    {index === achievements.length - 1 && "+"}
+                    {index === achievements.length - 1}
                   </td>
+                )}
+                {isEditable && (
+                  <div className="add-row" onClick={addAchievementRow}>
+                    +
+                  </div>
                 )}
               </tr>
             ))}
           </tbody>
         </table>
-        {isEditable && (
-          <div className="add-row" onClick={addAchievementRow}>
-            +
-          </div>
-        )}
       </div>
       {isEditable && (
-        <div className="dateoffilingSA">
-          <input
-            type="date"
-            value={dateoffillingSA}
-            onChange={(event) => setdateoffillingSA(event.target.value)}
-          />
+        <div className="date_saf">
+          <div className="titleDate_saf">Date of filling :</div>
+          <div className="dateoffilingSA">
+            <input
+              type="date"
+              value={dateoffillingSA}
+              onChange={(event) => setdateoffillingSA(event.target.value)}
+            />
+          </div>
         </div>
       )}
 

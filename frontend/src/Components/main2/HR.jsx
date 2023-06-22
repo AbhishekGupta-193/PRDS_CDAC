@@ -1,7 +1,6 @@
 import '../../css/notes.css'
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-// import StateContext from '../../StateContext.js';
 import axios from 'axios';
 import { useGlobalContext } from '../../StateContext';
 
@@ -40,23 +39,10 @@ export const HR = () => {
        <div className="container">
         <div className="card">
           <h2>Welcome</h2>
-          {/* <p>You have 50 employees in your company.</p> */}
           <div className="action">
             <button onClick={btnhandler}>APAR</button>
-            {/* <a href="/">Manage Departments</a> */}
           </div>
         </div>
-        {/* <div className="card">
-          <h2>Recent Requests</h2>
-
-          {show.map((employee) =>
-            <>
-              <p>Request from : {employee.email}</p>
-              <button onClick={fillForrm}>Fill apprasel form</button>
-              <br />
-            </>
-          )}
-        </div> */}
       </div>  
     </div>
   )

@@ -1,0 +1,16 @@
+
+
+.APAR_details{
+    display: flex;
+    border: 2px solid red;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+.EmployeeSection-wrapper{
+    border: 2px solid red;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

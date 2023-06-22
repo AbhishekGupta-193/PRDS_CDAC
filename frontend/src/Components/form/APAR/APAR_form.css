@@ -1,7 +1,3 @@
-/* .parent_container {
-  display: flex;
-} */
-
 .Table_rows {
   display: flex;
   justify-content: space-between;
@@ -10,7 +6,6 @@
 }
 .container_apar {
   background-color: #f2f2f2;
-  /* display: flex; */
   border: 1px solid rgba(57, 93, 138, 0.358);
   justify-content: center;
   align-items: center;
@@ -19,11 +14,10 @@
   margin: 1% 20%;
   text-align: center;
   margin: auto;
-  /* border: 2px solid rgb(235, 231, 231); */
+
 }
 .inpt {
   width: 50%;
-  /* height: 90%; */
   padding: 0.5rem;
   border: 1px solid #9fc8fe;
   background: #ffffff;
@@ -62,42 +56,91 @@
   justify-content: center;
   background-color: #5b91d9;
   color: white;
-  /* border-radius: 20px; */
-
   padding: 3px;
 }
 
-.period {
-  margin-top: 5px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 96%;
-}
-.title {
-  display: flex;
-  justify-content: center;
-  width: 30%;
-}
 
-.content {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 1em;
-  width: 70%;
-}
-.from {
-  display: flex;
-  width: 100%;
-}
-.upto {
-  display: flex;
-  width: 100%;
-}
 .Edit_lock{
    display: flex;
    gap: 1rem;
    justify-content: center;
    align-items: center;
    width: 50%;
+}
+.error {
+  display: flex;
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  width: 20%;
+
+}
+.inpt{
+  display: flex;
+  width: 60%;
+
+}
+.spantype{
+  display: flex;
+  width: 20%;
+
+}
+.period{
+  margin-top: 4%;
+  display: flex;
+  gap: 0.5em;
+
+}
+.reporting_title{
+  display: flex;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+
+.from_apar{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+
+}
+.to_apar{
+  display: flex;
+  flex-direction: column;
+
+  width: 40%;
+
+
+}
+.inpt_period{
+  display: flex;
+  padding: 0.5rem;
+  border: 1px solid #9fc8fe;
+  background: #ffffff;
+  background-blend-mode: multiply;
+  border: 1px solid #9fc8fe;
+  border-radius: 5px;
+  margin: 8px 0;
+  width: 80%;
+}
+.error_apar1 {
+  display: flex;
+  color: red;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 5px;
+  width: 50%;
+
+}
+.error_apar2 {
+  display: flex;
+  color: red;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 5px;
+  width: 50%;
+
 }

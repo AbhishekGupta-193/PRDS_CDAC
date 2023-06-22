@@ -7,6 +7,8 @@
   text-transform: capitalize;
   overflow: hidden;
   width: 3.5rem;
+  background-color: #404e67;
+  min-height: 100vh;
 }
 .side-bar:hover {
   width: 12rem;
@@ -16,14 +18,16 @@
   display: flex;
   gap: 0.8rem;
   align-items: center;
-  border-radius: 30px;
+  border-radius: 25px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   text-decoration: none;
-  color: #333;
+  color: #fff;
 }
 .side-bar .sidebar-item:hover {
   background: rgba(90, 91, 92, 0.1568627451);
+  background: #fff;
+  color: #1c1c1c;
 }
 .side-bar .sidebar-item i {
   font-size: 1.2rem;
@@ -31,12 +35,6 @@
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s linear;
-}
-.side-bar .active {
-  background: #feefc3;
-}
-.side-bar .active:hover {
-  background: #feefc3;
 }
 
 .open {
