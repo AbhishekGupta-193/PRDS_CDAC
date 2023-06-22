@@ -21,7 +21,7 @@
   margin: auto;
 }
 
-.inpt {
+.inpt_tag {
   width: 50%;
   /* height: 90%; */
   padding: 0.5rem;
@@ -33,7 +33,7 @@
   margin: 8px 0;
 }
 
-.inpt:focus {
+.inpt_tag:focus {
   outline: 0;
 }
 
@@ -93,15 +93,7 @@
   width: 70%;
 }
 
-.from {
-  display: flex;
-  width: 100%;
-}
 
-.upto {
-  display: flex;
-  width: 100%;
-}
 
 .Edit_lock {
   display: flex;
@@ -152,8 +144,52 @@ td {
   /* Changes the border color on focus */
 }
 
-.error {
+.error_evaluation{
   color: red;
-  font-size: 14px;
+  font-size: 11px;
   margin-top: 5px;
+}
+.from {
+  display: flex;
+  width: 100%;
+
+}
+
+.upto {
+  display: flex;
+  width: 100%;
+}
+
+.inpt_tag{
+  display: flex;
+  width: 62%;
+}
+.Table_rows{
+  display: flex;
+
+}
+.spantype_eva{
+  display: flex;
+  width: 28%;
+
+}
+.pd_error_evaluation{
+  color: red;
+  font-size: 11px;
+  margin-top: 5px;
+  width: 10%;
+}
+
+.Table_rows_cl{
+  display: flex;
+
+  width: 100%;
+
+}
+.spantype_score{
+  display: flex;
+  width: 28%;
+  margin-left: 1%;
+
+
 }

@@ -39,64 +39,67 @@ export const Evaluation_form = () => {
     const alphabetRegex = /^[A-Za-z]+$/;
 
     if (!user.appraiselPeriodFrom) {
-      errors.appraiselPeriodFrom = "*required";
+      errors.appraiselPeriodFrom = "*This is required";
     } else if (!dateRegex.test(user.appraiselPeriodFrom)) {
-      errors.appraiselPeriodFrom = "*required";
+      errors.appraiselPeriodFrom = "*Numeric input is required";
     }
 
     // ----------------------->
     if (!user.appraiselPeriodTo) {
-      errors.appraiselPeriodTo = "*required";
+      errors.appraiselPeriodTo = "*This is required";
     } else if (!dateRegex.test(user.appraiselPeriodTo)) {
-      errors.appraiselPeriodTo = "*required";
+      errors.appraiselPeriodTo = "*Numeric input required";
     }
     // ----------------------->
     if (validator.isEmpty(user.userName)) {
-      errors.userName = "*required";
+      errors.userName = "*Name required";
     }
-    if (!validator.isLength(user.userName, { min: 3, max: 20 })) {
-      errors.userName = "*length between 3 and 20";
+    else if (!alphabetRegex.test(user.userName)) {
+      errors.userName = "*Alphabetical input required";
     }
-    if (!alphabetRegex.test(user.userName)) {
-      errors.userName = "*only alphabets";
+    else if (!validator.isLength(user.userName, { min: 3, max: 20 })) {
+      errors.userName = "*Max length can be 20 characters";
     }
+    
 
     // ----------------------->
     if (validator.isEmpty(user.groupHead)) {
-      errors.groupHead = "*required";
+      errors.groupHead = "*GroupHead name required";
     }
-    if (!validator.isLength(user.groupHead, { min: 3, max: 20 })) {
-      errors.groupHead = "*length between 3 and 20";
+    else if (!alphabetRegex.test(user.groupHead)) {
+      errors.groupHead = "*Alphabetical input required";
     }
-    if (!alphabetRegex.test(user.groupHead)) {
-      errors.groupHead = "*only alphabets";
+    else if (!validator.isLength(user.groupHead, { min: 3, max: 20 })) {
+      errors.groupHead = "*Max length can be 20 characters";
     }
+    
 
     // ----------------------->
     if (validator.isEmpty(user.designation)) {
-      errors.designation = "*required";
+      errors.designation = "*Designation is required";
     }
-    if (!validator.isLength(user.designation, { min: 3, max: 20 })) {
-      errors.designation = "*lenght between 3 and 20";
+    else if (!alphabetRegex.test(user.designation)) {
+      errors.designation = "*Alphabetical input required";
     }
-    if (!alphabetRegex.test(user.designation)) {
-      errors.designation = "*only alphabets";
+    else if (!validator.isLength(user.designation, { min: 3, max: 20 })) {
+      errors.designation = "*Max length can be 20 characters";
     }
+    
 
     // ----------------------->
     if (user.selfAppraisalScore === "") {
       errors.selfAppraisalScore = "*required";
     }
-    if (!validator.isInt(user.selfAppraisalScore, { min: 0, max: 25 })) {
-      errors.selfAppraisalScore = "* between 0 and 25";
+    else if (!validator.isInt(user.selfAppraisalScore, { min: 0, max: 25 })) {
+      errors.selfAppraisalScore = "* Should be between 0 and 25";
     }
 
     // ----------------------->
     if (user.achievementBeyondScore === "") {
       errors.achievementBeyondScore = "*required";
     }
-    if (!validator.isInt(user.achievementBeyondScore, { min: 0, max: 15 })) {
-      errors.achievementBeyondScore = "* between 0 and 15";
+    else if (!validator.isInt(user.achievementBeyondScore, { min: 0, max: 15 })) {
+      errors.achievementBeyondScore = "*should be between 0 and 15";
     }
 
     return errors;
@@ -135,9 +138,9 @@ export const Evaluation_form = () => {
                 value={user.appraiselPeriodFrom}
                 onChange={(e) => setuser({ ...user, appraiselPeriodFrom: e.target.value })}
                 disabled={!isEditing}
-                className="inpt"
+                className="inpt_tag"
               ></input>
-              {formErrors.appraiselPeriodFrom && <span className="error">{formErrors.appraiselPeriodFrom}</span>}
+              {formErrors.appraiselPeriodFrom && <span className="error_evaluation">{formErrors.appraiselPeriodFrom}</span>}
             </div>
             <div className="upto">
               <input
@@ -147,52 +150,52 @@ export const Evaluation_form = () => {
                 value={user.appraiselPeriodTo}
                 onChange={(e) => setuser({ ...user, appraiselPeriodTo: e.target.value })}
                 disabled={!isEditing}
-                className="inpt"
+                className="inpt_tag"
               ></input>
-              {formErrors.appraiselPeriodTo && <span className="error">{formErrors.appraiselPeriodTo}</span>}
+              {formErrors.appraiselPeriodTo && <span className="error_evaluation">{formErrors.appraiselPeriodTo}</span>}
             </div>
           </div>
 
         </div>
         <div className="personal_deatils">
           <div className="Table_rows">
-            <span>Name of the Employee:</span>
+            <span className="spantype_eva">Name of the Employee:</span>
             <input
               type="text"
               placeholder="Name"
               name="username"
               value={user.userName}
               onChange={(e) => setuser({ ...user, userName: e.target.value })}
-              className="inpt"
+              className="inpt_tag"
               disabled={!isEditing}
             ></input>
-            {formErrors.userName && <span className="error">{formErrors.userName}</span>}
+            {formErrors.userName && <span className="pd_error_evaluation">{formErrors.userName}</span>}
           </div>
           <div className="Table_rows">
-            <span>Name of Group Head</span>
+            <span className="spantype_eva">Name of Group Head</span>
             <input
               type="text"
               placeholder="Group Head"
               name="groupHead"
               value={user.groupHead}
               onChange={(e) => setuser({ ...user, groupHead: e.target.value })}
-              className="inpt"
+              className="inpt_tag"
               disabled={!isEditing}
             ></input>
-            {formErrors.groupHead && <span className="error">{formErrors.groupHead}</span>}
+            {formErrors.groupHead && <span className="pd_error_evaluation">{formErrors.groupHead}</span>}
           </div>
           <div className="Table_rows">
-            <span>Designation :</span>
+            <span className="spantype_eva">Designation :</span>
             <input
               type="text"
               placeholder="designation"
               name="designation"
               value={user.designation}
               onChange={(e) => setuser({ ...user, designation: e.target.value })}
-              className="inpt"
+              className="inpt_tag"
               disabled={!isEditing}
             ></input>
-            {formErrors.designation && <span className="error">{formErrors.designation}</span>}
+            {formErrors.designation && <span className="pd_error_evaluation">{formErrors.designation}</span>}
           </div>
           <h4>PART - I</h4>
           <div className="table-mid">
@@ -218,7 +221,7 @@ export const Evaluation_form = () => {
                       onChange={(e) => setuser({ ...user, scoreOfEvaluation: { ...user.scoreOfEvaluation, sc1: e.target.value } })}
                       required
                       disabled={!isEditing}
-                      className="inpt"
+                      className="inpt_tag"
                     />
                   </td>
                 </tr>
@@ -235,7 +238,7 @@ export const Evaluation_form = () => {
                       onChange={(e) => setuser({ ...user, scoreOfEvaluation: { ...user.scoreOfEvaluation, sc2: e.target.value } })}
                       required
                       disabled={!isEditing}
-                      className="inpt"
+                      className="inpt_tag"
                     />
                   </td>
                 </tr>
@@ -252,7 +255,7 @@ export const Evaluation_form = () => {
                       onChange={(e) => setuser({ ...user, scoreOfEvaluation: { ...user.scoreOfEvaluation, sc3: e.target.value } })}
                       required
                       disabled={!isEditing}
-                      className="inpt"
+                      className="inpt_tag"
                     />
                   </td>
                 </tr>
@@ -269,7 +272,7 @@ export const Evaluation_form = () => {
                       onChange={(e) => setuser({ ...user, scoreOfEvaluation: { ...user.scoreOfEvaluation, sc4: e.target.value } })}
                       required
                       disabled={!isEditing}
-                      className="inpt"
+                      className="inpt_tag"
                     />
                   </td>
                 </tr>
@@ -286,7 +289,7 @@ export const Evaluation_form = () => {
                       onChange={(e) => setuser({ ...user, scoreOfEvaluation: { ...user.scoreOfEvaluation, sc5: e.target.value } })}
                       required
                       disabled={!isEditing}
-                      className="inpt"
+                      className="inpt_tag"
                     />
                   </td>
                 </tr>
@@ -304,7 +307,7 @@ export const Evaluation_form = () => {
 
                       required
                       disabled={!isEditing}
-                      className="inpt"
+                      className="inpt_tag"
                     />
                   </td>
                 </tr>
@@ -319,8 +322,8 @@ export const Evaluation_form = () => {
             </table>
           </div>
           <h4>PART - II</h4>
-          <div className="Table_rows cl">
-            <span>Self Appraisel Score  :</span>
+          <div className="Table_rows_cl">
+            <span className="spantype_score">Self Appraisal Score  :</span>
             <input
               type="number"
               placeholder="Marks Out of 25"
@@ -329,15 +332,15 @@ export const Evaluation_form = () => {
               name="selfAppraisalScore"
               value={user.selfAppraisalScore}
               onChange={(e) => setuser({ ...user, selfAppraisalScore: e.target.value })}
-              className="inpt"
+              className="inpt_tag"
               disabled={!isEditing}
               backgroundcolor="blue"
             ></input>
-            {formErrors.selfAppraisalScore && <span className="error">{formErrors.selfAppraisalScore}</span>}
+            {formErrors.selfAppraisalScore && <span className="error_evaluation">{formErrors.selfAppraisalScore}</span>}
           </div>
           <h4>PART - III</h4>
-          <div className="Table_rows cl">
-            <span>Acheivement Beyond Normal Scope of Work  :</span><br />
+          <div className="Table_rows_cl">
+            <span className="spantype_score">Acheivement Beyond Normal Scope of Work  :</span><br />
             <input
               type="number"
               placeholder="Marks Out of 15"
@@ -346,10 +349,10 @@ export const Evaluation_form = () => {
               name="achievementBeyondScore"
               value={user.achievementBeyondScore}
               onChange={(e) => setuser({ ...user, achievementBeyondScore: e.target.value })}
-              className="inpt"
+              className="inpt_tag"
               disabled={!isEditing}
             ></input>
-            {formErrors.achievementBeyondScore && <span className="error">{formErrors.achievementBeyondScore}</span>}
+            {formErrors.achievementBeyondScore && <span className="error_evaluation">{formErrors.achievementBeyondScore}</span>}
           </div>
           <p>TOTAL MARKS OUT OF 40 : {parseInt(user.achievementBeyondScore) + parseInt(user.selfAppraisalScore)}</p>
           <p>TOTAL MARKS OUT OF 100 : {parseInt(user.achievementBeyondScore) + parseInt(user.selfAppraisalScore) + user.totalScore}</p>

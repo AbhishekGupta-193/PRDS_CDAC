@@ -1,4 +1,4 @@
-.Table_rows {
+.Table_row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,12 +67,13 @@
    align-items: center;
    width: 50%;
 }
-.error {
+.error_apar {
   display: flex;
   color: red;
   font-size: 14px;
   margin-top: 5px;
-  width: 20%;
+  width: 10%;
+  font-size: 11px;
 
 }
 .inpt{
@@ -82,7 +83,7 @@
 }
 .spantype{
   display: flex;
-  width: 20%;
+  width: 30%;
 
 }
 .period{

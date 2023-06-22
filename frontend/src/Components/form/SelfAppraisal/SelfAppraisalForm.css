@@ -179,3 +179,12 @@ align-items: center;
 display: flex;
 width: 70%;
 }
+.error_saf {
+  display: flex;
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  width: 100%;
+  font-size: 11px;
+
+}
