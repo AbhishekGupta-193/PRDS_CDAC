@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .inp {
     width: 90%;
     padding: 0.5rem;
@@ -13,12 +13,13 @@
 
 
 
-.submitbtn{
-=======
+
+
 .parent_container{
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 6px solid red;
 }
 .container2 {
     background-color: #f2f2f2;
@@ -51,7 +52,7 @@
 .submitbtn {
   
 
->>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+
     width: 30%;
     background-color: #5b91d9;
     color: white;
@@ -62,24 +63,23 @@
     cursor: pointer;
     
 }
-<<<<<<< HEAD
-.submitbtn:hover{
-=======
+
+
 
 .submitbtn:hover {
->>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+
     background-color: #5b91d9;
 }
 .heading{
 
-<<<<<<< HEAD
+
 
     background-color: #5b91d9;
     color: white;
   border-radius: 20px;
 
     padding: 3px;
-=======
+}
 .heading {
 
     display: flex;
@@ -88,7 +88,7 @@
     color: white;
     border-radius: 20px;
     padding: 2px;
->>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+
 
 }
 
@@ -101,7 +101,7 @@
     height: 80px;
 
 }
-<<<<<<< HEAD
+
 .row{
     display: flex;
     justify-content: space-evenly;
@@ -190,9 +190,9 @@
 .title_date{
     
     display: flex;
-=======
 
 
+}
 .inp1 {
     /* width: 100%; */
     padding: 0.5rem;
@@ -328,6 +328,6 @@
 .title_date {
 
     display: flex;
->>>>>>> 9bf6f73ff8cfd72107c06d6af5b85a59bb8cc8b7
+
     align-items: center;
 }

@@ -3,9 +3,12 @@ import "./SelfAppraisalForm.css";
 import { useGlobalContext } from "../../../StateContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import validator from "validator";
 
 const SelfAppraisalForm = () => {
   const navigate = useNavigate();
+  const [formErrors, setFormErrors] = useState({});
+  
   const { curuser, setcuruser } = useGlobalContext();
   const [isEditable, setIsEditable] = useState(true);
   const [employeeName, setEmployeeName] = useState("");
@@ -50,6 +53,13 @@ const SelfAppraisalForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
     lockForm();
   };
 
@@ -79,6 +89,49 @@ const SelfAppraisalForm = () => {
     navigate("/main/EmployeeSection");
   };
 
+  const validateForm = () => {
+    const errors = {};
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    const alphabetRegex = /^[A-Za-z]+$/;
+
+      // ----------------------->
+      if (validator.isEmpty(employeeName)) {
+        errors.employeeName = "*Thisrequired is ";
+      } else if (!alphabetRegex.test(employeeName)) {
+        errors.employeeName = "*Alphabetic input is required";
+      } else if (!validator.isLength(employeeName, { min: 2, max: 20 })) {
+        errors.employeeName = "*Name can't exceed 20 characters";
+      }
+      // ----------------------->
+     if (validator.isEmpty(employeeId)) {
+      errors.employeeId = "*This is required";
+    } else if (!dateRegex.test(employeeId)) {
+      errors.employeeId = "*Numeric input is required";
+    }
+
+      // ----------------------->
+
+    if (!fromDate) {
+      errors.fromDate = "*This is required";
+    } else if (!dateRegex.test(fromDate)) {
+      errors.fromDate = "*Numeric input is required";
+    }
+
+    // ----------------------->
+    if (!toDate) {
+      errors.toDate = "*This is required";
+    } else if (!dateRegex.test(toDate)) {
+      errors.toDate = "*Numeric input is required";
+    }
+    // ----------------------->
+    if (!dateoffillingSA) {
+      errors.dateoffillingSA = "*This is required";
+    } else if (!dateRegex.test(dateoffillingSA)) {
+      errors.dateoffillingSA = "*Numeric input is required";
+    }
+    return errors;
+  };
+
   return (
     <form className="self-appraisal-form">
      <div className="Self_Appraisal_heading">Self Appraisal</div>
@@ -94,6 +147,9 @@ const SelfAppraisalForm = () => {
             onChange={(event) => setEmployeeName(event.target.value)}
             disabled={!isEditable}
           />
+          {formErrors.employeeName && (
+              <span className="error_saf">{formErrors.employeeName}</span>
+            )}
         </div>
 
         <div className="form-group">
@@ -106,6 +162,9 @@ const SelfAppraisalForm = () => {
             onChange={(event) => setEmployeeId(event.target.value)}
             disabled={!isEditable}
           />
+          {formErrors.employeeId && (
+              <span className="error_saf">{formErrors.employeeId}</span>
+            )}
         </div>
       </div>
 
@@ -122,6 +181,9 @@ const SelfAppraisalForm = () => {
               onChange={(event) => setFromDate(event.target.value)}
               disabled={!isEditable}
             />
+            {formErrors.fromDate && (
+              <span className="error_saf">{formErrors.fromDate}</span>
+            )}
             <input
               className="todate_saf"
               type="date"
@@ -131,6 +193,9 @@ const SelfAppraisalForm = () => {
               onChange={(event) => setToDate(event.target.value)}
               disabled={!isEditable}
             />
+            {formErrors.toDate && (
+              <span className="error_saf">{formErrors.toDate}</span>
+            )}
           </div>
         </div>
       </div>
@@ -170,6 +235,7 @@ const SelfAppraisalForm = () => {
                     }
                     disabled={!isEditable}
                   />
+                 
                 </td>
                 <td>
                   <input
@@ -181,6 +247,9 @@ const SelfAppraisalForm = () => {
                     }
                     disabled={!isEditable}
                   />
+                  {formErrors.correspondingAchievement && (
+              <span className="error_saf">{formErrors.correspondingAchievement}</span>
+            )}
                 </td>
                 {isEditable && (
                   <td className="add-row-cell">
@@ -263,6 +332,9 @@ const SelfAppraisalForm = () => {
               value={dateoffillingSA}
               onChange={(event) => setdateoffillingSA(event.target.value)}
             />
+            {formErrors.dateoffillingSA && (
+              <span className="error_saf">{formErrors.dateoffillingSA}</span>
+            )}
           </div>
         </div>
       )}

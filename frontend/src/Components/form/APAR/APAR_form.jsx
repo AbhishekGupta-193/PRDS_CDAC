@@ -3,7 +3,6 @@ import "./APAR_form.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../StateContext";
-// import { useForm } from "react-hook-form";
 
 import validator from "validator";
 
@@ -15,10 +14,7 @@ function APAR_form() {
   const { isSubmitted, setisSubmitted } = useGlobalContext();
   console.log(isSubmitted);
 
-  // const { register, handleSubmit, formState: { errors } } = useForm();
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // }
+
   const [user, setuser] = useState({
     appraiselPeriodFrom: "",
     appraiselPeriodTo: "",
@@ -90,9 +86,7 @@ function APAR_form() {
     if (user.presentpay === "") {
       errors.presentpay = "*This is required";
     }
-    if (!validator.isInt(user.presentpay, { min: 0, max: 250000 })) {
-      errors.presentpay = "*Numeric input is required";
-    }
+    
     // ----------------------->
     if (validator.isEmpty(user.group)) {
       errors.group = "*This is required";
@@ -219,7 +213,6 @@ function APAR_form() {
               type="text"
               placeholder="Name"
               name="username"
-              // {...register("userName",{required:true})}
 
               value={user.userName}
               onChange={(e) => setuser({ ...user, userName: e.target.value })}
@@ -227,7 +220,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.userName && (
-              <span className="error">{formErrors.userName}</span>
+              <span className="error_apar">{formErrors.userName}</span>
             )}
           </div>
           <div className="Table_rows">
@@ -236,7 +229,6 @@ function APAR_form() {
               id="empid_apar"
               type="text"
               placeholder="Employee Id"
-              // register={{...register("empid_apar")}}
 
               name="EmployeeID"
               value={user.empId}
@@ -245,7 +237,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.empId && (
-              <span className="error">{formErrors.empId}</span>
+              <span className="error_apar">{formErrors.empId}</span>
             )}
           </div>
           <div className="Table_rows">
@@ -261,7 +253,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.dateOBirth && (
-              <span className="error">{formErrors.dateOBirth}</span>
+              <span className="error_apar">{formErrors.dateOBirth}</span>
             )}
           </div>
           <div className="Table_rows">
@@ -280,7 +272,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.designation && (
-              <span className="error">{formErrors.designation}</span>
+              <span className="error_apar">{formErrors.designation}</span>
             )}
           </div>
           <div className="Table_rows">
@@ -296,7 +288,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.presentpay && (
-              <span className="error">{formErrors.presentpay}</span>
+              <span className="error_apar">{formErrors.presentpay}</span>
             )}
           </div>
           <div className="Table_rows">
@@ -311,7 +303,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.group && (
-              <span className="error">{formErrors.group}</span>
+              <span className="error_apar">{formErrors.group}</span>
             )}
           </div>
           <div className="Table_rows">
@@ -328,7 +320,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.dateOfEntryInCdac && (
-              <span className="error">{formErrors.dateOfEntryInCdac}</span>
+              <span className="error_apar">{formErrors.dateOfEntryInCdac}</span>
             )}
           </div>
           <div className="Table_rows">
@@ -347,10 +339,10 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.dateOfFillingAparForm && (
-              <span className="error">{formErrors.dateOfFillingAparForm}</span>
+              <span className="error_apar">{formErrors.dateOfFillingAparForm}</span>
             )}
           </div>
-          <div className="Table_rows">
+          <div className="Table_row">
             <span className="spantype">Leave availed :</span>
             <input
               type="text"
@@ -364,10 +356,10 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.leaveAvailed && (
-              <span className="error">{formErrors.leaveAvailed}</span>
+              <span className="error_apar">{formErrors.leaveAvailed}</span>
             )}
           </div>
-          <div className="Table_rows">
+          <div className="Table_row">
             <span className="spantype">
               Absence from duty other then leave :
             </span>
@@ -383,7 +375,7 @@ function APAR_form() {
               disabled={!isEditing}
             ></input>
             {formErrors.absenceOtherThanLeave && (
-              <span className="error">{formErrors.absenceOtherThanLeave}</span>
+              <span className="error_apar">{formErrors.absenceOtherThanLeave}</span>
             )}
           </div>
         </div>
