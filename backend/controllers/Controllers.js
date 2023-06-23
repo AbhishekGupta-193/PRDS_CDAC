@@ -3,13 +3,12 @@ import User from "../models/user.js";
 export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log({ email, password });
-
     const user = await User.findOne({ email });
+    const allusers = await User.find({ });
 
     if (user) {
       if (password === user.password) {
-        res.send({ status: 200, message: "Login Successful", user });
+        res.send({ status: 200, message: "Login Successful", user , allusers});
       } else {
         res.send({ message: "Password didn't match" });
       }
@@ -50,9 +49,8 @@ export const getRequests = async (req, res) => {
   }
 };
 
-export const submitSelfAppraisal = async (req, res) => {
+export const submitSelfAppraisel = async (req, res) => {
   const { empId } = req.body;
-  console.log(empId, "empid");
   try {
     const user = await User.findOneAndUpdate({ empId }, req.body, {
       new: true,
@@ -91,12 +89,11 @@ export const submitAparForm = async (req, res) => {
 };
 
 export const submitEvalutaionForm = async (req, res) => {
-  const { userName } = req.body;
-  console.log(req.body);
-
+  const { empId } = req.body;
+  console.log("data receivesd");
   try {
     const user = await User.findOneAndUpdate(
-      { userName: "xyz" },
+      { empId: empId },
       req.body,
       {
         new: true,

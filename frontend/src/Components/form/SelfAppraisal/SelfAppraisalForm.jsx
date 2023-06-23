@@ -8,13 +8,9 @@ import validator from "validator";
 const SelfAppraisalForm = () => {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
-  
+
   const { curuser, setcuruser } = useGlobalContext();
   const [isEditable, setIsEditable] = useState(true);
-  const [employeeName, setEmployeeName] = useState("");
-  const [employeeId, setEmployeeId] = useState("");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
   const [dateoffillingSA, setdateoffillingSA] = useState("");
   const [jobAssignments, setJobAssignments] = useState([
     { serialNumber: "", jobAssigned: "", correspondingAchievement: "" },
@@ -22,7 +18,11 @@ const SelfAppraisalForm = () => {
   const [achievements, setAchievements] = useState([
     { serialNumber: "", achievement: "", deliverable: "" },
   ]);
-
+  const DateFrom = new Date(curuser.appraiselPeriodFrom);
+  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const From = DateFrom.toLocaleDateString(undefined, options);
+  const DateTo = new Date(curuser.appraiselPeriodTo);
+  const To = DateTo.toLocaleDateString(undefined, options);
   const handleJobAssignmentChange = (index, event) => {
     const { name, value } = event.target;
     const updatedAssignments = [...jobAssignments];
@@ -71,17 +71,34 @@ const SelfAppraisalForm = () => {
     setIsEditable(true);
   };
 
+  const getData = async () => {
+    try {
+      setcuruser(JSON.parse(localStorage.getItem("curuser")));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
   const lockAndSubmit = async () => {
     const updatedFormData = {
       ...curuser,
-      appraiselPeriodFrom: fromDate,
-      appraiselPeriodTo: toDate,
       selfAppFormData1: jobAssignments,
       selfAppFormData2: achievements,
       dateOfFillingSelfAppraisalForm: dateoffillingSA,
       SelfAppraisal_status: true,
     };
+    console.log("this is updatedform data" , updatedFormData);
     setcuruser(updatedFormData);
+    try {
+      localStorage.setItem("curuser", JSON.stringify(updatedFormData));
+      console.log("curuser updated successfully in localStorage.");
+    } catch (error) {
+      console.error("Error storing updated curuser in localStorage:", error);
+    }
+
     const { data } = await axios.post(
       "http://localhost:5000/submitSelfAppraisel",
       curuser
@@ -94,35 +111,8 @@ const SelfAppraisalForm = () => {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     const alphabetRegex = /^[A-Za-z]+$/;
 
-      // ----------------------->
-      if (validator.isEmpty(employeeName)) {
-        errors.employeeName = "*Thisrequired is ";
-      } else if (!alphabetRegex.test(employeeName)) {
-        errors.employeeName = "*Alphabetic input is required";
-      } else if (!validator.isLength(employeeName, { min: 2, max: 20 })) {
-        errors.employeeName = "*Name can't exceed 20 characters";
-      }
-      // ----------------------->
-     if (validator.isEmpty(employeeId)) {
-      errors.employeeId = "*This is required";
-    } else if (!dateRegex.test(employeeId)) {
-      errors.employeeId = "*Numeric input is required";
-    }
-
-      // ----------------------->
-
-    if (!fromDate) {
-      errors.fromDate = "*This is required";
-    } else if (!dateRegex.test(fromDate)) {
-      errors.fromDate = "*Numeric input is required";
-    }
-
-    // ----------------------->
-    if (!toDate) {
-      errors.toDate = "*This is required";
-    } else if (!dateRegex.test(toDate)) {
-      errors.toDate = "*Numeric input is required";
-    }
+   
+  
     // ----------------------->
     if (!dateoffillingSA) {
       errors.dateoffillingSA = "*This is required";
@@ -134,7 +124,7 @@ const SelfAppraisalForm = () => {
 
   return (
     <form className="self-appraisal-form">
-     <div className="Self_Appraisal_heading">Self Appraisal</div>
+      <div className="Self_Appraisal_heading">Self Appraisal</div>
 
       <div className="form-row">
         <div className="form-group">
@@ -143,13 +133,12 @@ const SelfAppraisalForm = () => {
             type="text"
             id="employeeName"
             name="employeeName"
-            value={employeeName}
-            onChange={(event) => setEmployeeName(event.target.value)}
-            disabled={!isEditable}
+            value={curuser.userName}
+            disabled={true}
           />
-          {formErrors.employeeName && (
-              <span className="error_saf">{formErrors.employeeName}</span>
-            )}
+          {/* {formErrors.employeeName && (
+            <span className="error_saf">{formErrors.employeeName}</span>
+          )} */}
         </div>
 
         <div className="form-group">
@@ -158,13 +147,12 @@ const SelfAppraisalForm = () => {
             type="text"
             id="employeeId"
             name="employeeId"
-            value={employeeId}
-            onChange={(event) => setEmployeeId(event.target.value)}
-            disabled={!isEditable}
+            value={curuser.empId}
+            disabled={true}
           />
-          {formErrors.employeeId && (
-              <span className="error_saf">{formErrors.employeeId}</span>
-            )}
+          {/* {formErrors.employeeId && (
+            <span className="error_saf">{formErrors.employeeId}</span>
+          )} */}
         </div>
       </div>
 
@@ -174,28 +162,26 @@ const SelfAppraisalForm = () => {
           <div className="form-date-inputs">
             <input
               className="fromdate_saf"
-              type="date"
+              type="text"
               id="fromDate"
               name="fromDate"
-              value={fromDate}
-              onChange={(event) => setFromDate(event.target.value)}
-              disabled={!isEditable}
+              value={From}
+              disabled={true}
             />
-            {formErrors.fromDate && (
+            {/* {formErrors.fromDate && (
               <span className="error_saf">{formErrors.fromDate}</span>
-            )}
+            )} */}
             <input
               className="todate_saf"
-              type="date"
+              type="text"
               id="toDate"
               name="toDate"
-              value={toDate}
-              onChange={(event) => setToDate(event.target.value)}
-              disabled={!isEditable}
+              value={To}
+              disabled={true}
             />
-            {formErrors.toDate && (
+            {/* {formErrors.toDate && (
               <span className="error_saf">{formErrors.toDate}</span>
-            )}
+            )} */}
           </div>
         </div>
       </div>
@@ -235,7 +221,6 @@ const SelfAppraisalForm = () => {
                     }
                     disabled={!isEditable}
                   />
-                 
                 </td>
                 <td>
                   <input
@@ -248,8 +233,10 @@ const SelfAppraisalForm = () => {
                     disabled={!isEditable}
                   />
                   {formErrors.correspondingAchievement && (
-              <span className="error_saf">{formErrors.correspondingAchievement}</span>
-            )}
+                    <span className="error_saf">
+                      {formErrors.correspondingAchievement}
+                    </span>
+                  )}
                 </td>
                 {isEditable && (
                   <td className="add-row-cell">

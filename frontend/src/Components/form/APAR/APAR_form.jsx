@@ -13,7 +13,17 @@ function APAR_form() {
   const { curuser, setcuruser } = useGlobalContext();
   const { isSubmitted, setisSubmitted } = useGlobalContext();
   console.log(isSubmitted);
+  const getData = async () => {
+    try {
+      setcuruser(JSON.parse(localStorage.getItem("curuser")));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
+    getData();
+  }, []);
 
   const [user, setuser] = useState({
     appraiselPeriodFrom: "",
@@ -62,10 +72,7 @@ function APAR_form() {
 
     if (validator.isEmpty(user.empId)) {
       errors.empId = "*This is required";
-    } else if (!dateRegex.test(user.empId)) {
-      errors.empId = "*Numeric input is required";
     }
-
     // ----------------------->
     if (!user.dateOBirth) {
       errors.dateOBirth = "*This is required";
@@ -78,7 +85,7 @@ function APAR_form() {
       errors.designation = "*This is required";
     } else if (!alphabetRegex.test(user.designation)) {
       errors.designation = "*Alphabetic input is required";
-    } else if (!validator.isLength(user.designation, { min: 3, max: 20 })) {
+    } else if (!validator.isLength(user.designation, { min: 2, max: 20 })) {
       errors.designation = "*Designation can't exceed 20 characters";
     }
 
@@ -86,13 +93,13 @@ function APAR_form() {
     if (user.presentpay === "") {
       errors.presentpay = "*This is required";
     }
-    
+
     // ----------------------->
     if (validator.isEmpty(user.group)) {
       errors.group = "*This is required";
     }
-    if (!validator.isLength(user.group, { min: 3, max: 20 })) {
-      errors.group = "*length between 3 and 20";
+    if (!validator.isLength(user.group, { min: 2, max: 20 })) {
+      errors.group = "*length between 2 and 20";
     }
     if (!alphabetRegex.test(user.group)) {
       errors.group = "*Alphabetic input is required";
@@ -113,22 +120,16 @@ function APAR_form() {
     if (validator.isEmpty(user.leaveAvailed)) {
       errors.leaveAvailed = "*This is required";
     }
-    if (!validator.isLength(user.group, { min: 3, max: 100 })) {
-      errors.leaveAvailed = "*length between 3 and 100";
-    }
-    if (!alphabetRegex.test(user.leaveAvailed)) {
-      errors.leaveAvailed = "*Alphabetic input is required";
-    }
+    // if (!dateRegex.test(user.leaveAvailed)) {
+    //   errors.leaveAvailed = "*Numeric input is required";
+    // }
     // ----------------------->
     if (validator.isEmpty(user.absenceOtherThanLeave)) {
       errors.absenceOtherThanLeave = "*This is required";
     }
-    if (!validator.isLength(user.group, { min: 3, max: 100 })) {
-      errors.absenceOtherThanLeave = "*length between 3 and 100";
-    }
-    if (!alphabetRegex.test(user.absenceOtherThanLeave)) {
-      errors.absenceOtherThanLeave = "*Alphabetic input is required";
-    }
+    // if (!dateRegex.test(user.absenceOtherThanLeave)) {
+    //   errors.absenceOtherThanLeave = "*Numeric input is required";
+    // }
 
     return errors;
   };

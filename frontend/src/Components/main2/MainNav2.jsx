@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {FaUserCircle} from 'react-icons/fa'
 import "../../css/mainNav.css";
+import { useGlobalContext } from "../../StateContext";
 
 export const MainNav2 = () => {
   const navigate = useNavigate();
+  const {curuser,setcuruser} = useGlobalContext();
+
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
 
   const sidebarHandler = () => {
@@ -16,7 +19,9 @@ export const MainNav2 = () => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('curuser');
     navigate("/login");
+    setcuruser(null);
   };
 
   return (

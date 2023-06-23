@@ -19,9 +19,6 @@ app.use("/", userRoutes);
 app.post("/register", async (req, res) => {
   const userdata = req.body;
   console.log("register");
-  console.log(userdata, " userdata");
-  console.log(userdata.additionalComments, "additional cmt");
-  // const newObject = {  email,password,request };
   const result = await User.create(userdata);
   res.send({ status: 200, msg: "successfully register" });
 });

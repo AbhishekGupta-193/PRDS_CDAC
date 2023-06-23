@@ -7,19 +7,16 @@ import "./EmployeeSection.css";
 export const EmployeeSection = () => {
   const navigate = useNavigate();
   const { curuser, setcuruser } = useGlobalContext();
-  const [flag, setflag] = useState(false);
   console.log(curuser);
   
   const getData = async () => {
-    console.log('kreogherogerger');
     try {
-      const key = JSON.parse(localStorage.getItem("email")); 
+      setcuruser(JSON.parse(localStorage.getItem("curuser"))); 
 
-      const response = await axios.post("http://localhost:5000/getCurUser", { email: key });
-      console.log(response.data);
-      setcuruser(response.data.user);
-      console.log(curuser);
-      setflag(true)
+      // const response = await axios.post("http://localhost:5000/getCurUser", { email: key });
+      // console.log(response.data);
+      // setcuruser(response.data);
+      // console.log(curuser);
     } catch (error) {
       console.error(error);
     }
@@ -35,13 +32,8 @@ export const EmployeeSection = () => {
     navigate("/form/SelfAppraisal");
   };
 
-  if (!flag) {
-    return <div>Loading...</div>; 
-  }
+  
 
-  // if (!curuser) {
-  //   return <div>Error: Unable to fetch user data.</div>; 
-  // }
 
   const DateFrom = new Date(curuser.appraiselPeriodFrom);
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };

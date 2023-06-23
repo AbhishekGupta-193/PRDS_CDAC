@@ -71,7 +71,7 @@ const AppProvider = ({ children }) => {
     setisSubmitted,
   };
   const [alluser, setalluser] = useState([]);
-  const [requserId, setReqUserId] = useState();
+  const [ CurEmp,setCurEmp ] = useState({});
   useEffect(() => {
     getusers();
   }, []);
@@ -80,8 +80,6 @@ const AppProvider = ({ children }) => {
       value={{
         user,
         setuser,
-        requserId,
-        setReqUserId,
         alluser,
         setalluser,
         isSubmitted,
@@ -89,6 +87,8 @@ const AppProvider = ({ children }) => {
         curuser,
         setcuruser,
         contextValue,
+        CurEmp,
+        setCurEmp
       }}
     >
       {children}

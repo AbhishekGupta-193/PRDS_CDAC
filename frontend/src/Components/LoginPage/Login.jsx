@@ -16,7 +16,7 @@ import { useGlobalContext } from "../../StateContext";
 const theme = createTheme();
 
 export default function SignIn() {
-  const { curuser, setcuruser } = useGlobalContext();
+  const { curuser, setcuruser , setuser} = useGlobalContext();
 
   console.log(curuser, "curuser ");
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ export default function SignIn() {
       const { data } = await axios.post(myurl, userData);
       console.log(data);
       const code = data.status;
+      localStorage.setItem("allusers", JSON.stringify(data.allusers));
       if (code === 400) alert("All inputs are required");
       else if (code === 401) alert("Invalid Credientials");
       else if (
@@ -41,12 +42,14 @@ export default function SignIn() {
         data.user.email === "rpo@gmail.com"
       ) {
         setcuruser(data.user);
-        
-        localStorage.setItem("email", JSON.stringify(data.user.email));
-        console.log(data.user.email, "daata.emaidl");
+
+        localStorage.setItem("curuser", JSON.stringify(data.user));
 
         navigate("/main/EmployeeSection");
       } else if ((code === 200) & (data.user.email === "hr@gmail.com")) {
+        setcuruser(data.user);
+
+        localStorage.setItem("curuser", JSON.stringify(data.user));
         navigate("/main2/HR");
       }
     } catch (error) {
