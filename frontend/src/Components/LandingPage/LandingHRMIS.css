@@ -1,0 +1,46 @@
+.Landing_wrapper .cover {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.Landing_wrapper .cover__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: rgba(0, 0, 0, 0.4);
+}
+.Landing_wrapper .cover__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ffffff;
+}
+.Landing_wrapper .cover__title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.Landing_wrapper .cover__subtitle {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.Landing_wrapper .cover__button {
+  padding: 12px 24px;
+  background-color: #333;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.Landing_wrapper .cover__button:hover {
+  background-color: #555;
+}/*# sourceMappingURL=LandingHRMIS.css.map */

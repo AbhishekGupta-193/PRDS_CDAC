@@ -8,6 +8,7 @@ import { HR } from "./Components/main2/HR";
 import APAR_form from "./Components/form/APAR/APAR_form";
 import SelfAppraisalForm from "./Components/form/SelfAppraisal/SelfAppraisalForm";
 import LandingPage from "./Components/LandingPage/LandingPage";
+import {LandingHRMIS} from "./Components/LandingPage/LandingHRMIS";
 import { Reporting } from "./Components/main/Reporting";
 import { EmployeeSection } from "./Components/main/EmployeeSection";
 import Analytics from "./Components/main2/Analytics";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/form/APAR" element={<APAR_form />} />
           <Route path="/form/Evaluation" element={<Evaluation_form />} />
           <Route path="/LandingPage" element={<LandingPage />} />
+          <Route path="/LandingHRMIS" element={<LandingHRMIS />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,0 +1,77 @@
+.Landing_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .Landing_nav__logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .Landing_nav__logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .Landing_nav__logo-text {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .Landing_nav__links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .Landing_nav__link {
+    margin-right: 20px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .Landing_nav__login-btn {
+    padding: 8px 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Landing_nav__login-btn:hover {
+    background-color: #555;
+  }
+  
+  .Landing_nav__login-box {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .Landing_nav__login-option {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Landing_nav__login-option:last-child {
+    margin-bottom: 0;
+  }
+  
+  .Landing_nav__login-option:hover {
+    background-color: #555;
+  }
+  
