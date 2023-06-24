@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
   APAR_status: Boolean,
   SelfAppraisal_status: Boolean,
   Evalutation_status: Boolean,
+  dateofIssueofAPAR: Date,
+  dateofSubmission : Date,
+  dateofReviewbyRPO: Date,
   Role: {
     HR: Boolean,
     Reporting_Officer: Boolean,

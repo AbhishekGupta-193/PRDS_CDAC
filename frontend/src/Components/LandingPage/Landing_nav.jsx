@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Landing_nav.css";
-
 const Landing_nav = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
@@ -10,11 +9,7 @@ const Landing_nav = () => {
 
   return (
     <nav className="Landing_nav">
-      <div className="Landing_nav__logo">
-        <img src="logo.png" alt="Logo" />
-        <span className="Landing_nav__logo-text">
-          Centre for Development of Advanced Computing
-        </span>
+      <div className="Landing_nav__logo">      
       </div>
       <div className="Landing_nav__links">
         <a href="#" className="Landing_nav__link">About Us</a>

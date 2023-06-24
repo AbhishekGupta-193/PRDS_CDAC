@@ -1,18 +1,20 @@
 .Landing_wrapper .cover {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   overflow: hidden;
+  background-image: url("./imgs/coverimg1.jpg");
+  background-size: cover;
+  background-position: 50% -95px;
 }
-.Landing_wrapper .cover__image {
+.Landing_wrapper .cover::after {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
   background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  content: "";
 }
 .Landing_wrapper .cover__content {
   position: absolute;
@@ -21,6 +23,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
   color: #ffffff;
+  z-index: 1;
 }
 .Landing_wrapper .cover__title {
   font-size: 36px;
@@ -43,4 +46,20 @@
 }
 .Landing_wrapper .cover__button:hover {
   background-color: #555;
+}
+.Landing_wrapper .About {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Landing_wrapper .About .about_us {
+  width: 70%;
+  height: 80%;
+  padding: 30px;
+  margin-top: -100px;
+  position: relative;
+  z-index: 10;
+  background: #000;
 }/*# sourceMappingURL=LandingHRMIS.css.map */
