@@ -38,8 +38,8 @@ export default function SignIn() {
       if (code === 400) alert("All inputs are required");
       else if (code === 401) alert("Invalid Credientials");
       else if (
-        (code === 200) & (data.user.email === "emp@gmail.com") ||
-        data.user.email === "rpo@gmail.com"
+        (code === 200) & (data.user.email === "emp1@gmail.com") ||
+        (data.user.email === "rpo@gmail.com" )|| (data.user.email === "emp2@gmail.com")
       ) {
         setcuruser(data.user);
 

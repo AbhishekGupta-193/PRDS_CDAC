@@ -13,10 +13,6 @@ export const EmployeeSection = () => {
     try {
       setcuruser(JSON.parse(localStorage.getItem("curuser"))); 
 
-      // const response = await axios.post("http://localhost:5000/getCurUser", { email: key });
-      // console.log(response.data);
-      // setcuruser(response.data);
-      // console.log(curuser);
     } catch (error) {
       console.error(error);
     }

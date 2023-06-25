@@ -18,30 +18,6 @@ export const Evaluation_form = () => {
   const To = DateTo.toLocaleDateString(undefined, options);
   console.log(CurEmp);
 
-  // useEffect(()=>{
-  //   setCurEmp(location.state?.User)
-  //   console.log(CurEmp);
-  // })
-  // const [CurEmp, setCurEmp] = useState({
-  //   appraiselPeriodFrom: "",
-  //   appraiselPeriodTo: "",
-  //   CurEmpName: "",
-  //   designation: "",
-  //   groupHead: "",
-  //   scoreOfEvaluation: {
-  //     "sc1": 0,
-  //     "sc2": 0,
-  //     "sc3": 0,
-  //     "sc4": 0,
-  //     "sc5": 0,
-  //     "sc6": 0,
-  //     "totalScore": 0,
-  //   },
-  //   "selfAppraisalScore": "",
-  //   "achievementBeyondScore": "",
-  //   "additionalComments": "Great job overall!",
-  //   "totalScore": ""
-  // })
 
   const validateForm = () => {
     const errors = {};
@@ -157,9 +133,13 @@ export const Evaluation_form = () => {
   return (
     <>
       <form className="container_eval">
+        <button onClick={()=>{
+          navigate('/form/Evaluation/SelfAppraisalData')
+        }}>View the Self Appraisal form Filled by {CurEmp.userName}</button>
         <div className="head">
           <h3>EVALUATION FORM FOR EMPLOYEES </h3>
         </div>
+
         <div className="period">
           <div className="title">
             <span>Report for the Period :</span>

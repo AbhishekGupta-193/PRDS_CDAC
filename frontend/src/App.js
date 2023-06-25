@@ -12,6 +12,7 @@ import {LandingHRMIS} from "./Components/LandingPage/LandingHRMIS";
 import { Reporting } from "./Components/main/Reporting";
 import { EmployeeSection } from "./Components/main/EmployeeSection";
 import Analytics from "./Components/main2/Analytics";
+import SelfAppraisalData from "./Components/form/Evaluation/SelfAppraisalData";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/form/selfappraisal" element={<SelfAppraisalForm />} />
           <Route path="/form/APAR" element={<APAR_form />} />
           <Route path="/form/Evaluation" element={<Evaluation_form />} />
+          <Route path="/form/Evaluation/SelfAppraisalData" element={<SelfAppraisalData/>} />
           <Route path="/LandingPage" element={<LandingPage />} />
           <Route path="/LandingHRMIS" element={<LandingHRMIS />} />
         </Routes>

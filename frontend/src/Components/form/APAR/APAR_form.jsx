@@ -136,14 +136,11 @@ function APAR_form() {
 
   const handleSubmit1 = async (e) => {
     e.preventDefault();
-
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
     }
-
-    console.log({ user });
 
     try {
       const { data } = await axios.post(
@@ -151,9 +148,6 @@ function APAR_form() {
         user
       );
       setcuruser(data.user);
-      console.log(isSubmitted);
-      setisSubmitted(true);
-      console.log(isSubmitted);
       navigate("/main2/HR");
     } catch (error) {
       console.error("Error sending request:", error);

@@ -39,6 +39,7 @@ export const Reporting = () => {
 
   const EvaluationFormHandler = (User) => {
        setCurEmp(User);
+       localStorage.setItem("CurEmp",JSON.stringify(User))
        console.log(User);
     navigate("/form/Evaluation");
   };
@@ -55,7 +56,8 @@ export const Reporting = () => {
     localStorage.setItem("usersForEvaluation", JSON.stringify(usersForEvaluation));
 
   
-  }, [[user, curuser]]);
+  }, [user,curuser]);
+  console.log(usersForEvaluation);
 
   return (
     <div className="Reporting_Section">

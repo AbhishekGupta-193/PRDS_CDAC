@@ -2,6 +2,7 @@ import User from "../models/user.js";
 
 export const Login = async (req, res) => {
   try {
+    console.log("hello im here");
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     const allusers = await User.find({ });
