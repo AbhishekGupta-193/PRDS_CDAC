@@ -1,0 +1,26 @@
+.APAR_Track_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.APAR_track_table {
+    width: 90%;
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
+  
+  th,
+  td {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  
+  thead {
+    background-color: lightgray;
+  }
+  
+  tbody tr:hover {
+    background-color: #ffffcc;
+  }
+  

@@ -13,6 +13,7 @@ import { Reporting } from "./Components/main/Reporting";
 import { EmployeeSection } from "./Components/main/EmployeeSection";
 import Analytics from "./Components/main2/Analytics";
 import SelfAppraisalData from "./Components/form/Evaluation/SelfAppraisalData";
+import APAR_Track from "./Components/main2/APAR_Track";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="main2" element={<Main2 />}>
             <Route path="HR" element={<HR />} />
             <Route path="Analytics" element={<Analytics />} />
+            <Route path="APAR_Track" element={<APAR_Track />} />
           </Route>
 
           <Route path="/form/selfappraisal" element={<SelfAppraisalForm />} />

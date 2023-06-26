@@ -14,10 +14,10 @@ export const SideBar2 = () => {
         <i><FaUserAlt /></i>
         <span>HR Dashboard</span>
       </Link>
-      {/* <Link className={`sidebar-item ${active === 'Forms' ? 'active' : ''}`} onClick={() => setActive('Forms')} to='forms'>
+      <Link className={`sidebar-item ${active === 'APAR_Track' ? 'active' : ''}`} onClick={() => setActive('APAR_Track')} to='APAR_Track'>
         <i><SiFormstack /></i>
-        <span>Forms</span>
-      </Link> */}
+        <span>APAR Tracking</span>
+      </Link>
       <Link className={`sidebar-item ${active === 'Analytics' ? 'active' : ''}`} onClick={() => setActive('Analytics')} to='Analytics'>
         <i> <FaChartLine /> </i>
         <span>Analytics</span>
