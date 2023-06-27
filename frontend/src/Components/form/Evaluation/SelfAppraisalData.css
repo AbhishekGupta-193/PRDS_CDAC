@@ -1,12 +1,20 @@
 .SelfAppraisalData_wrapper{
+  /* display: none; */
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
     align-items: center;
-    position: relative;
+    position: absolute;
+    background-color: #f2f2f2;
+    width: 50%;
+    transform: translate(50% , 0);
+    z-index: -1;
+    transition: all 0.3s ease-in-out;
+  }
+.SelfAppraisalData_wrapper-tr{
+  transform: translate(100% , 0);
 }
+
 .Emp_details{
-    border: 2px solid red;
     margin-top: 1rem;
 }
 .header {

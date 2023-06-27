@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./SelfAppraisalData.css";
 import { useNavigate } from "react-router-dom";
+import {Evaluation_form} from "./Evaluation_form"
 
-const SelfAppraisalData = ({}) => {
+
+const SelfAppraisalData = ({isVisible,setisVisible}) => {
   const navigate = useNavigate();
   const CurEmp  = JSON.parse(localStorage.getItem("CurEmp"));
-
   const handleGoBack = () => {
-    navigate("/form/Evaluation");
+    setisVisible(!isVisible)
   };
-
+ useEffect(()=>{
+  if(isVisible){
+    document.querySelector('.SelfAppraisalData_wrapper').classList.add('SelfAppraisalData_wrapper-tr')
+  }
+  if(!isVisible){
+    document.querySelector('.SelfAppraisalData_wrapper').classList.remove('SelfAppraisalData_wrapper-tr')
+  }
+ },[isVisible])
   const {
     userName,
     empId,
@@ -24,6 +32,7 @@ const SelfAppraisalData = ({}) => {
   const DateTo = new Date(CurEmp.appraiselPeriodTo);
   const To = DateTo.toLocaleDateString(undefined, options);
   return (
+    <>
     <div className="SelfAppraisalData_wrapper">
       <div className="Emp_details">
       <h2>Employee Details</h2>
@@ -78,6 +87,7 @@ const SelfAppraisalData = ({}) => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

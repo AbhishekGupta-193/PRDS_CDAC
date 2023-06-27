@@ -3,86 +3,28 @@ import "./Evaluation_form.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../StateContext.js";
-import validator from "validator";
+import EvaluationGrid from "./Grid";
+import Grid from "./Grid";
+import SelfAppraisalData from "./SelfAppraisalData";
+import e from "cors";
+import { useForm } from "react-hook-form";
+
 
 export const Evaluation_form = () => {
-  const [formErrors, setFormErrors] = useState({});
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
   const navigate = useNavigate();
   const [Remark,setRemark] = useState();
   const [isEditing, setIsEditing] = useState(false);
-  const { CurEmp, setCurEmp } = useGlobalContext();
+  const [ CurEmp, setCurEmp ] = useState(JSON.parse(localStorage.getItem("curuser")));
   const DateFrom = new Date(CurEmp.appraiselPeriodFrom);
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   const From = DateFrom.toLocaleDateString(undefined, options);
   const DateTo = new Date(CurEmp.appraiselPeriodTo);
   const To = DateTo.toLocaleDateString(undefined, options);
-  console.log(CurEmp);
+  const [isVisible, setisVisible] = useState(false);
 
 
-  const validateForm = () => {
-    const errors = {};
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    const alphabetRegex = /^[A-Za-z]+$/;
-
-    // if (!CurEmp.appraiselPeriodFrom) {
-    //   errors.appraiselPeriodFrom = "*This is required";
-    // } else if (!dateRegex.test(CurEmp.appraiselPeriodFrom)) {
-    //   errors.appraiselPeriodFrom = "*Numeric input is required";
-    // }
-
-    // // ----------------------->
-    // if (!CurEmp.appraiselPeriodTo) {
-    //   errors.appraiselPeriodTo = "*This is required";
-    // } else if (!dateRegex.test(CurEmp.appraiselPeriodTo)) {
-    //   errors.appraiselPeriodTo = "*Numeric input required";
-    // }
-    // // ----------------------->
-    // if (validator.isEmpty(CurEmp.CurEmpName)) {
-    //   errors.CurEmpName = "*Name required";
-    // } else if (!alphabetRegex.test(CurEmp.CurEmpName)) {
-    //   errors.CurEmpName = "*Alphabetical input required";
-    // } else if (!validator.isLength(CurEmp.CurEmpName, { min: 2, max: 20 })) {
-    //   errors.CurEmpName = "*characters limit";
-    // }
-
-    // // ----------------------->
-    // if (validator.isEmpty(CurEmp.groupHead)) {
-    //   errors.groupHead = "*GroupHead name required";
-    // } else if (!alphabetRegex.test(CurEmp.groupHead)) {
-    //   errors.groupHead = "*Alphabetical input required";
-    // } else if (!validator.isLength(CurEmp.groupHead, { min: 2, max: 20 })) {
-    //   errors.groupHead = "*characters limit ";
-    // }
-
-    // // ----------------------->
-    // if (validator.isEmpty(CurEmp.designation)) {
-    //   errors.designation = "*Designation is required";
-    // } else if (!alphabetRegex.test(CurEmp.designation)) {
-    //   errors.designation = "*Alphabetical input required";
-    // } else if (!validator.isLength(CurEmp.designation, { min: 2, max: 20 })) {
-    //   errors.designation = "*characters limit";
-    // }
-
-    // // ----------------------->
-    // if (CurEmp.selfAppraisalScore === "") {
-    //   errors.selfAppraisalScore = "*required";
-    // } else if (
-    //   !validator.isInt(CurEmp.selfAppraisalScore, { min: 0, max: 25 })
-    // ) {
-    //   errors.selfAppraisalScore = "* Should be between 0 and 25";
-    // }
-
-    // // ----------------------->
-    // if (CurEmp.achievementBeyondScore === "") {
-    //   errors.achievementBeyondScore = "*required";
-    // } else if (
-    //   !validator.isInt(CurEmp.achievementBeyondScore, { min: 0, max: 15 })
-    // ) {
-    //   errors.achievementBeyondScore = "*should be between 0 and 15";
-    // }
-
-    return errors;
-  };
 
   CurEmp.totalScore =
     parseInt(CurEmp.scoreOfEvaluation.sc1) +
@@ -92,25 +34,25 @@ export const Evaluation_form = () => {
     parseInt(CurEmp.scoreOfEvaluation.sc5) +
     parseInt(CurEmp.scoreOfEvaluation.sc6);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit1 = async (e) => {
     e.preventDefault();
-    const errors = validateForm();
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      return;
-    }
+    
     console.log({ CurEmp });
     setCurEmp({
       ...CurEmp,
       Evalutation_status: true,
 
     });
+
     const { data } = axios.post(
       "http://localhost:5000/submitEvalutaionForm",
       CurEmp
     );
     navigate("/main/Reporting");
   };
+
+  const handleFormSubmit = handleSubmit(handleSubmit1);
+
   useEffect(()=>{
     const PerformanceRemark = () => {
       let performance = "";
@@ -125,27 +67,36 @@ export const Evaluation_form = () => {
       }
       return performance
     };
+
+    if(isVisible){
+      console.log('aa gya=');
+      document.querySelector('.container_eval').classList.add('container_eval-tl');
+    }
+    else{
+      document.querySelector('.container_eval').classList.remove('container_eval-tl')
+    }
     setRemark(PerformanceRemark())
 
-  },[CurEmp])
-
+  },[CurEmp,isVisible])
+console.log('ppp',isVisible);
 
   return (
-    <>
-      <form className="container_eval">
-        <button onClick={()=>{
-          navigate('/form/Evaluation/SelfAppraisalData')
+    <div className="Evaluation_form_wrapper">
+      <form className="container_eval" onSubmit={handleFormSubmit}>
+        <button className="SelfAppdatabtn" onClick={(e)=>{
+          e.preventDefault();
+          setisVisible(!isVisible)
+          console.log('aaaa',isVisible);
+         
         }}>View the Self Appraisal form Filled by {CurEmp.userName}</button>
         <div className="head">
           <h3>EVALUATION FORM FOR EMPLOYEES </h3>
         </div>
 
-        <div className="period">
-          <div className="title">
-            <span>Report for the Period :</span>
-          </div>
-          <div className="content">
-            <div className="from">
+        <div className="Table_rows">
+            <span className="spantype_eva">Report for the Period :</span>
+          <div className="inpt_tag_period">
+          <div className={`from ${errors.From ? "error" : ""}`}>
               <input
                 type="text"
                 placeholder="FROM : DD / MM / YYYY"
@@ -153,10 +104,12 @@ export const Evaluation_form = () => {
                 value={From}
                 disabled={true}
                 className="inpt_tag"
+              
               ></input>
-              {/* {formErrors.appraiselPeriodFrom && <span className="error_evaluation">{formErrors.appraiselPeriodFrom}</span>} */}
+            
             </div>
-            <div className="upto">
+          <div className={`upto ${errors.To ? "error" : ""}`}>
+
               <input
                 type="text"
                 placeholder="TO : DD / MM / YYYY"
@@ -164,13 +117,15 @@ export const Evaluation_form = () => {
                 value={To}
                 disabled={true}
                 className="inpt_tag"
+              
               ></input>
-              {/* {formErrors.appraiselPeriodTo && <span className="error_evaluation">{formErrors.appraiselPeriodTo}</span>} */}
+             
             </div>
           </div>
         </div>
         <div className="personal_deatils">
-          <div className="Table_rows">
+          <div className={`Table_rows ${errors.userName ? "error" : ""}`}>
+
             <span className="spantype_eva">Name of the Employee:</span>
             <input
               type="text"
@@ -179,10 +134,12 @@ export const Evaluation_form = () => {
               value={CurEmp.userName}
               className="inpt_tag"
               disabled={true}
+             
             ></input>
-            {/* {formErrors.CurEmpName && <span className="pd_error_evaluation">{formErrors.CurEmpName}</span>} */}
+           
           </div>
-          <div className="Table_rows">
+          <div className={`Table_rows ${errors.groupHead ? "error" : ""}`}>
+
             <span className="spantype_eva">Name of Group Head</span>
             <input
               type="text"
@@ -193,11 +150,13 @@ export const Evaluation_form = () => {
                 setCurEmp({ ...CurEmp, groupHead: e.target.value })
               }
               className="inpt_tag"
-              disabled={!isEditing}
+              disabled={true}
+            
             ></input>
-            {/* {formErrors.groupHead && <span className="pd_error_evaluation">{formErrors.groupHead}</span>} */}
+           
           </div>
-          <div className="Table_rows">
+          <div className={`Table_rows ${errors.designation ? "error" : ""}`}>
+
             <span className="spantype_eva">Designation :</span>
             <input
               type="text"
@@ -207,8 +166,24 @@ export const Evaluation_form = () => {
               // onChange={(e) => setCurEmp({ ...CurEmp, designation: e.target.value })}
               className="inpt_tag"
               disabled={true}
+              {...register("designation", {
+                required: "",
+                pattern: {
+                  value: /^[A-Za-z\s]+$/,
+                  message: "",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "",
+                },
+              })}
             ></input>
-            {/* {formErrors.designation && <span className="pd_error_evaluation">{formErrors.designation}</span>} */}
+            {errors.designation && (
+            <div className="error-container">
+              <p className="error-message">{errors.designation.message}</p>
+              <div className="error-icon">!</div>
+            </div>
+          )}
           </div>
           <h4>PART - I</h4>
           <div className="table-mid">
@@ -388,7 +363,8 @@ export const Evaluation_form = () => {
             </table>
           </div>
           <h4>PART - II</h4>
-          <div className="Table_rows_cl">
+          <div className={`Table_rows ${errors.selfAppraisalScore ? "error" : ""}`}>
+
             <span className="spantype_score">Self Appraisal Score :</span>
             <input
               type="number"
@@ -409,11 +385,28 @@ export const Evaluation_form = () => {
               className="inpt_tag"
               disabled={!isEditing}
               backgroundcolor="blue"
+              {...register("selfAppraisalScore", {
+                required: "",
+                pattern: {
+                  value: /^[\w\s]+$/,
+                  message: "",
+                },
+                max: {
+                  value: 25,
+                  message: "",
+                },
+              })}
             ></input>
-            {/* {formErrors.selfAppraisalScore && <span className="error_evaluation">{formErrors.selfAppraisalScore}</span>} */}
+            {errors.selfAppraisalScore && (
+            <div className="error-container">
+              <p className="error-message">{errors.selfAppraisalScore.message}</p>
+              <div className="error-icon">!</div>
+            </div>
+          )}
           </div>
           <h4>PART - III</h4>
-          <div className="Table_rows_cl">
+          <div className={`Table_rows ${errors.achievementBeyondScore ? "error" : ""}`}>
+
             <span className="spantype_score">
               Acheivement Beyond Normal Scope of Work :
             </span>
@@ -436,8 +429,24 @@ export const Evaluation_form = () => {
               }
               className="inpt_tag"
               disabled={!isEditing}
+              {...register("achievementBeyondScore", {
+                required: "",
+                pattern: {
+                  value: /^[\w\s]+$/,
+                  message: "",
+                },
+                max: {
+                  value:15,
+                  message: "",
+                },
+              })}
             ></input>
-            {/* {formErrors.achievementBeyondScore && <span className="error_evaluation">{formErrors.achievementBeyondScore}</span>} */}
+            {errors.achievementBeyondScore && (
+            <div className="error-container">
+              <p className="error-message">{errors.achievementBeyondScore.message}</p>
+              <div className="error-icon">!</div>
+            </div>
+          )}
           </div>
           <p>
             TOTAL MARKS OUT OF 40 :{" "}
@@ -470,6 +479,7 @@ export const Evaluation_form = () => {
           className="multiline-input"
         />
 
+        <Grid/>
         <div className="btn_class">
           {isEditing ? (
             <button
@@ -491,7 +501,7 @@ export const Evaluation_form = () => {
               <button
                 type="submit"
                 className="submitbtn_apar"
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
               >
                 Lock & Submit
               </button>
@@ -499,7 +509,9 @@ export const Evaluation_form = () => {
           )}
         </div>
       </form>
-    </>
+       <SelfAppraisalData isVisible={isVisible} setisVisible={setisVisible} />
+       
+    </div>
   );
 };
 

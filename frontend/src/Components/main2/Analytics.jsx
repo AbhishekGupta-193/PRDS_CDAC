@@ -59,25 +59,25 @@ const Analytics = () => {
                     <td className="tdd">{user.empId}</td>
                     <td className="tdd">{user.userName}</td>
                     <td className="tdd">
-                      {user.scoreOfEvaluation.selfAppraisalScore}
+                      {user.quarter[user.quarter.length-1].scoreOfEvaluation.selfAppraisalScore}
                     </td>
                     <td className="tdd">
-                      {user.scoreOfEvaluation.achievementBeyondScore}
+                      {user.quarter[user.quarter.length-1].scoreOfEvaluation.achievementBeyondScore}
                     </td>
                     <td className="tdd">
-                      {user.scoreOfEvaluation.sc1 +
-                        user.scoreOfEvaluation.sc2 +
-                        user.scoreOfEvaluation.sc3 +
-                        user.scoreOfEvaluation.sc4 +
-                        user.scoreOfEvaluation.sc5 +
-                        user.scoreOfEvaluation.sc6}
+                      {user.quarter[user.quarter.length-1].scoreOfEvaluation.sc1 +
+                        user.quarter[user.quarter.length-1].scoreOfEvaluation.sc2 +
+                        user.quarter[user.quarter.length-1].scoreOfEvaluation.sc3 +
+                        user.quarter[user.quarter.length-1].scoreOfEvaluation.sc4 +
+                        user.quarter[user.quarter.length-1].scoreOfEvaluation.sc5 +
+                        user.quarter[user.quarter.length-1].scoreOfEvaluation.sc6}
                     </td>
                     <td className="tdd">
-                      {user.scoreOfEvaluation.totalScore < 40
+                      {user.quarter[user.quarter.length-1].scoreOfEvaluation.totalScore < 40
                         ? "Need Improvement"
-                        : user.scoreOfEvaluation.totalScore < 60
+                        : user.quarter[user.quarter.length-1].scoreOfEvaluation.totalScore < 60
                         ? "Satisfactory"
-                        : user.scoreOfEvaluation.totalScore < 80
+                        : user.quarter[user.quarter.length-1].scoreOfEvaluation.totalScore < 80
                         ? "Good"
                         : "Excellent"}
                     </td>

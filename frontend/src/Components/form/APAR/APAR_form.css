@@ -1,9 +1,4 @@
-.Table_row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-}
+
 .container_apar {
   background-color: #f2f2f2;
   border: 1px solid rgba(57, 93, 138, 0.358);
@@ -67,24 +62,31 @@
    align-items: center;
    width: 50%;
 }
-.error_apar {
-  display: flex;
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-  width: 10%;
-  font-size: 11px;
 
-}
-.inpt{
+
+.Table_rows{
   display: flex;
-  width: 60%;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 1rem;
 
 }
 .spantype{
   display: flex;
   width: 30%;
+  margin-left: 1%;
+  text-align: left;
 
+}
+.inpt{
+  display: flex;
+  width: 65%;
+
+}
+.inpt_periodbox{
+  display: flex;
+  width: 65%;
+  gap: 1.5em;
 }
 .period{
   margin-top: 4%;
@@ -104,16 +106,12 @@
 
 .from_apar{
   display: flex;
-  flex-direction: column;
-  width: 40%;
+  width: 50%;
 
 }
 .to_apar{
   display: flex;
-  flex-direction: column;
-
-  width: 40%;
-
+  width: 50%;
 
 }
 .inpt_period{
@@ -125,23 +123,35 @@
   border: 1px solid #9fc8fe;
   border-radius: 5px;
   margin: 8px 0;
-  width: 80%;
+  width: 100%;
 }
-.error_apar1 {
+
+
+.error input {
+  border: 2px solid red;
+}
+
+ .error-container {
   display: flex;
-  color: red;
   align-items: center;
-  font-size: 14px;
-  margin-top: 5px;
-  width: 50%;
+
 
 }
-.error_apar2 {
-  display: flex;
-  color: red;
-  align-items: center;
-  font-size: 14px;
-  margin-top: 5px;
-  width: 50%;
 
+.error-message {
+  color: red;
+  margin-right: 5px;
+}
+
+.error-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
 }

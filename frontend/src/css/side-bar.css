@@ -10,9 +10,6 @@
   background-color: #404e67;
   min-height: 100vh;
 }
-.side-bar:hover {
-  width: 12rem;
-}
 .side-bar .sidebar-item {
   padding: 0 0.5rem;
   display: flex;

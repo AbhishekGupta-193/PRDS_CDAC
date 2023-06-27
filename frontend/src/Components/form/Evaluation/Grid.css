@@ -1,0 +1,75 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+  .grid-item {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  
+  @media (min-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .grid-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+.yellow{
+    border-radius: 10px;
+    background-color: #EDF798;
+    
+}  
+.orange{
+    border-radius: 10px;
+    background-color: #FAB57A;
+}  
+.green{
+    border-radius: 10px;
+
+    background-color: #7DD076;
+}  
+.blue{
+    border-radius: 10px;
+    background-color: #80D6FF;
+}  
+.red{
+    border-radius: 10px;
+    background-color: #F06868 ;
+}  
+.darkyellow , .yellow:hover{
+    background-color: #FFD93D;
+    border: 2px solid black;
+    
+}  
+.darkorange,.orange:hover{
+    background-color: #F86F03;
+    border: 2px solid black;
+
+}  
+.darkgreen,.green:hover{
+    background-color: #54B435;
+    border: 2px solid black;
+
+}  
+.darkblue,.blue:hover{
+    background-color: #19A7CE;
+    border: 2px solid black;
+
+}  
+.darkred,.red:hover{
+    background-color: #F24C3D ;
+    border: 2px solid black;
+
+}  

@@ -2,14 +2,14 @@ import User from "../models/user.js";
 
 export const Login = async (req, res) => {
   try {
-    console.log("hello im here");
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     const allusers = await User.find({ });
 
     if (user) {
-      if (password === user.password) {
-        res.send({ status: 200, message: "Login Successful", user , allusers});
+      if (password === user.password ) {
+        if(user.Role.HR == true){ res.send({ status: 200, message: "HR Login", user , allusers});}
+        else { res.send({ status: 200, message: "Emp Login", user , allusers});}
       } else {
         res.send({ message: "Password didn't match" });
       }

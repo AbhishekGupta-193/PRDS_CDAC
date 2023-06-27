@@ -16,7 +16,7 @@ import { useGlobalContext } from "../../StateContext";
 const theme = createTheme();
 
 export default function SignIn() {
-  const { curuser, setcuruser , setuser} = useGlobalContext();
+  const { curuser, setcuruser, setuser } = useGlobalContext();
 
   console.log(curuser, "curuser ");
   const navigate = useNavigate();
@@ -37,18 +37,15 @@ export default function SignIn() {
       localStorage.setItem("allusers", JSON.stringify(data.allusers));
       if (code === 400) alert("All inputs are required");
       else if (code === 401) alert("Invalid Credientials");
-      else if (
-        (code === 200) & (data.user.email === "emp1@gmail.com") ||
-        (data.user.email === "rpo@gmail.com" )|| (data.user.email === "emp2@gmail.com")
-      ) {
+      else if ((code === 200) & (data.message === "Emp Login")) {
         setcuruser(data.user);
 
         localStorage.setItem("curuser", JSON.stringify(data.user));
 
-        navigate("/main/EmployeeSection");
-      } else if ((code === 200) & (data.user.email === "hr@gmail.com")) {
-        setcuruser(data.user);
 
+        navigate("/main/EmployeeSection");
+      } else if ((code === 200) & (data.message === "HR Login")) {
+        setcuruser(data.user);
         localStorage.setItem("curuser", JSON.stringify(data.user));
         navigate("/main2/HR");
       }
