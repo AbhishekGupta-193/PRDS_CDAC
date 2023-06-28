@@ -18,7 +18,7 @@ const APAR_Track = ({ data }) => {
   };
 
   return (
-    <div className="APAR_Track_wrapper">
+    <div className="note_wrapper">
       <input
         type="text"
         id="search"

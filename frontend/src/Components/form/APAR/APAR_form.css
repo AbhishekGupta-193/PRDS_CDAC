@@ -1,4 +1,5 @@
 
+
 .container_apar {
   background-color: #f2f2f2;
   border: 1px solid rgba(57, 93, 138, 0.358);
@@ -49,7 +50,7 @@
 .head {
   display: flex;
   justify-content: center;
-  background-color: #5b91d9;
+  background-color: #404e67;
   color: white;
   padding: 3px;
 }
@@ -64,7 +65,7 @@
 }
 
 
-.Table_rows{
+.Table_rows_APAR{
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -155,3 +156,6 @@
   line-height: 20px;
   border-radius: 50%;
 }
+
+
+

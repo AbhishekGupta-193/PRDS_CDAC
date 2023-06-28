@@ -12,7 +12,7 @@
   8px 16px 16px hsl(220deg 60% 50% / 0.2),
   16px 32px 32px hsl(220deg 60% 50% / 0.2); */
 }
-.Self_Appraisal_heading{
+.Self_Appraisal_heading {
   background-color: #404e67;
   padding: 0.5rem;
   color: #fff;
@@ -35,7 +35,6 @@
   flex-basis: 49%;
   margin-bottom: 10px;
 }
-
 
 .self-appraisal-form label {
   display: block;
@@ -102,6 +101,8 @@
   width: 40px;
   height: 40px;
   margin-top: 10px;
+  margin-left: 10px;
+
   border-radius: 50%;
   background-color: #404e67;
   color: #fff;
@@ -112,6 +113,25 @@
 }
 
 .self-appraisal-form .add-row:hover {
+  background-color: #45a049;
+}
+.delete-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background-color: #404e67;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.delete-row:hover {
   background-color: #45a049;
 }
 
@@ -144,40 +164,38 @@
   background-color: #f1f1f1;
   cursor: not-allowed;
 }
-.form-row_date{
+.form-row_date {
   display: flex;
 }
-.form-group_date{
+.form-group_date {
   display: flex;
   width: 100%;
 }
-.title_date{
+.title_date {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 30%;
 }
-.form-date-inputs{
+.form-date-inputs {
   gap: 0.5rem;
   display: flex;
   width: 70%;
 }
-.date_saf{
+.date_saf {
   display: flex;
-width: 100%;
-margin-top: 20px;
-
+  width: 100%;
+  margin-top: 20px;
 }
-.titleDate_saf{
+.titleDate_saf {
   display: flex;
-width: 30%;
-justify-content: flex-start;
-align-items: center;
-
+  width: 30%;
+  justify-content: flex-start;
+  align-items: center;
 }
-.dateoffilingSA{
-display: flex;
-width: 70%;
+.dateoffilingSA {
+  display: flex;
+  width: 70%;
 }
 .error_saf {
   display: flex;
@@ -186,5 +204,4 @@ width: 70%;
   margin-top: 5px;
   width: 100%;
   font-size: 11px;
-
 }

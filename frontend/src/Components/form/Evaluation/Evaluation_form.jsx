@@ -9,14 +9,19 @@ import SelfAppraisalData from "./SelfAppraisalData";
 import e from "cors";
 import { useForm } from "react-hook-form";
 
-
 export const Evaluation_form = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const navigate = useNavigate();
-  const [Remark,setRemark] = useState();
+  const [Remark, setRemark] = useState();
   const [isEditing, setIsEditing] = useState(false);
-  const [ CurEmp, setCurEmp ] = useState(JSON.parse(localStorage.getItem("curuser")));
+  const [CurEmp, setCurEmp] = useState(
+    JSON.parse(localStorage.getItem("curuser"))
+  );
   const DateFrom = new Date(CurEmp.appraiselPeriodFrom);
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   const From = DateFrom.toLocaleDateString(undefined, options);
@@ -24,24 +29,21 @@ export const Evaluation_form = () => {
   const To = DateTo.toLocaleDateString(undefined, options);
   const [isVisible, setisVisible] = useState(false);
 
-
-
   CurEmp.totalScore =
-    parseInt(CurEmp.scoreOfEvaluation.sc1) +
-    parseInt(CurEmp.scoreOfEvaluation.sc2) +
-    parseInt(CurEmp.scoreOfEvaluation.sc3) +
-    parseInt(CurEmp.scoreOfEvaluation.sc4) +
-    parseInt(CurEmp.scoreOfEvaluation.sc5) +
-    parseInt(CurEmp.scoreOfEvaluation.sc6);
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc1) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc2) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc3) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc4) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc5) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc6);
 
   const handleSubmit1 = async (e) => {
     e.preventDefault();
-    
+
     console.log({ CurEmp });
     setCurEmp({
       ...CurEmp,
       Evalutation_status: true,
-
     });
 
     const { data } = axios.post(
@@ -53,7 +55,7 @@ export const Evaluation_form = () => {
 
   const handleFormSubmit = handleSubmit(handleSubmit1);
 
-  useEffect(()=>{
+  useEffect(() => {
     const PerformanceRemark = () => {
       let performance = "";
       if (CurEmp.totalScore >= 0 && CurEmp.totalScore <= 40) {
@@ -65,38 +67,44 @@ export const Evaluation_form = () => {
       } else if (CurEmp.totalScore >= 81 && CurEmp.totalScore <= 100) {
         performance = "Excellent";
       }
-      return performance
+      return performance;
     };
 
-    if(isVisible){
-      console.log('aa gya=');
-      document.querySelector('.container_eval').classList.add('container_eval-tl');
+    if (isVisible) {
+      console.log("aa gya=");
+      document
+        .querySelector(".container_eval")
+        .classList.add("container_eval-tl");
+    } else {
+      document
+        .querySelector(".container_eval")
+        .classList.remove("container_eval-tl");
     }
-    else{
-      document.querySelector('.container_eval').classList.remove('container_eval-tl')
-    }
-    setRemark(PerformanceRemark())
-
-  },[CurEmp,isVisible])
-console.log('ppp',isVisible);
+    setRemark(PerformanceRemark());
+  }, [CurEmp, isVisible]);
+  console.log("ppp", isVisible);
 
   return (
     <div className="Evaluation_form_wrapper">
       <form className="container_eval" onSubmit={handleFormSubmit}>
-        <button className="SelfAppdatabtn" onClick={(e)=>{
-          e.preventDefault();
-          setisVisible(!isVisible)
-          console.log('aaaa',isVisible);
-         
-        }}>View the Self Appraisal form Filled by {CurEmp.userName}</button>
+        <button
+          className="SelfAppdatabtn"
+          onClick={(e) => {
+            e.preventDefault();
+            setisVisible(!isVisible);
+            console.log("aaaa", isVisible);
+          }}
+        >
+          View the Self Appraisal form Filled by {CurEmp.userName}
+        </button>
         <div className="head">
           <h3>EVALUATION FORM FOR EMPLOYEES </h3>
         </div>
 
         <div className="Table_rows">
-            <span className="spantype_eva">Report for the Period :</span>
+          <span className="spantype_eva">Report for the Period :</span>
           <div className="inpt_tag_period">
-          <div className={`from ${errors.From ? "error" : ""}`}>
+            <div className={`from ${errors.From ? "error" : ""}`}>
               <input
                 type="text"
                 placeholder="FROM : DD / MM / YYYY"
@@ -104,12 +112,9 @@ console.log('ppp',isVisible);
                 value={From}
                 disabled={true}
                 className="inpt_tag"
-              
               ></input>
-            
             </div>
-          <div className={`upto ${errors.To ? "error" : ""}`}>
-
+            <div className={`upto ${errors.To ? "error" : ""}`}>
               <input
                 type="text"
                 placeholder="TO : DD / MM / YYYY"
@@ -117,15 +122,12 @@ console.log('ppp',isVisible);
                 value={To}
                 disabled={true}
                 className="inpt_tag"
-              
               ></input>
-             
             </div>
           </div>
         </div>
         <div className="personal_deatils">
           <div className={`Table_rows ${errors.userName ? "error" : ""}`}>
-
             <span className="spantype_eva">Name of the Employee:</span>
             <input
               type="text"
@@ -134,12 +136,9 @@ console.log('ppp',isVisible);
               value={CurEmp.userName}
               className="inpt_tag"
               disabled={true}
-             
             ></input>
-           
           </div>
           <div className={`Table_rows ${errors.groupHead ? "error" : ""}`}>
-
             <span className="spantype_eva">Name of Group Head</span>
             <input
               type="text"
@@ -151,19 +150,15 @@ console.log('ppp',isVisible);
               }
               className="inpt_tag"
               disabled={true}
-            
             ></input>
-           
           </div>
           <div className={`Table_rows ${errors.designation ? "error" : ""}`}>
-
             <span className="spantype_eva">Designation :</span>
             <input
               type="text"
               placeholder="designation"
               name="designation"
               value={CurEmp.designation}
-              // onChange={(e) => setCurEmp({ ...CurEmp, designation: e.target.value })}
               className="inpt_tag"
               disabled={true}
               {...register("designation", {
@@ -179,11 +174,11 @@ console.log('ppp',isVisible);
               })}
             ></input>
             {errors.designation && (
-            <div className="error-container">
-              <p className="error-message">{errors.designation.message}</p>
-              <div className="error-icon">!</div>
-            </div>
-          )}
+              <div className="error-container">
+                <p className="error-message">{errors.designation.message}</p>
+                <div className="error-icon">!</div>
+              </div>
+            )}
           </div>
           <h4>PART - I</h4>
           <div className="table-mid">
@@ -208,19 +203,25 @@ console.log('ppp',isVisible);
                       name="s1"
                       min="0"
                       max="10"
-                      value={CurEmp.scoreOfEvaluation.sc1}
+                      className="inpt_tag"
+                      value={
+                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                          .scoreOfEvaluation.sc1
+                      }
                       onChange={(e) =>
                         setCurEmp({
                           ...CurEmp,
-                          scoreOfEvaluation: {
-                            ...CurEmp.scoreOfEvaluation,
-                            sc1: e.target.value,
-                          },
+                          quarter: [
+                            {
+                              scoreOfEvaluation: {
+                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                  .scoreOfEvaluation,
+                                sc1: e.target.value,
+                              },
+                            },
+                          ],
                         })
                       }
-                      required
-                      disabled={!isEditing}
-                      className="inpt_tag"
                     />
                   </td>
                 </tr>
@@ -236,14 +237,27 @@ console.log('ppp',isVisible);
                       name="sc2"
                       min="0"
                       max="10"
-                      value={CurEmp.scoreOfEvaluation.sc2}
+                      value={
+                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                          .scoreOfEvaluation.sc2
+                      }
                       onChange={(e) =>
                         setCurEmp({
                           ...CurEmp,
-                          scoreOfEvaluation: {
-                            ...CurEmp.scoreOfEvaluation,
-                            sc2: e.target.value,
-                          },
+                          quarter: [
+                            ...CurEmp.quarter.slice(
+                              0,
+                              CurEmp.quarter.length - 1
+                            ),
+                            {
+                              ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                              scoreOfEvaluation: {
+                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                  .scoreOfEvaluation,
+                                sc2: e.target.value,
+                              },
+                            },
+                          ],
                         })
                       }
                       required
@@ -263,14 +277,27 @@ console.log('ppp',isVisible);
                       name="sc3"
                       min="0"
                       max="10"
-                      value={CurEmp.scoreOfEvaluation.sc3}
+                      value={
+                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                          .scoreOfEvaluation.sc3
+                      }
                       onChange={(e) =>
                         setCurEmp({
                           ...CurEmp,
-                          scoreOfEvaluation: {
-                            ...CurEmp.scoreOfEvaluation,
-                            sc3: e.target.value,
-                          },
+                          quarter: [
+                            ...CurEmp.quarter.slice(
+                              0,
+                              CurEmp.quarter.length - 1
+                            ),
+                            {
+                              ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                              scoreOfEvaluation: {
+                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                  .scoreOfEvaluation,
+                                sc3: e.target.value,
+                              },
+                            },
+                          ],
                         })
                       }
                       required
@@ -288,14 +315,27 @@ console.log('ppp',isVisible);
                       name="sc4"
                       min="0"
                       max="10"
-                      value={CurEmp.scoreOfEvaluation.sc4}
+                      value={
+                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                          .scoreOfEvaluation.sc4
+                      }
                       onChange={(e) =>
                         setCurEmp({
                           ...CurEmp,
-                          scoreOfEvaluation: {
-                            ...CurEmp.scoreOfEvaluation,
-                            sc4: e.target.value,
-                          },
+                          quarter: [
+                            ...CurEmp.quarter.slice(
+                              0,
+                              CurEmp.quarter.length - 1
+                            ),
+                            {
+                              ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                              scoreOfEvaluation: {
+                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                  .scoreOfEvaluation,
+                                sc4: e.target.value,
+                              },
+                            },
+                          ],
                         })
                       }
                       required
@@ -313,14 +353,27 @@ console.log('ppp',isVisible);
                       name="sc5"
                       min="0"
                       max="10"
-                      value={CurEmp.scoreOfEvaluation.sc5}
+                      value={
+                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                          .scoreOfEvaluation.sc5
+                      }
                       onChange={(e) =>
                         setCurEmp({
                           ...CurEmp,
-                          scoreOfEvaluation: {
-                            ...CurEmp.scoreOfEvaluation,
-                            sc5: e.target.value,
-                          },
+                          quarter: [
+                            ...CurEmp.quarter.slice(
+                              0,
+                              CurEmp.quarter.length - 1
+                            ),
+                            {
+                              ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                              scoreOfEvaluation: {
+                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                  .scoreOfEvaluation,
+                                sc5: e.target.value,
+                              },
+                            },
+                          ],
                         })
                       }
                       required
@@ -338,14 +391,27 @@ console.log('ppp',isVisible);
                       name="sc6"
                       min="0"
                       max="10"
-                      value={CurEmp.scoreOfEvaluation.sc6}
+                      value={
+                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                          ?.scoreOfEvaluation?.sc6
+                      }
                       onChange={(e) =>
                         setCurEmp({
                           ...CurEmp,
-                          scoreOfEvaluation: {
-                            ...CurEmp.scoreOfEvaluation,
-                            sc6: e.target.value,
-                          },
+                          quarter: [
+                            ...CurEmp.quarter.slice(
+                              0,
+                              CurEmp.quarter.length - 1
+                            ),
+                            {
+                              ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                              scoreOfEvaluation: {
+                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                  ?.scoreOfEvaluation,
+                                sc6: e.target.value,
+                              },
+                            },
+                          ],
                         })
                       }
                       required
@@ -357,14 +423,17 @@ console.log('ppp',isVisible);
                 <tr>
                   <td></td>
                   <td>TOTAL MARKS OUT OF 60 : </td>
-                  <td>{CurEmp.totalScore}</td>
+                  <td>
+                    {CurEmp.quarter[CurEmp.quarter.length - 1].totalScore}
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <h4>PART - II</h4>
-          <div className={`Table_rows ${errors.selfAppraisalScore ? "error" : ""}`}>
-
+          <div
+            className={`Table_rows ${errors.selfAppraisalScore ? "error" : ""}`}
+          >
             <span className="spantype_score">Self Appraisal Score :</span>
             <input
               type="number"
@@ -372,19 +441,33 @@ console.log('ppp',isVisible);
               min="0"
               max="25"
               name="selfAppraisalScore"
-              value={CurEmp.scoreOfEvaluation.selfAppraisalScore}
+              value={
+                CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+                  ?.selfAppraisalScore
+              }
               onChange={(e) =>
-                setCurEmp({
-                  ...CurEmp,
-                  scoreOfEvaluation: {
-                    ...CurEmp.scoreOfEvaluation,
-                    selfAppraisalScore: e.target.value,
-                  },
+                setCurEmp((CurEmp) => {
+                  const lastQuarterIndex = CurEmp.quarter.length - 1;
+
+                  const updatedQuarter = [
+                    ...CurEmp.quarter.slice(0, lastQuarterIndex),
+                    {
+                      ...CurEmp.quarter[lastQuarterIndex],
+                      scoreOfEvaluation: {
+                        ...CurEmp.quarter[lastQuarterIndex]?.scoreOfEvaluation,
+                        selfAppraisalScore: e.target.value,
+                      },
+                    },
+                  ];
+
+                  return {
+                    ...CurEmp,
+                    quarter: updatedQuarter,
+                  };
                 })
               }
               className="inpt_tag"
               disabled={!isEditing}
-              backgroundcolor="blue"
               {...register("selfAppraisalScore", {
                 required: "",
                 pattern: {
@@ -396,17 +479,23 @@ console.log('ppp',isVisible);
                   message: "",
                 },
               })}
-            ></input>
+            />
+
             {errors.selfAppraisalScore && (
-            <div className="error-container">
-              <p className="error-message">{errors.selfAppraisalScore.message}</p>
-              <div className="error-icon">!</div>
-            </div>
-          )}
+              <div className="error-container">
+                <p className="error-message">
+                  {errors.selfAppraisalScore.message}
+                </p>
+                <div className="error-icon">!</div>
+              </div>
+            )}
           </div>
           <h4>PART - III</h4>
-          <div className={`Table_rows ${errors.achievementBeyondScore ? "error" : ""}`}>
-
+          <div
+            className={`Table_rows ${
+              errors.achievementBeyondScore ? "error" : ""
+            }`}
+          >
             <span className="spantype_score">
               Acheivement Beyond Normal Scope of Work :
             </span>
@@ -417,52 +506,78 @@ console.log('ppp',isVisible);
               min="0"
               max="15"
               name="achievementBeyondScore"
-              value={CurEmp.scoreOfEvaluation.achievementBeyondScore}
+              value={
+                CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+                  ?.achievementBeyondScore
+              }
               onChange={(e) =>
-                setCurEmp({
-                  ...CurEmp,
-                  scoreOfEvaluation: {
-                    ...CurEmp.scoreOfEvaluation,
-                    achievementBeyondScore: e.target.value,
-                  },
+                setCurEmp((CurEmp) => {
+                  const lastQuarterIndex = CurEmp.quarter.length - 1;
+
+                  const updatedQuarter = [
+                    ...CurEmp.quarter.slice(0, lastQuarterIndex),
+                    {
+                      ...CurEmp.quarter[lastQuarterIndex],
+                      scoreOfEvaluation: {
+                        ...CurEmp.quarter[lastQuarterIndex]?.scoreOfEvaluation,
+                        achievementBeyondScore: e.target.value,
+                      },
+                    },
+                  ];
+
+                  return {
+                    ...CurEmp,
+                    quarter: updatedQuarter,
+                  };
                 })
               }
               className="inpt_tag"
               disabled={!isEditing}
               {...register("achievementBeyondScore", {
-                required: "",
+                required: "This field is required",
                 pattern: {
                   value: /^[\w\s]+$/,
-                  message: "",
+                  message: "Invalid input",
                 },
                 max: {
-                  value:15,
-                  message: "",
+                  value: 15,
+                  message: "Value must be less than or equal to 15",
                 },
               })}
-            ></input>
+            />
             {errors.achievementBeyondScore && (
-            <div className="error-container">
-              <p className="error-message">{errors.achievementBeyondScore.message}</p>
-              <div className="error-icon">!</div>
-            </div>
-          )}
+              <div className="error-container">
+                <p className="error-message">
+                  {errors.achievementBeyondScore.message}
+                </p>
+                <div className="error-icon">!</div>
+              </div>
+            )}
           </div>
           <p>
             TOTAL MARKS OUT OF 40 :{" "}
-            {parseInt(CurEmp.scoreOfEvaluation.achievementBeyondScore) +
-              parseInt(CurEmp.scoreOfEvaluation.selfAppraisalScore)}
+            {parseInt(
+              CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+                ?.achievementBeyondScore
+            ) +
+              parseInt(
+                CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+                  ?.selfAppraisalScore
+              )}
           </p>
           <p>
             TOTAL MARKS OUT OF 100 :{" "}
-            {parseInt(CurEmp.scoreOfEvaluation.achievementBeyondScore) +
-              parseInt(CurEmp.scoreOfEvaluation.selfAppraisalScore) +
-              parseInt(CurEmp.totalScore)}
+            {parseInt(
+              CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+                ?.achievementBeyondScore
+            ) +
+              parseInt(
+                CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+                  ?.selfAppraisalScore
+              ) +
+              parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].totalScore)}
           </p>
-
-          <h3>
-            Overall performance of the Consolidated Employee "{Remark}"
-          </h3>
+          <h3>Overall performance of the Consolidated Employee "{Remark}"</h3>
         </div>
 
         <textarea
@@ -479,28 +594,28 @@ console.log('ppp',isVisible);
           className="multiline-input"
         />
 
-        <Grid/>
-        <div className="btn_class">
+        <div className="btn_class_Grid">
+          <Grid />
           {isEditing ? (
             <button
               onClick={() => setIsEditing(!isEditing)}
               type="submit"
-              className="submitbtn_apar"
+              className="submitbtn_Eval"
             >
               submit
             </button>
           ) : (
-            <div className="Edit_lock">
+            <div className="Edit_lock_Submit">
               <button
                 onClick={() => setIsEditing(!isEditing)}
                 type="submit"
-                className="submitbtn_apar"
+                className="submitbtn_Eval"
               >
                 Edit
               </button>
               <button
                 type="submit"
-                className="submitbtn_apar"
+                className="submitbtn_Eval"
                 // onClick={handleSubmit}
               >
                 Lock & Submit
@@ -509,8 +624,7 @@ console.log('ppp',isVisible);
           )}
         </div>
       </form>
-       <SelfAppraisalData isVisible={isVisible} setisVisible={setisVisible} />
-       
+      <SelfAppraisalData isVisible={isVisible} setisVisible={setisVisible} />
     </div>
   );
 };

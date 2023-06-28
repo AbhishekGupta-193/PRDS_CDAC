@@ -1,26 +1,27 @@
-.APAR_Track_wrapper{
+/* .APAR_Track_wrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+    border: 2px solid red;
+} */
 
 .APAR_track_table {
-    width: 90%;
+    /* width: 90%; */
     border-collapse: collapse;
     border: 1px solid black;
   }
   
-  th,
-  td {
+  .APAR_track_table th,
+  .APAR_track_table td {
     border: 1px solid black;
     padding: 5px;
   }
   
-  thead {
+  .APAR_track_table thead {
     background-color: lightgray;
   }
   
-  tbody tr:hover {
+  .APAR_track_table tbody tr:hover {
     background-color: #ffffcc;
   }
   

@@ -5,8 +5,7 @@
 }
 
 .SelfAppdatabtn {
-  background-image: linear-gradient(#42A1EC, #0070C9);
-  border: 1px solid #0077CC;
+  background-color: #404e67;
   border-radius: 4px;
   box-sizing: border-box;
   color: #FFFFFF;
@@ -35,17 +34,6 @@
   opacity: .3;
 }
 
-.SelfAppdatabtn:hover {
-  background-image: linear-gradient(#51A9EE, #147BCD);
-  border-color: #1482D0;
-  text-decoration: none;
-}
-
-.SelfAppdatabtn:active {
-  background-image: linear-gradient(#3D94D9, #0067B9);
-  border-color: #006DBC;
-  outline: none;
-}
 
 .SelfAppdatabtn:focus {
   box-shadow: rgba(131, 192, 253, 0.5) 0 0 0 3px;
@@ -93,21 +81,23 @@
   outline: 0;
 }
 
-.btn_class {
+.btn_Grid_class {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-.submitbtn_apar {
+.submitbtn_Eval {
   display: flex;
   justify-content: center;
   width: 30%;
   background-color: #404e67;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
 
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  /* margin-left: 25%; */
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -123,7 +113,6 @@
   background-color: #404e67;
 
   color: white;
-  /* border-radius: 20px; */
 
   padding: 3px;
 }
@@ -149,8 +138,9 @@
   width: 70%;
 }
 
-.Edit_lock {
+.Edit_lock_Submit {
   display: flex;
+  margin-left: 25%;
   gap: 1rem;
   justify-content: center;
   align-items: center;
@@ -161,7 +151,6 @@
   width: 100%;
   height: auto;
   margin-top: 20px;
-  /* margin-bottom: 30px; */
   border-collapse: collapse;
 }
 
@@ -174,28 +163,18 @@ td {
 
 .multiline-input {
   resize: vertical;
-  /* Allows vertical resizing */
   min-height: 70px;
-  /* Sets a minimum height for the textarea */
   max-height: 300px;
-  /* Sets a maximum height for the textarea */
   width: 90%;
-  /* Makes the textarea occupy the full width */
   padding: 8px;
-  /* Adds padding for better appearance */
   font-size: 16px;
-  /* Sets the font size */
   border: 1px solid #9fc8fe;
-  /* Adds a border */
   border-radius: 4px;
-  /* Adds border radius */
 }
 
 .multiline-input:focus {
   outline: none;
-  /* Removes the default focus outline */
   border-color: #007bff;
-  /* Changes the border color on focus */
 }
 
 .error_evaluation {

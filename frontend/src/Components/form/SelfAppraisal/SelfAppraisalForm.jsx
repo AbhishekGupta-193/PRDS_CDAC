@@ -7,9 +7,15 @@ import validator from "validator";
 
 const SelfAppraisalForm = () => {
   const navigate = useNavigate();
-  const [formErrors, setFormErrors] = useState({});
+  const [ curuser, setcuruser ] = useState(JSON.parse(localStorage.getItem("curuser")));
 
-  const { curuser, setcuruser } = useGlobalContext();
+  const [formErrors, setFormErrors] = useState({});
+  const DateFrom = new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodFrom);
+  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const From = DateFrom.toLocaleDateString(undefined, options);
+  const DateTo = new Date(curuser.appraiselPeriodTo);
+  const To = DateTo.toLocaleDateString(undefined, options);
+
   const [isEditable, setIsEditable] = useState(true);
   const [dateoffillingSA, setdateoffillingSA] = useState("");
   const [jobAssignments, setJobAssignments] = useState([
@@ -18,11 +24,7 @@ const SelfAppraisalForm = () => {
   const [achievements, setAchievements] = useState([
     { serialNumber: "", achievement: "", deliverable: "" },
   ]);
-  const DateFrom = new Date(curuser.appraiselPeriodFrom);
-  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-  const From = DateFrom.toLocaleDateString(undefined, options);
-  const DateTo = new Date(curuser.appraiselPeriodTo);
-  const To = DateTo.toLocaleDateString(undefined, options);
+
   const handleJobAssignmentChange = (index, event) => {
     const { name, value } = event.target;
     const updatedAssignments = [...jobAssignments];
@@ -50,6 +52,16 @@ const SelfAppraisalForm = () => {
       { serialNumber: "", achievement: "", deliverable: "" },
     ]);
   };
+  const deleteJobAssignmentRow = (index) => {
+    const updatedAssignments = [...jobAssignments];
+    updatedAssignments.splice(index, 1);
+    setJobAssignments(updatedAssignments);
+  };
+  const deleteAchievementRow = (index) => {
+    const updatedAchievements = [...achievements];
+    updatedAchievements.splice(index, 1);
+    setAchievements(updatedAchievements);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -71,17 +83,6 @@ const SelfAppraisalForm = () => {
     setIsEditable(true);
   };
 
-  const getData = async () => {
-    try {
-      setcuruser(JSON.parse(localStorage.getItem("curuser")));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
   const lockAndSubmit = async () => {
     const updatedFormData = {
       ...curuser,
@@ -90,15 +91,7 @@ const SelfAppraisalForm = () => {
       dateOfFillingSelfAppraisalForm: dateoffillingSA,
       SelfAppraisal_status: true,
     };
-    console.log("this is updatedform data" , updatedFormData);
     setcuruser(updatedFormData);
-    try {
-      localStorage.setItem("curuser", JSON.stringify(updatedFormData));
-      console.log("curuser updated successfully in localStorage.");
-    } catch (error) {
-      console.error("Error storing updated curuser in localStorage:", error);
-    }
-
     const { data } = await axios.post(
       "http://localhost:5000/submitSelfAppraisel",
       curuser
@@ -111,9 +104,7 @@ const SelfAppraisalForm = () => {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     const alphabetRegex = /^[A-Za-z]+$/;
 
-   
-  
-    // ----------------------->
+    
     if (!dateoffillingSA) {
       errors.dateoffillingSA = "*This is required";
     } else if (!dateRegex.test(dateoffillingSA)) {
@@ -136,9 +127,7 @@ const SelfAppraisalForm = () => {
             value={curuser.userName}
             disabled={true}
           />
-          {/* {formErrors.employeeName && (
-            <span className="error_saf">{formErrors.employeeName}</span>
-          )} */}
+          
         </div>
 
         <div className="form-group">
@@ -150,9 +139,7 @@ const SelfAppraisalForm = () => {
             value={curuser.empId}
             disabled={true}
           />
-          {/* {formErrors.employeeId && (
-            <span className="error_saf">{formErrors.employeeId}</span>
-          )} */}
+          
         </div>
       </div>
 
@@ -162,26 +149,26 @@ const SelfAppraisalForm = () => {
           <div className="form-date-inputs">
             <input
               className="fromdate_saf"
-              type="text"
+              type="date"
               id="fromDate"
               name="fromDate"
               value={From}
               disabled={true}
             />
-            {/* {formErrors.fromDate && (
+            {formErrors.fromDate && (
               <span className="error_saf">{formErrors.fromDate}</span>
-            )} */}
+            )}
             <input
               className="todate_saf"
-              type="text"
+              type="date"
               id="toDate"
               name="toDate"
               value={To}
-              disabled={true}
+              disabled={!isEditable}
             />
-            {/* {formErrors.toDate && (
+            {formErrors.toDate && (
               <span className="error_saf">{formErrors.toDate}</span>
-            )} */}
+            )}
           </div>
         </div>
       </div>
@@ -205,9 +192,7 @@ const SelfAppraisalForm = () => {
                     type="text"
                     name="serialNumber"
                     value={index + 1}
-                    onChange={(event) =>
-                      handleJobAssignmentChange(index, event)
-                    }
+                    onChange={(event) => handleJobAssignmentChange(index, event)}
                     disabled={true}
                   />
                 </td>
@@ -216,9 +201,7 @@ const SelfAppraisalForm = () => {
                     type="text"
                     name="jobAssigned"
                     value={assignment.jobAssigned}
-                    onChange={(event) =>
-                      handleJobAssignmentChange(index, event)
-                    }
+                    onChange={(event) => handleJobAssignmentChange(index, event)}
                     disabled={!isEditable}
                   />
                 </td>
@@ -227,30 +210,33 @@ const SelfAppraisalForm = () => {
                     type="text"
                     name="correspondingAchievement"
                     value={assignment.correspondingAchievement}
-                    onChange={(event) =>
-                      handleJobAssignmentChange(index, event)
-                    }
+                    onChange={(event) => handleJobAssignmentChange(index, event)}
                     disabled={!isEditable}
                   />
                   {formErrors.correspondingAchievement && (
-                    <span className="error_saf">
-                      {formErrors.correspondingAchievement}
-                    </span>
+                    <span className="error_saf">{formErrors.correspondingAchievement}</span>
                   )}
                 </td>
                 {isEditable && (
-                  <td className="add-row-cell">
-                    {index === jobAssignments.length - 1}
-                  </td>
-                )}
-                {isEditable && (
-                  <div className="add-row" onClick={addJobAssignmentRow}>
-                    +
-                  </div>
+                  <>
+                    <td className="add-row-cell">
+                      {index === jobAssignments.length - 1 && (
+                        <div className="add-row" onClick={addJobAssignmentRow}>
+                          +
+                        </div>
+                      )}
+                      {index !== jobAssignments.length - 1 && (
+                        <div className="delete-row" onClick={() => deleteJobAssignmentRow(index)}>
+                          -
+                        </div>
+                      )}
+                    </td>
+                  </>
                 )}
               </tr>
             ))}
           </tbody>
+
         </table>
       </div>
 
@@ -296,18 +282,25 @@ const SelfAppraisalForm = () => {
                   />
                 </td>
                 {isEditable && (
-                  <td className="add-row-cell">
-                    {index === achievements.length - 1}
-                  </td>
+                  <>
+
+                    <td className="add-row-cell">
+                      {index === achievements.length - 1 && (
+                        <div className="add-row" onClick={addAchievementRow}>
+                          +
+                        </div>
+                      )}
+                      {index !== achievements.length - 1 && (
+                        <div className="delete-row" onClick={() => deleteAchievementRow(index)}>
+                          -
+                        </div>
+                      )}
+                    </td>
+                  </>
                 )}
-                {isEditable && (
-                  <div className="add-row" onClick={addAchievementRow}>
-                    +
-                  </div>
-                )}
-              </tr>
+                </tr>
             ))}
-          </tbody>
+              </tbody>
         </table>
       </div>
       {isEditable && (

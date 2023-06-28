@@ -48,7 +48,6 @@ function APAR_form() {
   const handleSubmit1 = async (e) => {
     e.preventDefault();
 
-    // console.log({ user });
 
     try {
       const { data } = await axios.post(
@@ -72,7 +71,7 @@ function APAR_form() {
           <h3>APAR Management : Employee details</h3>
         </div>
 
-        <div className="Table_rows">
+        <div className="Table_rows_APAR">
           <span className="spantype">Report for the Period :</span>
           <div className="inpt_periodbox">
           <div className={`from_apar ${errors.appraiselPeriodFrom ? "error" : ""}`}>
@@ -162,7 +161,7 @@ function APAR_form() {
           </div>
         </div>
         <div className="personal_deatils">
-          <div className={`Table_rows ${errors.userName ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.userName ? "error" : ""}`}>
 
             <span className="spantype">Name :</span>
             <input
@@ -194,7 +193,7 @@ function APAR_form() {
             </div>
           )}
           </div>
-          <div className={`Table_rows ${errors.empId ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.empId ? "error" : ""}`}>
 
             <span className="spantype">Employee Id :</span>
             <input
@@ -228,7 +227,7 @@ function APAR_form() {
           )}
 
           </div>
-          <div className={`Table_rows ${errors.dateOBirth ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.dateOBirth ? "error" : ""}`}>
 
             <span className="spantype">Date of Birth :</span>
 
@@ -269,7 +268,7 @@ function APAR_form() {
           )}
 
           </div>
-          <div className={`Table_rows ${errors.designation ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.designation ? "error" : ""}`}>
 
             <span className="spantype">Designation :</span>
 
@@ -305,7 +304,7 @@ function APAR_form() {
           )}
 
           </div>
-          <div className={`Table_rows ${errors.presentpay ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.presentpay ? "error" : ""}`}>
 
             <span className="spantype">Present Pay :</span>
 
@@ -338,7 +337,7 @@ function APAR_form() {
           )}
 
           </div>
-          <div className={`Table_rows ${errors.group ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.group ? "error" : ""}`}>
 
             <span className="spantype">section/Group :</span>
             <input
@@ -368,7 +367,7 @@ function APAR_form() {
             </div>
           )}
           </div>
-          <div className={`Table_rows ${errors.dateOfEntryInCdac ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.dateOfEntryInCdac ? "error" : ""}`}>
 
             <span className="spantype">Date of entry in CDAC :</span>
             <input
@@ -408,7 +407,7 @@ function APAR_form() {
             </div>
           )}
           </div>
-          <div className={`Table_rows ${errors.dateOfFillingAparForm ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.dateOfFillingAparForm ? "error" : ""}`}>
 
             <span className="spantype">
               Date of entry to the current designation :
@@ -450,7 +449,7 @@ function APAR_form() {
             </div>
           )}
           </div>
-          <div className={`Table_rows ${errors.leaveAvailed ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.leaveAvailed ? "error" : ""}`}>
 
             <span className="spantype">Leave availed :</span>
             <input
@@ -482,7 +481,7 @@ function APAR_form() {
             </div>
           )}
           </div>
-          <div className={`Table_rows ${errors.absenceOtherThanLeave ? "error" : ""}`}>
+          <div className={`Table_rows_APAR ${errors.absenceOtherThanLeave ? "error" : ""}`}>
             
             <span className="spantype">
               Absence from duty other then leave :
