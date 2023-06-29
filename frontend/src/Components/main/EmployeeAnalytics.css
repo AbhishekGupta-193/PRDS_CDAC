@@ -1,0 +1,91 @@
+.EmployeeAnalyticsContainer {
+    background-color: #F0F2F5;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.graph-up {
+    width: 90%;
+    background-color: white;
+    margin: 1rem auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.table-down {
+    width: 90%;
+    background-color: white;
+    margin: 1rem auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.EAC {
+    margin-top: 20px;
+}
+
+.EAC-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.EAC-tr:nth-child(even) {
+    background-color: #D5F5E8;
+}
+
+.EAC-tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.EAC-th {
+    background-color: #D6E3FD;
+    color: black;
+    outline: none;
+    border: none;
+}
+
+.EAC-td {
+    height: 2rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.EAC-tr:hover {
+    background-color: #F0F2F5;
+    cursor: pointer;
+}
+
+.EAC-extra-details-row-td {
+    background-color: #F0F2F5;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+}
+
+.EAC-extra-details-row-td-1 {
+    width: 50%;
+    float: left;
+}
+
+.EAC-extra-details-row-td-2 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: right;
+}
+
+.EAC-extra-details-row-td-21 {
+    background-color: white;
+    border-radius: 1rem;
+    width: 90%;
+    height: auto;
+}

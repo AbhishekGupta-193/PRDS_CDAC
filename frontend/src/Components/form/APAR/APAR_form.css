@@ -36,7 +36,7 @@
   display: flex;
   justify-content: center;
   width: 30%;
-  background-color: #5b91d9;
+  background-color: #404e67;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -44,9 +44,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
-.submitbtn_apar:hover {
-  background-color: #5b91d9;
-}
+
 .head {
   display: flex;
   justify-content: center;

@@ -2,39 +2,27 @@
   min-height: 100%;
   background-color: #404e67;
   padding: 1rem;
+  width: 18rem;
   box-sizing: border-box;
-  
 }
-.EmployeeNames{
+.EmployeeNames {
   align-items: flex-start;
   height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: auto;
   color: #fff;
+  
+}
+.EmployeeNames p{
+  cursor: pointer;
 }
 .EmployeeNames::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
-.search {
-  margin-bottom: 20px;
-}
 
-.search input {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-}
 
-.search button {
-  padding: 8px 16px;
-  font-size: 16px;
-  background-color: #4CAF50;
-  color: rgb(192, 60, 60);
-  border: none;
-  cursor: pointer;
-}
 
-  
+
+

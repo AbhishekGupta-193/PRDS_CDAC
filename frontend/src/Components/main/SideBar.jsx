@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { SiFormstack } from "react-icons/si";
+import { FaChartLine } from "react-icons/fa";
 import "../../css/side-bar.css";
 
 export const SideBar = () => {
@@ -28,6 +29,16 @@ export const SideBar = () => {
           <SiFormstack />
         </i>
         <span>Reporting</span>
+      </Link>
+      <Link
+        className={`sidebar-item ${active === "analytics" ? "active" : ""}`}
+        to="Analytics"
+        onClick={() => setActive("Analytics")}
+      >
+        <i>
+          <FaChartLine />
+        </i>
+        <span>Analytics</span>
       </Link>
     </aside>
   );

@@ -2,11 +2,33 @@ import React, { useState } from "react";
 import "./Grid.css"; // Import the CSS file for styling
 import { bgcolor } from "@mui/system";
 
-const Grid = () => {
+const Grid = ({CurEmp,setCurEmp}) => {
   const [selectedGrid, setSelectedGrid] = useState(null);
 
+   const updateGridStatus = ()=>{
+    setCurEmp({
+      ...CurEmp,
+      quarter: [
+        ...CurEmp.quarter.slice(
+          0,
+          CurEmp.quarter.length - 1
+        ),
+        {
+          ...CurEmp.quarter[CurEmp.quarter.length - 1],
+          scoreOfEvaluation: {
+            ...CurEmp.quarter[CurEmp.quarter.length - 1]
+              .scoreOfEvaluation,
+              employeeFinalRemark:selectedGrid,
+            
+          },
+        },
+      ],
+    })
+  
+   }
   const handleMouseclick = (grid) => {
     setSelectedGrid(grid);
+    updateGridStatus();
   };
 
   return (

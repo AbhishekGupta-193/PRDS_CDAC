@@ -1,8 +1,4 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-  }
-  
+
   :root {
     --heights: 70vh;
     --widths: 100%;

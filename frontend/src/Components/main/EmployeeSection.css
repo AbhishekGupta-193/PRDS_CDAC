@@ -1,16 +1,64 @@
-
-
-.APAR_details{
-    display: flex;
-    border: 2px solid red;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-}
-.EmployeeSection-wrapper{
-    border: 2px solid red;
+.EmployeeSection-wrapper {
+    margin-top: 1rem;
+    background-color: #F0F2F5;
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 2rem;
+}
+
+.APAR_details {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 40%;
+}
+
+.APAR_details-head {
+    height: auto;
+    width: 30%;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    background-color: #D5F5E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.APAR_details-inside {
+    display: flex;
+    flex-direction: column;
+}
+
+.APAR_details-inside-1 {
+    font-size: 2rem;
+}
+
+.APAR_details-inside-2 {
+    font-size: 1.5rem;
+}
+
+.SAbtn {
+    margin: 1.5rem;
+    background-color: #D6E3FD;
+    height: 3rem;
+    border-radius: 2rem;
+    outline: none;
+    border: none;
+}
+.self-appraisal-filled{
+    height: auto;
+    width: 30%;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    background-color: #D5F5E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
 }

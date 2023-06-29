@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useGlobalContext } from '../../StateContext';
 import {IoIosPeople} from 'react-icons/io'
+import {GrDocumentPerformance} from 'react-icons/gr'
+import {MdPendingActions} from 'react-icons/md'
+import {AiOutlineIssuesClose} from 'react-icons/ai'
 
 
 export const HR = () => {
@@ -37,9 +40,7 @@ export const HR = () => {
         setalluser(data);
       })
   }, [])
-  const fillForrm = () => {
-    navigate("/form/APAR");
-  }
+ 
    
   return (
     
@@ -48,6 +49,18 @@ export const HR = () => {
       <div className='Total_Employee'>
            <span className='EmployeeIcon'><IoIosPeople/></span>
            <span>Total Employee are : </span>
+       </div>
+      <div className='Total_Employee'>
+           <span className='EmployeeIcon'><GrDocumentPerformance/></span>
+           <span>Performance Evaluation Completed: </span>
+       </div>
+      <div className='Total_Employee'>
+           <span className='EmployeeIcon'><MdPendingActions/></span>
+           <span>Performance Evaluation Pending : </span>
+       </div>
+      <div className='Total_Employee'>
+           <span className='EmployeeIcon'><AiOutlineIssuesClose/></span>
+           <span>APAR Issued : </span>
        </div>
     
       

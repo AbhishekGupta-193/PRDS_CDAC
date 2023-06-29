@@ -164,7 +164,7 @@ const SelfAppraisalForm = () => {
               id="toDate"
               name="toDate"
               value={To}
-              disabled={!isEditable}
+              disabled={true}
             />
             {formErrors.toDate && (
               <span className="error_saf">{formErrors.toDate}</span>

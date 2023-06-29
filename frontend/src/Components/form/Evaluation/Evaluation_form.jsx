@@ -22,23 +22,38 @@ export const Evaluation_form = () => {
   const [CurEmp, setCurEmp] = useState(
     JSON.parse(localStorage.getItem("curuser"))
   );
-  const DateFrom = new Date(CurEmp.appraiselPeriodFrom);
+  const DateFrom = new Date(CurEmp.quarter[CurEmp.quarter.length-1].appraiselPeriodFrom);
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   const From = DateFrom.toLocaleDateString(undefined, options);
-  const DateTo = new Date(CurEmp.appraiselPeriodTo);
+  const DateTo = new Date(CurEmp.quarter[CurEmp.quarter.length-1].appraiselPeriodTo);
   const To = DateTo.toLocaleDateString(undefined, options);
   const [isVisible, setisVisible] = useState(false);
 
-  CurEmp.totalScore =
+  CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.totalScore=
+  parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc1) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc2) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc3) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc4) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc5) +
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc6) ;
+
+  const final_score =
     parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc1) +
     parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc2) +
     parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc3) +
     parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc4) +
     parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc5) +
-    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc6);
+    parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc6)+
+    parseInt(
+      CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+        ?.achievementBeyondScore
+    ) +
+      parseInt(
+        CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
+          ?.selfAppraisalScore
+      ) ;
 
   const handleSubmit1 = async (e) => {
-    e.preventDefault();
 
     console.log({ CurEmp });
     setCurEmp({
@@ -58,18 +73,18 @@ export const Evaluation_form = () => {
   useEffect(() => {
     const PerformanceRemark = () => {
       let performance = "";
-      if (CurEmp.totalScore >= 0 && CurEmp.totalScore <= 40) {
+      if (final_score >= 0 && final_score <= 40) {
         performance = "Need improvement";
-      } else if (CurEmp.totalScore >= 41 && CurEmp.totalScore <= 60) {
+      } else if (final_score >= 41 && final_score <= 60) {
         performance = "Satisfactory";
-      } else if (CurEmp.totalScore >= 61 && CurEmp.totalScore <= 80) {
+      } else if (final_score >= 61 && final_score <= 80) {
         performance = "Good";
-      } else if (CurEmp.totalScore >= 81 && CurEmp.totalScore <= 100) {
+      } else if (final_score >= 81 && final_score <= 100) {
         performance = "Excellent";
       }
       return performance;
     };
-
+    console.log(Remark,"hasbjksdb")
     if (isVisible) {
       console.log("aa gya=");
       document
@@ -82,7 +97,7 @@ export const Evaluation_form = () => {
     }
     setRemark(PerformanceRemark());
   }, [CurEmp, isVisible]);
-  console.log("ppp", isVisible);
+
 
   return (
     <div className="Evaluation_form_wrapper">
@@ -144,7 +159,7 @@ export const Evaluation_form = () => {
               type="text"
               placeholder="Group Head"
               name="groupHead"
-              value={CurEmp.groupHead}
+              value={CurEmp.quarter[CurEmp.quarter.length-1].groupHead}
               onChange={(e) =>
                 setCurEmp({ ...CurEmp, groupHead: e.target.value })
               }
@@ -158,7 +173,7 @@ export const Evaluation_form = () => {
               type="text"
               placeholder="designation"
               name="designation"
-              value={CurEmp.designation}
+              value={CurEmp.quarter[CurEmp.quarter.length-1].designation}
               className="inpt_tag"
               disabled={true}
               {...register("designation", {
@@ -205,7 +220,7 @@ export const Evaluation_form = () => {
                       max="10"
                       className="inpt_tag"
                       value={
-                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                        CurEmp.quarter[CurEmp.quarter.length-1]
                           .scoreOfEvaluation.sc1
                       }
                       onChange={(e) =>
@@ -214,7 +229,7 @@ export const Evaluation_form = () => {
                           quarter: [
                             {
                               scoreOfEvaluation: {
-                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                ...CurEmp.quarter[CurEmp.quarter.length-1]
                                   .scoreOfEvaluation,
                                 sc1: e.target.value,
                               },
@@ -238,21 +253,16 @@ export const Evaluation_form = () => {
                       min="0"
                       max="10"
                       value={
-                        CurEmp.quarter[CurEmp.quarter.length - 1]
+                        CurEmp.quarter[CurEmp.quarter.length-1]
                           .scoreOfEvaluation.sc2
                       }
                       onChange={(e) =>
                         setCurEmp({
                           ...CurEmp,
                           quarter: [
-                            ...CurEmp.quarter.slice(
-                              0,
-                              CurEmp.quarter.length - 1
-                            ),
                             {
-                              ...CurEmp.quarter[CurEmp.quarter.length - 1],
                               scoreOfEvaluation: {
-                                ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                                ...CurEmp.quarter[CurEmp.quarter.length-1]
                                   .scoreOfEvaluation,
                                 sc2: e.target.value,
                               },
@@ -422,9 +432,11 @@ export const Evaluation_form = () => {
                 </tr>
                 <tr>
                   <td></td>
-                  <td>TOTAL MARKS OUT OF 60 : </td>
+                  <td>TOTAL MARKS OUT OF 60 :{" "}</td>
                   <td>
-                    {CurEmp.quarter[CurEmp.quarter.length - 1].totalScore}
+                    {
+                       parseInt(CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation?.totalScore)
+                    }
                   </td>
                 </tr>
               </tbody>
@@ -440,34 +452,11 @@ export const Evaluation_form = () => {
               placeholder="Marks Out of 25"
               min="0"
               max="25"
-              name="selfAppraisalScore"
+              // name="selfAppraisalScore"
               value={
-                CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
-                  ?.selfAppraisalScore
+                CurEmp.quarter[CurEmp.quarter.length - 1]
+                  ?.scoreOfEvaluation?.selfAppraisalScore
               }
-              onChange={(e) =>
-                setCurEmp((CurEmp) => {
-                  const lastQuarterIndex = CurEmp.quarter.length - 1;
-
-                  const updatedQuarter = [
-                    ...CurEmp.quarter.slice(0, lastQuarterIndex),
-                    {
-                      ...CurEmp.quarter[lastQuarterIndex],
-                      scoreOfEvaluation: {
-                        ...CurEmp.quarter[lastQuarterIndex]?.scoreOfEvaluation,
-                        selfAppraisalScore: e.target.value,
-                      },
-                    },
-                  ];
-
-                  return {
-                    ...CurEmp,
-                    quarter: updatedQuarter,
-                  };
-                })
-              }
-              className="inpt_tag"
-              disabled={!isEditing}
               {...register("selfAppraisalScore", {
                 required: "",
                 pattern: {
@@ -479,6 +468,31 @@ export const Evaluation_form = () => {
                   message: "",
                 },
               })}
+              onChange={(e) =>
+
+                setCurEmp({
+                  ...CurEmp,
+                  quarter: [
+                    ...CurEmp.quarter.slice(
+                      0,
+                      CurEmp.quarter.length - 1
+                    ),
+                    {
+                      ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                      scoreOfEvaluation: {
+                        ...CurEmp.quarter[CurEmp.quarter.length - 1]
+                          ?.scoreOfEvaluation,
+                        selfAppraisalScore: e.target.value,
+                      },
+                    },
+                  ],
+                })
+              }
+              required
+
+              className="inpt_tag"
+            disabled={!isEditing}
+
             />
 
             {errors.selfAppraisalScore && (
@@ -492,9 +506,8 @@ export const Evaluation_form = () => {
           </div>
           <h4>PART - III</h4>
           <div
-            className={`Table_rows ${
-              errors.achievementBeyondScore ? "error" : ""
-            }`}
+            className={`Table_rows ${errors.achievementBeyondScore ? "error" : ""
+              }`}
           >
             <span className="spantype_score">
               Acheivement Beyond Normal Scope of Work :
@@ -510,6 +523,17 @@ export const Evaluation_form = () => {
                 CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
                   ?.achievementBeyondScore
               }
+              {...register("achievementBeyondScore", {
+                required: "This field is required",
+                pattern: {
+                  value: /^[\w\s]+$/,
+                  message: "Invalid input",
+                },
+                max: {
+                  value: 15,
+                  message: "Value must be less than or equal to 15",
+                },
+              })}
               onChange={(e) =>
                 setCurEmp((CurEmp) => {
                   const lastQuarterIndex = CurEmp.quarter.length - 1;
@@ -531,19 +555,10 @@ export const Evaluation_form = () => {
                   };
                 })
               }
+              required
               className="inpt_tag"
-              disabled={!isEditing}
-              {...register("achievementBeyondScore", {
-                required: "This field is required",
-                pattern: {
-                  value: /^[\w\s]+$/,
-                  message: "Invalid input",
-                },
-                max: {
-                  value: 15,
-                  message: "Value must be less than or equal to 15",
-                },
-              })}
+            disabled={!isEditing}
+
             />
             {errors.achievementBeyondScore && (
               <div className="error-container">
@@ -575,7 +590,7 @@ export const Evaluation_form = () => {
                 CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation
                   ?.selfAppraisalScore
               ) +
-              parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].totalScore)}
+              parseInt(CurEmp.quarter[CurEmp.quarter.length - 1]?.scoreOfEvaluation?.totalScore)}
           </p>
           <h3>Overall performance of the Consolidated Employee "{Remark}"</h3>
         </div>
@@ -595,7 +610,7 @@ export const Evaluation_form = () => {
         />
 
         <div className="btn_class_Grid">
-          <Grid />
+          <Grid CurEmp={CurEmp} setCurEmp={setCurEmp} />
           {isEditing ? (
             <button
               onClick={() => setIsEditing(!isEditing)}
@@ -616,7 +631,7 @@ export const Evaluation_form = () => {
               <button
                 type="submit"
                 className="submitbtn_Eval"
-                // onClick={handleSubmit}
+              // onClick={handleSubmit}
               >
                 Lock & Submit
               </button>
