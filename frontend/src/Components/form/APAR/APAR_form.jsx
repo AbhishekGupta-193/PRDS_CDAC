@@ -14,11 +14,11 @@ function APAR_form() {
   } = useForm();
   const location = useLocation();
   const CurrentUser = location.state;
-
+  // console.log(CurrentUser)
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(true);
   const { curuser, setcuruser } = useGlobalContext();
-  const { isSubmitted, setisSubmitted } = useGlobalContext();
+  const { isSubmitted } = useGlobalContext();
   console.log(isSubmitted);
 
   const getData = async () => {
@@ -32,13 +32,19 @@ function APAR_form() {
     getData();
   }, []);
 
+  console.log(CurrentUser);
   const [user, setuser] = useState({
+    appraiselPeriodFrom: null,
+    appraiselPeriodTo: null,
     absenceOtherThanLeave: null,
     leaveAvailed: null,
     APAP_status: false,
     dateofIssueofAPAR: null,
     dateofSubmission: null,
     dateofReviewbyRPO: null,
+    designation: null,
+    presentPay: null,
+
   });
 
   const handleSubmit1 = async (e) => {
@@ -55,10 +61,9 @@ function APAR_form() {
       user.dateofReviewbyRPO;
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/submitAparForm",
-        CurrentUser
-      );
+      console.log("a=hamaea cueryse hye hai", CurrentUser, " aur ye hai normal user", user);
+      const { data } = await axios.post("http://localhost:5000/submitAparForm", CurrentUser);
+      // await axios.post("http://localhost:5000/send-email", CurrentUser);
       setcuruser(data.user);
       navigate("/main2/HR");
     } catch (error) {
@@ -75,66 +80,19 @@ function APAR_form() {
         </div>
 
         <div className="Table_rows_APAR">
+
           <span className="spantype">Report for the Period :</span>
           <div className="inpt_periodbox">
             <div
-              className={`from_apar ${
-                errors.appraiselPeriodFrom ? "error" : ""
-              }`}
+              className={`from_apar ${errors.appraiselPeriodFrom ? "error" : ""
+                }`}
             >
               <input
                 type="date"
                 placeholder="FROM : DD / MM / YYYY"
                 name="Aparfrom"
                 value={user.appraiselPeriodFrom}
-                onChange={(e) =>
-                  setuser({ ...user, appraiselPeriodFrom: e.target.value })
-                }
-                disabled={!isEditing}
-                className="inpt_period"
                 {...register("appraiselPeriodFrom", {
-                  required: "",
-                  pattern: {
-                    value: /^\d{4}-\d{2}-\d{2}$/,
-                    message: "",
-                  },
-                  validate: {
-                    notExceedCurrentDate: (value) => {
-                      const selectedDate = new Date(value);
-                      const currentDate = new Date();
-
-                      if (selectedDate > currentDate) {
-                        return "";
-                      }
-
-                      return true;
-                    },
-                  },
-                })}
-              ></input>
-              {errors.appraiselPeriodFrom && (
-                <div className="error-container">
-                  <p className="error-message">
-                    {errors.appraiselPeriodFrom.message}
-                  </p>
-                  <div className="error-icon">!</div>
-                </div>
-              )}
-            </div>
-            <div
-              className={`to_apar ${errors.appraiselPeriodTo ? "error" : ""}`}
-            >
-              <input
-                type="date"
-                placeholder="TO : DD / MM / YYYY"
-                name="Aparupto"
-                value={user.appraiselPeriodTo}
-                onChange={(e) =>
-                  setuser({ ...user, appraiselPeriodTo: e.target.value })
-                }
-                disabled={!isEditing}
-                className="inpt_period"
-                {...register("appraiselPeriodTo", {
                   required: "",
                   pattern: {
                     value: /^\d{4}-\d{2}-\d{2}$/,
@@ -160,6 +118,60 @@ function APAR_form() {
                     },
                   },
                 })}
+                onChange={(e) =>
+                  setuser({ ...user, appraiselPeriodFrom: e.target.value })
+                }
+                disabled={!isEditing}
+                className="inpt_period"
+              ></input>
+              {errors.appraiselPeriodFrom && (
+                <div className="error-container">
+                  <p className="error-message">
+                    {errors.appraiselPeriodFrom.message}
+                  </p>
+                  <div className="error-icon">!</div>
+                </div>
+              )}
+            </div>
+            <div
+              className={`to_apar ${errors.appraiselPeriodTo ? "error" : ""}`}
+            >
+              <input
+                type="date"
+                placeholder="TO : DD / MM / YYYY"
+                name="Aparupto"
+                value={user.appraiselPeriodTo}
+                {...register("appraiselPeriodTo", {
+                  required: "",
+                  pattern: {
+                    value: /^\d{4}-\d{2}-\d{2}$/,
+                    message: "",
+                  },
+                  validate: {
+                    notExceedCurrentDate: (value) => {
+                      const fromDate = new Date(user.appraiselPeriodTo);
+                      const toDate = new Date(value);
+
+                      if (toDate < fromDate) {
+                        return "";
+                      }
+
+                      const selectedDate = new Date(value);
+                      const currentDate = new Date();
+
+                      if (selectedDate > currentDate) {
+                        return "";
+                      }
+
+                      return true;
+                    },
+                  },
+                })}
+                onChange={(e) =>
+                  setuser({ ...user, appraiselPeriodTo: e.target.value })
+                }
+                disabled={!isEditing}
+                className="inpt_period"
               ></input>
               {errors.appraiselPeriodTo && (
                 <div className="error-container">
@@ -174,328 +186,179 @@ function APAR_form() {
         </div>
         <div className="personal_deatils">
           <div className={`Table_rows_APAR ${errors.userName ? "error" : ""}`}>
-            <span className="spantype">Name :</span>
-            <input
-              type="text"
-              placeholder="Name"
-              name="username"
-              value={CurrentUser.userName}
-              // onChange={(e) => setuser({ ...user, userName: e.target.value })}
-              className="inpt"
-              disabled={true}
-              {...register("userName", {
-                required: "",
-                pattern: {
-                  value: /^[A-Za-z\s]+$/,
-                  message: "",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "",
-                },
-              })}
-            ></input>
-            {errors.userName && (
-              <div className="error-container">
-                <p className="error-message">{errors.userName.message}</p>
-                <div className="error-icon">!</div>
-              </div>
-            )}
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Name :</span>
+              <input
+                type="text"
+                placeholder="Name"
+                name="username"
+                value={CurrentUser.userName}
+                className="inpt"
+                disabled={true}
+              ></input>
+            </div>
           </div>
+
           <div className={`Table_rows_APAR ${errors.empId ? "error" : ""}`}>
-            <span className="spantype">Employee Id :</span>
-            <input
-              id="empid_apar"
-              type="text"
-              placeholder="Employee Id"
-              name="EmployeeID"
-              value={CurrentUser.empId}
-              // onChange={(e) => setuser({ ...user, empId: e.target.value })}
-              className="inpt"
-              disabled={true}
-              {...register("empId", {
-                required: "",
-                pattern: {
-                  value: /^\d+$/,
-                  message: "",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "",
-                },
-              })}
-            ></input>
-            {errors.empId && (
-              <div className="error-container">
-                <p className="error-message">{errors.empId.message}</p>
-                <div className="error-icon">!</div>
-              </div>
-            )}
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Employee Id :</span>
+              <input
+                id="empid_apar"
+                type="text"
+                placeholder="Employee Id"
+                name="EmployeeID"
+                value={CurrentUser.empId}
+                className="inpt"
+                disabled={true}
+
+              ></input>
+            </div>
           </div>
           <div
             className={`Table_rows_APAR ${errors.dateOBirth ? "error" : ""}`}
           >
-            <span className="spantype">Date of Birth :</span>
-
-            <input
-              type="date"
-              placeholder="Date of birth"
-              name="dob"
-              value={CurrentUser.dateOBirth}
-              // onChange={(e) => setuser({ ...user, dateOBirth: e.target.value })}
-              className="inpt"
-              disabled={true}
-              {...register("dateOBirth", {
-                required: "",
-                pattern: {
-                  value: /^\d{4}-\d{2}-\d{2}$/,
-                  message: "",
-                },
-                validate: {
-                  notExceedCurrentDate: (value) => {
-                    const selectedDate = new Date(value);
-                    const currentDate = new Date();
-
-                    if (selectedDate > currentDate) {
-                      return "";
-                    }
-
-                    return true;
-                  },
-                },
-              })}
-            ></input>
-            {errors.dateOBirth && (
-              <div className="error-container">
-                <p className="error-message">{errors.dateOBirth.message}</p>
-                <div className="error-icon">!</div>
-              </div>
-            )}
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Date of Birth :</span>
+              <input
+                type="text"
+                placeholder="Date of birth"
+                name="dob"
+                value={new Date(CurrentUser.dateOfBirth).toLocaleDateString()}
+                className="inpt"
+                disabled={true}
+              ></input>
+            </div>
           </div>
           <div
             className={`Table_rows_APAR ${errors.designation ? "error" : ""}`}
           >
-            <span className="spantype">Designation :</span>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Designation :</span>
 
-            <input
-              id="des_apar"
-              type="text"
-              placeholder="Designation"
-              name="designation"
-              value={
-                CurrentUser.quarter[CurrentUser.quarter.length - 1].designation
-              }
-              // onChange={(e) =>
-              //   setuser({ ...user, designation: e.target.value })
-              // }
-              className="inpt"
-              disabled={true}
-              {...register("designation", {
-                required: "",
-                pattern: {
-                  value: /^[A-Za-z\s]+$/,
-                  message: "",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "",
-                },
-              })}
-            ></input>
-            {errors.designation && (
-              <div className="error-container">
-                <p className="error-message">{errors.designation.message}</p>
-                <div className="error-icon">!</div>
-              </div>
-            )}
+              <input
+                id="des_apar"
+                type="text"
+                placeholder="Designation"
+                name="designation"
+                value={CurrentUser.quarter[CurrentUser.quarter.length - 1].designation}
+                // onChange={(e) =>
+                //   setuser({ ...user, designation: e.target.value })
+                // }
+                className="inpt"
+                disabled={!isEditing}
+              ></input>
+            </div>
           </div>
-          <div
-            className={`Table_rows_APAR ${errors.presentpay ? "error" : ""}`}
-          >
-            <span className="spantype">Present Pay :</span>
-
-            <input
-              type="text"
-              placeholder="Present Pay"
-              name="pay"
-              value={
-                CurrentUser.quarter[CurrentUser.quarter.length - 1].presentpay
-              }
-              // onChange={(e) => setuser({ ...user, presentpay: e.target.value })}
-              className="inpt"
-              disabled={true}
-              {...register("presentpay", {
-                required: "",
-                pattern: {
-                  value: /^[\w\s]+$/,
-                  message: "",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "",
-                },
-              })}
-            ></input>
-            {errors.presentpay && (
+          <div className={`Table_rows_APAR ${errors.presentPay ? "error" : ""}`}>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Present Pay :</span>
+              <input
+                type="text"
+                placeholder="Present Pay"
+                name="pay"
+                value={
+                  user.presentPay
+                }
+                {...register("presentPay", {
+                  required: "",
+                  pattern: {
+                    value: /^[\w\s]+$/,
+                    message: "",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "",
+                  },
+                })}
+                onChange={(e) => setuser({ ...user, presentPay: e.target.value })}
+                className="inpt"
+                disabled={!isEditing}
+              ></input>
+            </div>
+            {errors.presentPay && (
               <div className="error-container">
-                <p className="error-message">{errors.presentpay.message}</p>
+                <p className="error-message">{errors.presentPay.message}</p>
                 <div className="error-icon">!</div>
               </div>
             )}
           </div>
           <div className={`Table_rows_APAR ${errors.group ? "error" : ""}`}>
-            <span className="spantype">section/Group :</span>
-            <input
-              type="text"
-              placeholder="Section/Group"
-              name="grp"
-              value={CurrentUser.quarter[CurrentUser.quarter.length - 1].group}
-              // onChange={(e) => setuser({ ...user, group: e.target.value })}
-              className="inpt"
-              disabled={true}
-              {...register("group", {
-                required: "",
-                pattern: {
-                  value: /^[A-Za-z\s]+$/,
-                  message: "",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "",
-                },
-              })}
-            ></input>
-            {errors.group && (
-              <div className="error-container">
-                <p className="error-message">{errors.group.message}</p>
-                <div className="error-icon">!</div>
-              </div>
-            )}
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">section/Group :</span>
+              <input
+                type="text"
+                placeholder="Section/Group"
+                name="grp"
+                value={CurrentUser.quarter[CurrentUser.quarter.length - 1].group}
+                className="inpt"
+                disabled={true}
+              ></input>
+            </div>
           </div>
           <div
-            className={`Table_rows_APAR ${
-              errors.dateOfEntryInCdac ? "error" : ""
-            }`}
+            className={`Table_rows_APAR ${errors.dateOfEntryInCdac ? "error" : ""
+              }`}
           >
-            <span className="spantype">Date of entry in CDAC :</span>
-            <input
-              type="date"
-              placeholder=" DD / MM / YYYY"
-              name="entrydate"
-              value={
-                CurrentUser.quarter[CurrentUser.quarter.length - 1]
-                  .dateOfEntryInCdac
-              }
-              // onChange={(e) =>
-              //   setuser({ ...user, dateOfEntryInCdac: e.target.value })
-              // }
-              className="inpt"
-              disabled={true}
-              {...register("dateOfEntryInCdac", {
-                required: "",
-                pattern: {
-                  value: /^\d{4}-\d{2}-\d{2}$/,
-                  message: "",
-                },
-                validate: {
-                  notExceedCurrentDate: (value) => {
-                    const selectedDate = new Date(value);
-                    const currentDate = new Date();
-
-                    if (selectedDate > currentDate) {
-                      return "";
-                    }
-
-                    return true;
-                  },
-                },
-              })}
-            ></input>
-            {errors.dateOfEntryInCdac && (
-              <div className="error-container">
-                <p className="error-message">
-                  {errors.dateOfEntryInCdac.message}
-                </p>
-                <div className="error-icon">!</div>
-              </div>
-            )}
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Date of entry in CDAC :</span>
+              <input
+                type="text"
+                placeholder=" DD / MM / YYYY"
+                name="entrydate"
+                value={new Date(CurrentUser.dateOfEntryInCdac).toLocaleDateString()}
+                className="inpt"
+                disabled={true}
+              ></input>
+            </div>
           </div>
           <div
-            className={`Table_rows_APAR ${
-              errors.dateOfFillingAparForm ? "error" : ""
-            }`}
+            className={`Table_rows_APAR ${errors.dateOfFillingAparForm ? "error" : ""
+              }`}
           >
-            <span className="spantype">
-              Date of entry to the current designation :
-            </span>
-            <input
-              type="date"
-              placeholder="Date of entry to the current designation"
-              name="Apardate"
-              value={
-                CurrentUser.quarter[CurrentUser.quarter.length - 1]
-                  .dateOfEntryToCurrentDesignation
-              }
-              // onChange={(e) =>
-              //   setuser({ ...user, dateOfFillingAparForm: e.target.value })
-              // }
-              className="inpt"
-              disabled={true}
-              {...register("dateOfFillingAparForm", {
-                required: "",
-                pattern: {
-                  value: /^\d{4}-\d{2}-\d{2}$/,
-                  message: "",
-                },
-                validate: {
-                  notExceedCurrentDate: (value) => {
-                    const selectedDate = new Date(value);
-                    const currentDate = new Date();
-
-                    if (selectedDate > currentDate) {
-                      return "";
-                    }
-
-                    return true;
-                  },
-                },
-              })}
-            ></input>
-            {errors.dateOfFillingAparForm && (
-              <div className="error-container">
-                <p className="error-message">
-                  {errors.dateOfFillingAparForm.message}
-                </p>
-                <div className="error-icon">!</div>
-              </div>
-            )}
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">
+                Date of entry to the current designation :
+              </span>
+              <input
+                type="text"
+                placeholder="Date of entry to the current designation"
+                name="Apardate"
+                value={new Date(CurrentUser.quarter[CurrentUser.quarter.length - 1]
+                  .dateOfEntryToCurrentDesignation).toLocaleDateString()}
+                className="inpt"
+                disabled={true}
+              ></input>
+            </div>
           </div>
           <div
             className={`Table_rows_APAR ${errors.leaveAvailed ? "error" : ""}`}
           >
-            <span className="spantype">Leave availed :</span>
-            <input
-              type="text"
-              placeholder="Leave availed"
-              name="leave"
-              value={user.leaveAvailed}
-              onChange={(e) =>
-                setuser({ ...user, leaveAvailed: e.target.value })
-              }
-              className="inpt"
-              disabled={!isEditing}
-              {...register("leaveAvailed", {
-                required: "",
-                pattern: {
-                  value: /^\d+$/,
-                  message: "",
-                },
-                maxLength: {
-                  value: 3,
-                  message: "",
-                },
-              })}
-            ></input>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Leave availed :</span>
+              <input
+                type="text"
+                placeholder="Leave availed"
+                name="leave"
+                value={user.leaveAvailed}
+                {...register("leaveAvailed", {
+                  required: "",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "",
+                  },
+                  maxLength: {
+                    value: 3,
+                    message: "",
+                  },
+                })}
+                onChange={(e) =>
+                  setuser({ ...user, leaveAvailed: e.target.value })
+                }
+                className="inpt"
+                disabled={!isEditing}
+
+              ></input>
+            </div>
             {errors.leaveAvailed && (
               <div className="error-container">
                 <p className="error-message">{errors.leaveAvailed.message}</p>
@@ -504,35 +367,36 @@ function APAR_form() {
             )}
           </div>
           <div
-            className={`Table_rows_APAR ${
-              errors.absenceOtherThanLeave ? "error" : ""
-            }`}
+            className={`Table_rows_APAR ${errors.absenceOtherThanLeave ? "error" : ""
+              }`}
           >
-            <span className="spantype">
-              Absence from duty other then leave :
-            </span>
-            <input
-              type="text"
-              placeholder="Absence from duty other then leave"
-              name="otherleave"
-              value={user.absenceOtherThanLeave}
-              onChange={(e) =>
-                setuser({ ...user, absenceOtherThanLeave: e.target.value })
-              }
-              className="inpt"
-              disabled={!isEditing}
-              {...register("absenceOtherThanLeave", {
-                required: "",
-                pattern: {
-                  value: /^\d+$/,
-                  message: "",
-                },
-                maxLength: {
-                  value: 3,
-                  message: "",
-                },
-              })}
-            ></input>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">
+                Absence from duty other then leave :
+              </span>
+              <input
+                type="text"
+                placeholder="Absence from duty other then leave"
+                name="otherleave"
+                value={user.absenceOtherThanLeave}
+                {...register("absenceOtherThanLeave", {
+                  required: "",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "",
+                  },
+                  maxLength: {
+                    value: 3,
+                    message: "",
+                  },
+                })}
+                onChange={(e) =>
+                  setuser({ ...user, absenceOtherThanLeave: e.target.value })
+                }
+                className="inpt"
+                disabled={!isEditing}
+              ></input>
+            </div>
             {errors.absenceOtherThanLeave && (
               <div className="error-container">
                 <p className="error-message">
@@ -544,41 +408,43 @@ function APAR_form() {
           </div>
         </div>
         <div
-          className={`Table_rows_APAR ${
-            errors.dateofIssueofAPAR ? "error" : ""
-          }`}
+          className={`Table_rows_APAR ${errors.dateofIssueofAPAR ? "error" : ""
+            }`}
         >
-          <span className="spantype">Date of Issue:</span>
-          <input
-            type="date"
-            placeholder="Date of Issue"
-            name="Apardate"
-            value={user.dateofIssueofAPAR}
-            onChange={(e) =>
-              setuser({ ...user, dateofIssueofAPAR: e.target.value })
-            }
-            className="inpt"
-            disabled={!isEditing}
-            {...register("dateofIssueofAPAR", {
-              required: "",
-              pattern: {
-                value: /^\d{4}-\d{2}-\d{2}$/,
-                message: "",
-              },
-              validate: {
-                notExceedCurrentDate: (value) => {
-                  const selectedDate = new Date(value);
-                  const currentDate = new Date();
-
-                  if (selectedDate > currentDate) {
-                    return "";
-                  }
-
-                  return true;
+          <div className="Table_rows_APAR-1">
+            <span className="spantype">Date of Issue:</span>
+            <input
+              type="date"
+              placeholder="Date of Issue"
+              name="Apardate"
+              value={user.dateofIssueofAPAR}
+              {...register("dateofIssueofAPAR", {
+                required: "",
+                pattern: {
+                  value: /^\d{4}-\d{2}-\d{2}$/,
+                  message: "",
                 },
-              },
-            })}
-          ></input>
+                validate: {
+                  notExceedCurrentDate: (value) => {
+                    const selectedDate = new Date(value);
+                    const currentDate = new Date();
+
+                    if (selectedDate > currentDate) {
+                      return "";
+                    }
+
+                    return true;
+                  },
+                },
+              })}
+              onChange={(e) =>
+                setuser({ ...user, dateofIssueofAPAR: e.target.value })
+              }
+              className="inpt"
+              disabled={!isEditing}
+
+            ></input>
+          </div>
           {errors.dateofIssueofAPAR && (
             <div className="error-container">
               <p className="error-message">
@@ -589,41 +455,45 @@ function APAR_form() {
           )}
         </div>
         <div
-          className={`Table_rows_APAR ${
-            errors.dateofSubmission ? "error" : ""
-          }`}
+          className={`Table_rows_APAR ${errors.dateofSubmission ? "error" : ""
+            }`}
         >
-          <span className="spantype">Deadline for Submission:</span>
-          <input
-            type="date"
-            placeholder="Deadline for submission"
-            name="Apardate"
-            value={user.dateofSubmission}
-            onChange={(e) =>
-              setuser({ ...user, dateofSubmission: e.target.value })
-            }
-            className="inpt"
-            disabled={!isEditing}
-            {...register("dateofSubmission", {
-              required: "",
-              pattern: {
-                value: /^\d{4}-\d{2}-\d{2}$/,
-                message: "",
-              },
-              validate: {
-                notExceedCurrentDate: (value) => {
-                  const selectedDate = new Date(value);
-                  const currentDate = new Date();
+          <div className="Table_rows_APAR-1">
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">Deadline for Submission:</span>
+              <input
+                type="date"
+                placeholder="Deadline for submission"
+                name="Apardate"
+                value={user.dateofSubmission}
+                {...register("dateofSubmission", {
+                  required: "",
+                  pattern: {
+                    value: /^\d{4}-\d{2}-\d{2}$/,
+                    message: "",
+                  },
+                  validate: {
+                    notExceedCurrentDate: (value) => {
+                      const selectedDate = new Date(value);
+                      const currentDate = new Date();
 
-                  if (selectedDate > currentDate) {
-                    return "";
-                  }
+                      if (selectedDate < currentDate) {
+                        return "LJHRGLAUGHA";
+                      }
 
-                  return true;
-                },
-              },
-            })}
-          ></input>
+                      return true;
+                    },
+                  },
+                })}
+                onChange={(e) =>
+                  setuser({ ...user, dateofSubmission: e.target.value })
+                }
+                className="inpt"
+                disabled={!isEditing}
+
+              ></input>
+            </div>
+          </div>
           {errors.dateofSubmission && (
             <div className="error-container">
               <p className="error-message">{errors.dateofSubmission.message}</p>
@@ -632,41 +502,43 @@ function APAR_form() {
           )}
         </div>
         <div
-          className={`Table_rows_APAR ${
-            errors.dateofReviewbyRPO ? "error" : ""
-          }`}
+          className={`Table_rows_APAR ${errors.dateofReviewbyRPO ? "error" : ""
+            }`}
         >
-          <span className="spantype">Date for review by FLA:</span>
-          <input
-            type="date"
-            placeholder="Date for review by FlA"
-            name="Apardate"
-            value={user.dateofReviewbyRPO}
-            onChange={(e) =>
-              setuser({ ...user, dateofReviewbyRPO: e.target.value })
-            }
-            className="inpt"
-            disabled={!isEditing}
-            {...register("dateofReviewbyRPO", {
-              required: "",
-              pattern: {
-                value: /^\d{4}-\d{2}-\d{2}$/,
-                message: "",
-              },
-              validate: {
-                notExceedCurrentDate: (value) => {
-                  const selectedDate = new Date(value);
-                  const currentDate = new Date();
-
-                  if (selectedDate > currentDate) {
-                    return "";
-                  }
-
-                  return true;
+          <div className="Table_rows_APAR-1">
+            <span className="spantype">Date for review by FLA:</span>
+            <input
+              type="date"
+              placeholder="Date for review by FlA"
+              name="Apardate"
+              value={user.dateofReviewbyRPO}
+              {...register("dateofReviewbyRPO", {
+                required: "",
+                pattern: {
+                  value: /^\d{4}-\d{2}-\d{2}$/,
+                  message: "",
                 },
-              },
-            })}
-          ></input>
+                validate: {
+                  notExceedCurrentDate: (value) => {
+                    const selectedDate = new Date(value);
+                    const currentDate = new Date();
+
+                    if (selectedDate > currentDate) {
+                      return "";
+                    }
+
+                    return true;
+                  },
+                },
+              })}
+              onChange={(e) =>
+                setuser({ ...user, dateofReviewbyRPO: e.target.value })
+              }
+              className="inpt"
+              disabled={!isEditing}
+
+            ></input>
+          </div>
           {errors.dateofReviewbyRPO && (
             <div className="error-container">
               <p className="error-message">
@@ -697,7 +569,7 @@ function APAR_form() {
               <button
                 type="submit"
                 className="submitbtn_apar"
-                // onClick={handleSubmit1}
+              // onClick={handleSubmit1}
               >
                 Lock & Submit
               </button>

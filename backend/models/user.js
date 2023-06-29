@@ -17,6 +17,7 @@ const quarterSchema = new mongoose.Schema({
   presentPay: String,
   group: String,
   groupHead: String,
+  groupHead_email:String,
   dateOfEntryToCurrentDesignation: Date,
   leaveAvailed: Number,
   absenceOtherThanLeave: Number,
@@ -32,7 +33,7 @@ const quarterSchema = new mongoose.Schema({
   selfAppFormData1: [
     {
       jobAssigned: String,
-      serialNumber: String
+      Corresponding_Achievement:String
     }
   ],
   selfAppFormData2: [

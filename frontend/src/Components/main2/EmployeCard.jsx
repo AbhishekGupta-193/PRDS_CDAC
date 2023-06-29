@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./EmployeeCard.css";
 import { BsGithub } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export const EmployeCard = ({ profileUser }) => {
+  const [CurrentUser,setCurrentUser] = useState(profileUser);
+  useEffect(()=>{
+    setCurrentUser(profileUser);
+  },[])
   const navigate = useNavigate();
-
   const handleMouseEnter = () => {
     var profile = document.querySelector(".card-wrapper");
     profile.style.opacity = "1";
@@ -38,8 +41,10 @@ export const EmployeCard = ({ profileUser }) => {
       <div className="icon dots">
         <i className="fas fa-ellipsis-v"></i>
       </div>
-      <div className="name">{profileUser.userName}</div>
-      <div className="about">Designation</div>
+      <div className="name">{CurrentUser.userName}</div>
+      <div className="about">
+        {/* {CurrentUser.quarter[CurrentUser.quarter.length - 1].designation} */}
+        </div>
       <div className="social-icons">
         <a href="#" className="Git">
           <i className="Github">
@@ -51,12 +56,7 @@ export const EmployeCard = ({ profileUser }) => {
             <FaLinkedinIn />
           </i>
         </a>
-        {/* <a href="#" className="insta">
-          <i className="fab fa-instagram"></i>
-        </a>
-        <a href="#" className="yt">
-          <i className="fab fa-youtube"></i>
-        </a> */}
+       
       </div>
       <div className="buttons">
         <button>Message</button>

@@ -5,7 +5,9 @@ import { bgcolor } from "@mui/system";
 const Grid = ({CurEmp,setCurEmp}) => {
   const [selectedGrid, setSelectedGrid] = useState(null);
 
-   const updateGridStatus = ()=>{
+   const updateGridStatus = (grid)=>{
+    console.log("this is eslected grid" , selectedGrid);
+    console.log("this grid" , grid);
     setCurEmp({
       ...CurEmp,
       quarter: [
@@ -18,7 +20,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
           scoreOfEvaluation: {
             ...CurEmp.quarter[CurEmp.quarter.length - 1]
               .scoreOfEvaluation,
-              employeeFinalRemark:selectedGrid,
+              employeeFinalRemark:grid,
             
           },
         },
@@ -28,7 +30,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
    }
   const handleMouseclick = (grid) => {
     setSelectedGrid(grid);
-    updateGridStatus();
+    updateGridStatus(grid);
   };
 
   return (
@@ -38,7 +40,6 @@ const Grid = ({CurEmp,setCurEmp}) => {
         className={`grid-item ${
           selectedGrid === "Need development" ? "selected" : ""
         }`}
-        onClick={() => handleMouseclick("Need development")}
       >
         Need development
       </div>
@@ -46,7 +47,6 @@ const Grid = ({CurEmp,setCurEmp}) => {
         className={`grid-item ${
           selectedGrid === "Meet expectation" ? "selected" : ""
         }`}
-        onClick={() => handleMouseclick("Meet expectation")}
       >
         Meet expectation
       </div>
@@ -54,13 +54,11 @@ const Grid = ({CurEmp,setCurEmp}) => {
         className={`grid-item ${
           selectedGrid === "Exceed expectation" ? "selected" : ""
         }`}
-        onClick={() => handleMouseclick("Exceed expectation")}
       >
         Exceed expectation
       </div>
       <div
         className={`grid-item ${selectedGrid === "High" ? "selected" : ""}`}
-        onClick={() => handleMouseclick("High")}
       >
         High
       </div>
@@ -70,7 +68,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             ? "darkyellow"
             : "yellow"
         }`}
-        onClick={() => handleMouseclick("1c Poor Performance High potential")}
+        onClick={() => handleMouseclick("1c")}
       >
         <span> 1c </span>
         <span>Poor Performance High potential</span>
@@ -81,7 +79,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             ? "darkgreen"
             : "green"
         }`}
-        onClick={() => handleMouseclick("1b Good performance High potential")}
+        onClick={() => handleMouseclick("1b")}
       >
         <span> 1b </span>
         <span>Good performance High potential</span>
@@ -93,7 +91,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             : "blue"
         }`}
         onClick={() =>
-          handleMouseclick("1a Outstanding performance High potential")
+          handleMouseclick("1a")
         }
       >
         <span> 1a </span>
@@ -112,7 +110,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             : "orange"
         }`}
         onClick={() =>
-          handleMouseclick("2c Poor Performance Moderate potential")
+          handleMouseclick("2c")
         }
       >
         <span> 2c </span>
@@ -125,7 +123,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             : "yellow"
         }`}
         onClick={() =>
-          handleMouseclick("2b Good performance Moderate potential")
+          handleMouseclick("2b")
         }
       >
         <span>2b </span>
@@ -138,7 +136,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             : "green"
         }`}
         onClick={() =>
-          handleMouseclick("2a Outstanding performance Moderate potential")
+          handleMouseclick("2a")
         }
       >
         <span> 2a </span>
@@ -146,7 +144,6 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${selectedGrid === "3a low" ? "selected" : ""}`}
-        onClick={() => handleMouseclick("3a low")}
       >
         low
       </div>
@@ -156,7 +153,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             ? "darkred"
             : "red"
         }`}
-        onClick={() => handleMouseclick("3c Poor Performance low potential")}
+        onClick={() => handleMouseclick("3c")}
       >
         <span> 3c </span>
         <span>Poor Performance low potential</span>
@@ -167,7 +164,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             ? "darkorange"
             : "orange"
         }`}
-        onClick={() => handleMouseclick("3b Good performance low potential")}
+        onClick={() => handleMouseclick("3b")}
       >
         <span>3b</span>
         <span> Good performance low potential</span>
@@ -179,7 +176,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
             : "yellow"
         }`}
         onClick={() =>
-          handleMouseclick("3a Outstanding performance low potential")
+          handleMouseclick("3a")
         }
       >
         <span> 3a </span>

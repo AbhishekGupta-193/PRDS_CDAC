@@ -1,5 +1,3 @@
-
-
 .container_apar {
   background-color: #f2f2f2;
   border: 1px solid rgba(57, 93, 138, 0.358);
@@ -12,6 +10,7 @@
   margin: auto;
 
 }
+
 .inpt {
   width: 50%;
   padding: 0.5rem;
@@ -23,8 +22,9 @@
   margin: 8px 0;
 
 }
-.inpt:focus{
-    outline: 0;
+
+.inpt:focus {
+  outline: 0;
 }
 
 .btn_class {
@@ -32,6 +32,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .submitbtn_apar {
   display: flex;
   justify-content: center;
@@ -54,46 +55,60 @@
 }
 
 
-.Edit_lock{
-   display: flex;
-   gap: 1rem;
-   justify-content: center;
-   align-items: center;
-   width: 50%;
+.Edit_lock {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 }
 
 
-.Table_rows_APAR{
+.Table_rows_APAR {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 0 1rem;
+  /* border: 2px solid green; */
 
 }
-.spantype{
+
+.Table_rows_APAR-1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.spantype {
   display: flex;
   width: 30%;
   margin-left: 1%;
   text-align: left;
 
 }
-.inpt{
+
+.inpt {
   display: flex;
   width: 65%;
 
 }
-.inpt_periodbox{
+
+.inpt_periodbox {
   display: flex;
   width: 65%;
   gap: 1.5em;
 }
-.period{
+
+.period {
   margin-top: 4%;
   display: flex;
   gap: 0.5em;
 
 }
-.reporting_title{
+
+.reporting_title {
   display: flex;
   width: 20%;
   justify-content: center;
@@ -103,17 +118,19 @@
 }
 
 
-.from_apar{
+.from_apar {
   display: flex;
   width: 50%;
 
 }
-.to_apar{
+
+.to_apar {
   display: flex;
   width: 50%;
 
 }
-.inpt_period{
+
+.inpt_period {
   display: flex;
   padding: 0.5rem;
   border: 1px solid #9fc8fe;
@@ -130,11 +147,13 @@
   border: 2px solid red;
 }
 
- .error-container {
+.error-container {
   display: flex;
   align-items: center;
-
-
+  width: 100%;
+  /* border: 2px solid blue; */
+  font-size: .6rem;
+  justify-content: flex-end;
 }
 
 .error-message {
@@ -154,6 +173,3 @@
   line-height: 20px;
   border-radius: 50%;
 }
-
-
-
