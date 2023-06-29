@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./EmployeeCard.css";
 import { BsGithub } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa";
+import { GrFormClose } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
 export const EmployeCard = ({ profileUser }) => {
@@ -10,11 +11,15 @@ export const EmployeCard = ({ profileUser }) => {
     setCurrentUser(profileUser);
   },[])
   const navigate = useNavigate();
-  const handleMouseEnter = () => {
-    var profile = document.querySelector(".card-wrapper");
-    profile.style.opacity = "1";
-  };
-  const handleMouseLeave = () => {
+  // const handleMouseEnter = () => {
+  //   var profile = document.querySelector(".card-wrapper");
+  //   profile.style.opacity = "1";
+  // };
+  // const handleMouseLeave = () => {
+  //   var profile = document.querySelector(".card-wrapper");
+  //   profile.style.opacity = "0";
+  // };
+  const handleExit = () => {
     var profile = document.querySelector(".card-wrapper");
     profile.style.opacity = "0";
   };
@@ -24,8 +29,8 @@ export const EmployeCard = ({ profileUser }) => {
   return (
     <div
       className="card-wrapper"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
     >
       <div className="img-area">
         <div className="inner-area">
@@ -39,7 +44,9 @@ export const EmployeCard = ({ profileUser }) => {
         <i className="fas fa-arrow-left"></i>
       </div>
       <div className="icon dots">
-        <i className="fas fa-ellipsis-v"></i>
+        <i className="fas fa-ellipsis-v" onClick={handleExit}>
+          <GrFormClose/>
+        </i>
       </div>
       <div className="name">{CurrentUser.userName}</div>
       <div className="about">

@@ -1,4 +1,6 @@
 import User from "../models/user.js";
+import nodemailer from "nodemailer"
+import htmlTemplate from '.././EmailTemplate.js';
 
 export const Login = async (req, res) => {
   try {
@@ -111,3 +113,47 @@ export const submitEvalutaionForm = async (req, res) => {
     res.status(500).send("An error occurred");
   }
 };
+
+export const sendMail = ((req, res) => {
+  const { email, userName, dateOfBirth, empId, dateOfEntryInCdac, quarter } = req.body;
+  // console.log("userofemail", req.body,"detail",quarter);
+  const formattedTemplate = htmlTemplate
+    .replace('{userName}', userName)
+    .replace('{userName1}', userName)
+    .replace('{appraiselPeriodTo}', quarter[quarter.length - 1].appraiselPeriodTo.split('T')[0])
+    .replace('{appraiselPeriodFrom}', quarter[quarter.length - 1].appraiselPeriodFrom.split('T')[0])
+    .replace('{dateofSubmission}', quarter[quarter.length - 1].dateofSubmission.split('T')[0])
+    .replace('{empId}', empId)
+    .replace('{dateOfBirth}', dateOfBirth.split('T')[0])
+    .replace('{designation}', quarter[quarter.length - 1].designation)
+    .replace('{presentPay}', quarter[quarter.length - 1].presentPay)
+    .replace('{dateOfEntryInCdac}', dateOfEntryInCdac)
+    .replace('{absenceOtherThanLeave}', quarter[quarter.length - 1].absenceOtherThanLeave)
+    .replace('{leaveAvailed}', quarter[quarter.length - 1].leaveAvailed);
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'akashchauhan72520@gmail.com',
+      pass: 'mmdaudzbxrotscir',
+    },
+  });
+  // Define the email details
+  const mailOptions = {
+    from: '"PRDS Team CDAC"<akashchauhan72520@gmail.com>',
+    to: email,
+    subject: 'Reminder!',
+    html: formattedTemplate,
+  };
+
+  // Send the email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent successfully:', info.response);
+      res.send('Email sent successfully');
+    }
+  });
+});

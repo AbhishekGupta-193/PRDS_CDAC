@@ -70,7 +70,7 @@ const AppProvider = ({ children }) => {
     isSubmitted,
     setisSubmitted,
   };
-  const [alluser, setalluser] = useState([]);
+  const [alluser, setalluser] = useState(null);
   const [ CurEmp,setCurEmp ] = useState({});
   useEffect(() => {
     getusers();
