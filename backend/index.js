@@ -30,8 +30,8 @@ app.get("/getUsers", async (req, res) => {
 
 app.post("/getCurUser", async (req, res) => {
   try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
+    const { empId } = req.body;
+    const user = await User.findOne({ empId });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }

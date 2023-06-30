@@ -11,14 +11,7 @@ export const EmployeCard = ({ profileUser }) => {
     setCurrentUser(profileUser);
   },[])
   const navigate = useNavigate();
-  // const handleMouseEnter = () => {
-  //   var profile = document.querySelector(".card-wrapper");
-  //   profile.style.opacity = "1";
-  // };
-  // const handleMouseLeave = () => {
-  //   var profile = document.querySelector(".card-wrapper");
-  //   profile.style.opacity = "0";
-  // };
+
   const handleExit = () => {
     var profile = document.querySelector(".card-wrapper");
     profile.style.opacity = "0";
@@ -29,8 +22,7 @@ export const EmployeCard = ({ profileUser }) => {
   return (
     <div
       className="card-wrapper"
-      // onMouseEnter={handleMouseEnter}
-      // onMouseLeave={handleMouseLeave}
+      
     >
       <div className="img-area">
         <div className="inner-area">

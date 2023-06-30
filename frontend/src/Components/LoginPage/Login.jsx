@@ -34,19 +34,20 @@ export default function SignIn() {
       const { data } = await axios.post(myurl, userData);
       console.log(data);
       const code = data.status;
-      localStorage.setItem("allusers", JSON.stringify(data.allusers));
+      // localStorage.setItem("allusers", JSON.stringify(data.allusers));
       if (code === 400) alert("All inputs are required");
       else if (code === 401) alert("Invalid Credientials");
       else if ((code === 200) & (data.message === "Emp Login")) {
         setcuruser(data.user);
 
-        localStorage.setItem("curuser", JSON.stringify(data.user));
-
-
+        // localStorage.setItem("curuser", JSON.stringify(data.user));
+        localStorage.setItem("empId", JSON.stringify(data.empId));
         navigate("/main/EmployeeSection");
       } else if ((code === 200) & (data.message === "HR Login")) {
         setcuruser(data.user);
         localStorage.setItem("curuser", JSON.stringify(data.user));
+        localStorage.setItem("empId", JSON.stringify(data.empId));
+
         navigate("/main2/HR");
       }
     } catch (error) {

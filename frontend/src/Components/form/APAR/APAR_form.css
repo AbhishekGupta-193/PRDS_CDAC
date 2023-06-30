@@ -107,15 +107,25 @@
   gap: 0.5em;
 
 }
+.Table_rows_APAR2 {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  /* border: 2px solid green; */
 
+}
+/* 
 .reporting_title {
   display: flex;
   width: 20%;
   justify-content: center;
   align-items: center;
+  border: 2px solid red;
 
 
-}
+} */
 
 
 .from_apar {

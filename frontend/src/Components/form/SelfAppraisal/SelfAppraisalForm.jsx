@@ -7,14 +7,32 @@ import validator from "validator";
 
 const SelfAppraisalForm = () => {
   const navigate = useNavigate();
-  const [ curuser, setcuruser ] = useState(JSON.parse(localStorage.getItem("curuser")));
+  // const [ curuser, setcuruser ] = useState(JSON.parse(localStorage.getItem("curuser")));
+
+  const { curuser, setcuruser } = useGlobalContext();
+
+  const getData = async () => {
+    try {
+      const empId = JSON.parse(localStorage.getItem("empId"));
+      const {data} = await axios.post("http://localhost:5000/getCurUser", {empId});
+      setcuruser(data);
+      console.log("curuser inside getdatat",curuser);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    console.log("curuser inside useeffect",curuser);
+    getData();
+  }, []);
 
   const [formErrors, setFormErrors] = useState({});
-  const DateFrom = new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodFrom);
-  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-  const From = DateFrom.toLocaleDateString(undefined, options);
-  const DateTo = new Date(curuser.appraiselPeriodTo);
-  const To = DateTo.toLocaleDateString(undefined, options);
+  // const DateFrom = new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodFrom);
+  // const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  // const From = DateFrom.toLocaleDateString(undefined, options);
+  // const DateTo = new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodTo);
+  // const To = DateTo.toLocaleDateString(undefined, options);
 
   const [isEditable, setIsEditable] = useState(true);
   const [dateoffillingSA, setdateoffillingSA] = useState("");
@@ -42,14 +60,14 @@ const SelfAppraisalForm = () => {
   const addJobAssignmentRow = () => {
     setJobAssignments([
       ...jobAssignments,
-      { serialNumber: "", jobAssigned: "", correspondingAchievement: "" },
+      {  jobAssigned: "", correspondingAchievement: "" },
     ]);
   };
 
   const addAchievementRow = () => {
     setAchievements([
       ...achievements,
-      { serialNumber: "", achievement: "", deliverable: "" },
+      {  achievement: "", deliverable: "" },
     ]);
   };
   const deleteJobAssignmentRow = (index) => {
@@ -84,17 +102,16 @@ const SelfAppraisalForm = () => {
   };
 
   const lockAndSubmit = async () => {
-    const updatedFormData = {
-      ...curuser,
-      selfAppFormData1: jobAssignments,
-      selfAppFormData2: achievements,
-      dateOfFillingSelfAppraisalForm: dateoffillingSA,
-      SelfAppraisal_status: true,
-    };
-    setcuruser(updatedFormData);
+  
+    const selfAppFormData1 = jobAssignments
+    const selfAppFormData2 = achievements
+    const dateOfFillingSelfAppraisalForm = dateoffillingSA
+    const selfAppraisalData = {selfAppFormData1,dateOfFillingSelfAppraisalForm,selfAppFormData2}
+     
+
     const { data } = await axios.post(
       "http://localhost:5000/submitSelfAppraisel",
-      curuser
+      {empId:curuser.empId,quarterId:curuser.quarter[curuser.quarter.length-1]._id, selfAppraisalData}
     );
     navigate("/main/EmployeeSection");
   };
@@ -114,6 +131,9 @@ const SelfAppraisalForm = () => {
   };
 
   return (
+    <>
+    {curuser ? (
+
     <form className="self-appraisal-form">
       <div className="Self_Appraisal_heading">Self Appraisal</div>
 
@@ -149,10 +169,10 @@ const SelfAppraisalForm = () => {
           <div className="form-date-inputs">
             <input
               className="fromdate_saf"
-              type="date"
+              type="text"
               id="fromDate"
               name="fromDate"
-              value={From}
+              value={new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodFrom).toLocaleDateString()}
               disabled={true}
             />
             {formErrors.fromDate && (
@@ -160,10 +180,11 @@ const SelfAppraisalForm = () => {
             )}
             <input
               className="todate_saf"
-              type="date"
+              type="text"
               id="toDate"
               name="toDate"
-              value={To}
+              value={new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodTo).toLocaleDateString()}
+
               disabled={true}
             />
             {formErrors.toDate && (
@@ -336,6 +357,13 @@ const SelfAppraisalForm = () => {
         )}
       </div>
     </form>
+
+    ): "Loading"
+
+
+
+    }
+    </>
   );
 };
 

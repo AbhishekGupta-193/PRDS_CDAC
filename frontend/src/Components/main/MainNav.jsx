@@ -20,9 +20,9 @@ export const MainNav = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('curuser');
+    localStorage.removeItem('empId');
     navigate("/login");
-    setcuruser(null);
+    // setcuruser(null);
   };
 
   return (

@@ -10,8 +10,11 @@ export const Login = async (req, res) => {
 
     if (user) {
       if (password === user.password ) {
-        if(user.Role.HR == true){ res.send({ status: 200, message: "HR Login", user , allusers});}
-        else { res.send({ status: 200, message: "Emp Login", user , allusers});}
+        if (user.Role && user.Role.HR === true) {
+          res.send({ status: 200, message: "HR Login", user, allusers, empId: user.empId });
+        }
+        
+        else { res.send({ status: 200, message: "Emp Login", user , allusers , empId: user.empId });}
       } else {
         res.send({ message: "Password didn't match" });
       }
@@ -52,23 +55,35 @@ export const getRequests = async (req, res) => {
   }
 };
 
+
 export const submitSelfAppraisel = async (req, res) => {
-  const { empId } = req.body;
+  const { empId, quarterId, selfAppraisalData } = req.body;
+
   try {
-    const user = await User.findOneAndUpdate({ empId }, req.body, {
-      new: true,
-    });
+    const user = await User.findOneAndUpdate(
+      { empId: empId, "quarter._id": quarterId },
+      {
+        $set: {
+          "quarter.$.selfAppFormData1": selfAppraisalData.selfAppFormData1,
+          "quarter.$.selfAppFormData2": selfAppraisalData.selfAppFormData2,
+          "quarter.$.dateOfFillingSelfAppraisalForm": selfAppraisalData.dateOfFillingSelfAppraisalForm,
+          "quarter.$.SelfAppraisal_status": true
+        }
+      },
+      { new: true }
+    );
 
     if (user) {
-      res.send({ msg: "successfully registered", user });
+      res.send({ msg: "Self appraisal submitted successfully", user });
     } else {
-      res.status(404).send({ msg: "User not found" });
+      res.status(404).send({ msg: "User or Quarter not found" });
     }
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred");
   }
 };
+
 
 export const submitAparForm = async (req, res) => {
   const { empId } = req.body;

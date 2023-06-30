@@ -19,9 +19,7 @@ export const Evaluation_form = () => {
   const navigate = useNavigate();
   const [Remark, setRemark] = useState();
   const [isEditing, setIsEditing] = useState(false);
-  const [CurEmp, setCurEmp] = useState(
-    JSON.parse(localStorage.getItem("curuser"))
-  );
+  const {CurEmp, setCurEmp} = useGlobalContext()
   const DateFrom = new Date(CurEmp.quarter[CurEmp.quarter.length-1].appraiselPeriodFrom);
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   const From = DateFrom.toLocaleDateString(undefined, options);
@@ -100,6 +98,9 @@ export const Evaluation_form = () => {
 
 
   return (
+    <>
+    (CurEmp &&
+    
     <div className="Evaluation_form_wrapper">
       <form className="container_eval" onSubmit={handleFormSubmit}>
         <button
@@ -641,6 +642,9 @@ export const Evaluation_form = () => {
       </form>
       <SelfAppraisalData isVisible={isVisible} setisVisible={setisVisible} />
     </div>
+     )
+    
+    </>
   );
 };
 

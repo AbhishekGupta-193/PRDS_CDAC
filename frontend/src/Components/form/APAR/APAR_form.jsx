@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./APAR_form.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../../StateContext.js";
+import { useGlobalContext } from "../../../StateContext";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
@@ -32,36 +32,59 @@ function APAR_form() {
     getData();
   }, []);
 
-  console.log(CurrentUser);
   const [user, setuser] = useState({
-    appraiselPeriodFrom: null,
-    appraiselPeriodTo: null,
-    absenceOtherThanLeave: null,
-    leaveAvailed: null,
-    APAP_status: false,
-    dateofIssueofAPAR: null,
-    dateofSubmission: null,
-    dateofReviewbyRPO: null,
-    designation: null,
-    presentPay: null,
-
+    scoreOfEvaluation: {
+      "sc1": 0,
+      "sc2": 0,
+      "sc3": 0,
+      "sc4": 0,
+      "sc5": 0,
+      "sc6": 0,
+      "selfAppraisalScore": 0,
+      "achievementBeyondScore": 0,
+      "totalScore": 0
+    },
+    "designation": '',
+    "presentPay": '',
+    "group": 'AB',
+    "groupHead": 'XYZ',
+    "groupHead_email": 'zzz',
+    "dateOfEntryToCurrentDesignation": null,
+    "leaveAvailed": 0,
+    "absenceOtherThanLeave": 0,
+    "appraiselPeriodFrom": null,
+    "appraiselPeriodTo": null,
+    "projectName": '',
+    "APAR_status": true,
+    "SelfAppraisal_status": false,
+    "Evalutation_status": false,
+    "dateofIssueofAPAR": null,
+    "dateofSubmission": null,
+    "dateofReviewbyRPO": null,
+    "selfAppFormData1": [
+      {
+        "jobAssigned": '',
+        "Corresponding_Achievement": ''
+      }
+    ],
+    "selfAppFormData2": [
+      {
+        "achievement": '',
+        "deliverables": ''
+      }
+    ],
+    "dateOfFillingAparForm": new Date(),
+    "dateOfFillingSelfAppraisalForm": new Date(),
+    "dateOfFillingEvaluationForm": new Date(),
+    "additionalComments": '',
+    "employeeFinalRemark": ''
   });
 
-  const handleSubmit1 = async (e) => {
-    CurrentUser.quarter[CurrentUser.quarter.length - 1].absenceOtherThanLeave =
-      user.absenceOtherThanLeave;
-    CurrentUser.quarter[CurrentUser.quarter.length - 1].leaveAvailed =
-      user.leaveAvailed;
-    CurrentUser.quarter[CurrentUser.quarter.length - 1].APAP_status = true;
-    CurrentUser.quarter[CurrentUser.quarter.length - 1].dateofIssueofAPAR =
-      user.dateofIssueofAPAR;
-    CurrentUser.quarter[CurrentUser.quarter.length - 1].dateofSubmission =
-      user.dateofSubmission;
-    CurrentUser.quarter[CurrentUser.quarter.length - 1].dateofReviewbyRPO =
-      user.dateofReviewbyRPO;
 
+
+  const handleSubmit1 = async (e) => {
+    CurrentUser.quarter.push(user)
     try {
-      console.log("a=hamaea cueryse hye hai", CurrentUser, " aur ye hai normal user", user);
       const { data } = await axios.post("http://localhost:5000/submitAparForm", CurrentUser);
       // await axios.post("http://localhost:5000/send-email", CurrentUser);
       setcuruser(data.user);
@@ -79,7 +102,7 @@ function APAR_form() {
           <h3>APAR Management : Employee details</h3>
         </div>
 
-        <div className="Table_rows_APAR">
+        <div className="Table_rows_APAR2">
 
           <span className="spantype">Report for the Period :</span>
           <div className="inpt_periodbox">
@@ -93,29 +116,29 @@ function APAR_form() {
                 name="Aparfrom"
                 value={user.appraiselPeriodFrom}
                 {...register("appraiselPeriodFrom", {
-                  required: "",
+                  required: "This field is required.",
                   pattern: {
                     value: /^\d{4}-\d{2}-\d{2}$/,
                     message: "",
                   },
                   validate: {
-                    notExceedCurrentDate: (value) => {
-                      const fromDate = new Date(user.appraiselPeriodFrom);
-                      const toDate = new Date(value);
+                    // notExceedCurrentDate: (value) => {
+                    //   const fromDate = new Date(user.appraiselPeriodFrom);
+                    //   const toDate = new Date(value);
 
-                      if (toDate < fromDate) {
-                        return "";
-                      }
+                    //   if (toDate < fromDate) {
+                    //     return "";
+                    //   }
 
-                      const selectedDate = new Date(value);
-                      const currentDate = new Date();
+                    //   const selectedDate = new Date(value);
+                    //   const currentDate = new Date();
 
-                      if (selectedDate > currentDate) {
-                        return "";
-                      }
+                    //   if (selectedDate > currentDate) {
+                    //     return "";
+                    //   }
 
-                      return true;
-                    },
+                    //   return true;
+                    // },
                   },
                 })}
                 onChange={(e) =>
@@ -142,18 +165,18 @@ function APAR_form() {
                 name="Aparupto"
                 value={user.appraiselPeriodTo}
                 {...register("appraiselPeriodTo", {
-                  required: "",
+                  required: "This field is required.",
                   pattern: {
                     value: /^\d{4}-\d{2}-\d{2}$/,
                     message: "",
                   },
                   validate: {
                     notExceedCurrentDate: (value) => {
-                      const fromDate = new Date(user.appraiselPeriodTo);
+                      const fromDate = new Date(user.appraiselPeriodFrom);
                       const toDate = new Date(value);
 
                       if (toDate < fromDate) {
-                        return "";
+                        return "Should not preceed from date";
                       }
 
                       const selectedDate = new Date(value);
@@ -166,7 +189,9 @@ function APAR_form() {
                       return true;
                     },
                   },
-                })}
+
+                }
+                )}
                 onChange={(e) =>
                   setuser({ ...user, appraiselPeriodTo: e.target.value })
                 }
@@ -240,10 +265,10 @@ function APAR_form() {
                 type="text"
                 placeholder="Designation"
                 name="designation"
-                value={CurrentUser.quarter[CurrentUser.quarter.length - 1].designation}
-                // onChange={(e) =>
-                //   setuser({ ...user, designation: e.target.value })
-                // }
+                value={user.designation}
+                onChange={(e) =>
+                  setuser({ ...user, designation: e.target.value })
+                }
                 className="inpt"
                 disabled={!isEditing}
               ></input>
@@ -260,7 +285,7 @@ function APAR_form() {
                   user.presentPay
                 }
                 {...register("presentPay", {
-                  required: "",
+                  required: "This field is required.",
                   pattern: {
                     value: /^[\w\s]+$/,
                     message: "",
@@ -320,15 +345,44 @@ function APAR_form() {
                 Date of entry to the current designation :
               </span>
               <input
-                type="text"
+                type="date"
                 placeholder="Date of entry to the current designation"
                 name="Apardate"
-                value={new Date(CurrentUser.quarter[CurrentUser.quarter.length - 1]
-                  .dateOfEntryToCurrentDesignation).toLocaleDateString()}
+                value={user.dateOfEntryToCurrentDesignation}
                 className="inpt"
-                disabled={true}
+                // {...register("dateOfEntryToCurrentDesignation", {
+                //   required: "This field is required.",
+                //   pattern: {
+                //     value: /^\d{4}-\d{2}-\d{2}$/,
+                //     message: "",
+                //   },
+                //   validate: {
+                //     notExceedCurrentDate: (value) => {
+                //       const selectedDate = new Date(value);
+                //       const currentDate = new Date();
+  
+                //       if (selectedDate > currentDate) {
+                //         return "Exceeded current date";
+                //       }
+  
+                //       return true;
+                //     },
+                //   },
+                // })}
+                onChange={(e) =>
+                  setuser({ ...user, dateOfEntryToCurrentDesignation: e.target.value })
+                }
+                disabled={!isEditing}
               ></input>
             </div>
+            {/* {errors.dateOfEntryToCurrentDesignation && (
+            <div className="error-container">
+              <p className="error-message">
+                {errors.dateOfEntryToCurrentDesignation.message}
+              </p>
+              <div className="error-icon">!</div>
+            </div>
+          )} */}
           </div>
           <div
             className={`Table_rows_APAR ${errors.leaveAvailed ? "error" : ""}`}
@@ -341,10 +395,10 @@ function APAR_form() {
                 name="leave"
                 value={user.leaveAvailed}
                 {...register("leaveAvailed", {
-                  required: "",
+                  required: "This field is required.",
                   pattern: {
                     value: /^\d+$/,
-                    message: "",
+                    message: "Numeric input expected",
                   },
                   maxLength: {
                     value: 3,
@@ -380,10 +434,10 @@ function APAR_form() {
                 name="otherleave"
                 value={user.absenceOtherThanLeave}
                 {...register("absenceOtherThanLeave", {
-                  required: "",
+                  required: "This field is required.",
                   pattern: {
                     value: /^\d+$/,
-                    message: "",
+                    message: "Numeric input expected",
                   },
                   maxLength: {
                     value: 3,
@@ -419,7 +473,7 @@ function APAR_form() {
               name="Apardate"
               value={user.dateofIssueofAPAR}
               {...register("dateofIssueofAPAR", {
-                required: "",
+                required: "This field is required.",
                 pattern: {
                   value: /^\d{4}-\d{2}-\d{2}$/,
                   message: "",
@@ -430,7 +484,7 @@ function APAR_form() {
                     const currentDate = new Date();
 
                     if (selectedDate > currentDate) {
-                      return "";
+                      return "Exceeded current date";
                     }
 
                     return true;
@@ -467,7 +521,7 @@ function APAR_form() {
                 name="Apardate"
                 value={user.dateofSubmission}
                 {...register("dateofSubmission", {
-                  required: "",
+                  required: "This field is required.",
                   pattern: {
                     value: /^\d{4}-\d{2}-\d{2}$/,
                     message: "",
@@ -478,7 +532,7 @@ function APAR_form() {
                       const currentDate = new Date();
 
                       if (selectedDate < currentDate) {
-                        return "LJHRGLAUGHA";
+                        return "Date passed out";
                       }
 
                       return true;
@@ -513,7 +567,7 @@ function APAR_form() {
               name="Apardate"
               value={user.dateofReviewbyRPO}
               {...register("dateofReviewbyRPO", {
-                required: "",
+                required: "This field is required.",
                 pattern: {
                   value: /^\d{4}-\d{2}-\d{2}$/,
                   message: "",
@@ -523,8 +577,8 @@ function APAR_form() {
                     const selectedDate = new Date(value);
                     const currentDate = new Date();
 
-                    if (selectedDate > currentDate) {
-                      return "";
+                    if (selectedDate < currentDate) {
+                      return "Date passed out";
                     }
 
                     return true;
