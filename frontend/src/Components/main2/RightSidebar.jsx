@@ -10,29 +10,13 @@ import axios from "axios";
 const RightSidebar = () => {
   const [profileUser, setProfileUser] = useState({});
   const navigate = useNavigate();
-  const {alluser, setalluser} = useGlobalContext();
+  const {user} = useGlobalContext();
 
-  // const [users, setusers] = useState(
-  //   JSON.parse(localStorage.getItem("allusers"))
-  // );
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+ 
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get("http://localhost5000/getUsers");
-      // const data = await response.json();
-      console.log(response);
-      setalluser(response);
-      console.log(alluser, " ye all user hai");
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
 
-  const handleMouseEnter = (user) => {
-    setProfileUser(user);
+  const handleMouseEnter = (element) => {
+    setProfileUser(element);
     var profile = document.querySelector(".card-wrapper");
     profile.style.opacity = "1";
   };
@@ -41,8 +25,7 @@ const RightSidebar = () => {
 
   return (
     <>
-      {alluser && (
-        <div className="Right_sidebar">
+       <div className={user? "Right_sidebar" : "Right_sidebar_empty"}>
           <EmployeCard profileUser={profileUser} />
 
           <div
@@ -72,18 +55,18 @@ const RightSidebar = () => {
           <div className="EmployeeNames"
           //  onMouseLeave={handleMouseLeave}
            >
-            {alluser.map((user) => (
+            {user && user.map((element) => (
               <p
-                onClick={() => handleMouseEnter(user)}
+                onClick={() => handleMouseEnter(element)}
                 className="emp-name"
-                key={user.id}
+                key={element.id}
               >
-                {user.userName}
+                {element.userName}
               </p>
             ))}
           </div>
         </div>
-      )}
+    
     </>
   );
 };

@@ -6,15 +6,14 @@ import "./EmployeeSection.css";
 
 export const EmployeeSection = () => {
   const navigate = useNavigate();
-  const { curuser, setcuruser , user, loading} = useGlobalContext();
-  // const empId = JSON.parse(localStorage.getItem("empId"));
-
+  const { curuser, setcuruser, user, loading } = useGlobalContext();
 
   const getData = async () => {
     try {
-      // setcuruser(JSON.parse(localStorage.getItem("curuser")));
       const empId = JSON.parse(localStorage.getItem("empId"));
-      const {data} = await axios.post("http://localhost:5000/getCurUser", {empId});
+      const { data } = await axios.post("http://localhost:5000/getCurUser", {
+        empId,
+      });
       setcuruser(data);
       console.log(curuser);
     } catch (error) {
@@ -22,8 +21,6 @@ export const EmployeeSection = () => {
     }
   };
   useEffect(() => {
-    // const [filtered] = user.filter(item=>item.empId === empId)
-    // setcuruser(curuser)
     getData();
   }, []);
 
@@ -33,7 +30,7 @@ export const EmployeeSection = () => {
   console.log(curuser);
   return (
     <>
-      { curuser ? (
+      {curuser ? (
         <div className="EmployeeSection-wrapper">
           <div className="APAR_details-head">
             <h3> Welcome {curuser.userName}</h3>
@@ -122,7 +119,9 @@ export const EmployeeSection = () => {
             <div className="self-appraisal-filled">Self appraisal filled</div>
           ) : null}
         </div>
-      ) : "Loading"}
+      ) : (
+        "Loading"
+      )}
     </>
   );
 };

@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const [user, setuser] = useState([]);
+  const [user, setuser] = useState(null);
   var [curuser, setcuruser] = useState(null);
   const [loading,setloading] = useState(false);
   const getusers = async () => {

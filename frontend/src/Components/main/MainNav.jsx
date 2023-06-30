@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import UserProfile from "./UserProfile";
 import {FaUserCircle} from 'react-icons/fa'
 import "../../css/mainNav.css";
 import { useGlobalContext } from "../../StateContext";
+import {GiHamburgerMenu} from 'react-icons/gi'
+
 
 
 export const MainNav = () => {
@@ -22,16 +23,18 @@ export const MainNav = () => {
   const handleLogout = () => {
     localStorage.removeItem('empId');
     navigate("/login");
-    // setcuruser(null);
   };
 
   return (
     <>
     <nav className="main-nav">
       <div className="nav-left">
-        <i onClick={sidebarHandler} className="fa-solid fa-bars"></i>
+        <i onClick={sidebarHandler} className="fa-solid fa-bars">
+        <GiHamburgerMenu/>
+          
+        </i>
         <div className="logo">
-          <span>HRMS</span>
+          <span>PRIS</span>
         </div>
       </div>
     </nav>
@@ -43,11 +46,11 @@ export const MainNav = () => {
           >
             <FaUserCircle/>
           </div>
-          <div className={`profile-details ${isUserProfileOpen?'profile-open':''}`}>
+              <button onClick={handleLogout} className="logout_btn">Logout</button>
+          {/* <div className={`profile-details ${isUserProfileOpen?'profile-open':''}`}>
               <p>Name: John Doe</p>
               <p>Employee ID: 12345</p>
-              <button onClick={handleLogout}>Logout</button>
-            </div>
+            </div> */}
         </div>
       </div>
     </>

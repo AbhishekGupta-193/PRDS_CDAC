@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import "./APAR_Track.css";
+import { useGlobalContext } from "../../StateContext.js";
 
 const APAR_Track = ({ data }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(
-    JSON.parse(localStorage.getItem("allusers"))
-  );
+  //...........................Search functionality to be implemented...........................//
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [filteredData, setFilteredData] = useState();
+  // const handleSearch = (event) => {
+  //   const searchTerm = event.target.value.toLowerCase();
+  //   setSearchTerm(searchTerm);
 
-  const handleSearch = (event) => {
-    const searchTerm = event.target.value.toLowerCase();
-    setSearchTerm(searchTerm);
+  //   const filteredData = data.filter((item) => {
+  //     return item.employeeId.toLowerCase().includes(searchTerm);
+  //   });
+  //   setFilteredData(filteredData);
+  // };
+  //...........................Search functionality to be implemented...........................//
 
-    const filteredData = data.filter((item) => {
-      return item.employeeId.toLowerCase().includes(searchTerm);
-    });
-    setFilteredData(filteredData);
-  };
+  const { user } = useGlobalContext();
 
   return (
     <div className="AnEmployeeAnalyticsContainer">
-      <caption className="Ancp">EMPLOYEE's PERFORMANCE</caption>
+      <caption className="Ancp">Employee's APAR Tracking</caption>
       {
         <div className="AnEAC">
           <table className="AnEAC-table">
@@ -27,62 +29,55 @@ const APAR_Track = ({ data }) => {
               <tr className="AnEAC-tr1">
                 <th className="AnEAC-th">Emp ID</th>
                 <th className="AnEAC-th">Name</th>
-                <th className="AnEAC-th">Self Appraisal</th>
-                <th className="AnEAC-th">
-                  Achievement Beyond Normal Scope Of Work
-                </th>
-                <th className="AnEAC-th">Reporting Officer Score</th>
-                <th className="AnEAC-th">Overall Performance</th>
+                <th className="AnEAC-th">Issue Date</th>
+                <th className="AnEAC-th">Completion date for employee</th>
+                <th className="AnEAC-th">Completion date for FLA</th>
+                <th className="AnEAC-th">Status of completion by employee </th>
+                <th className="AnEAC-th">Status of completion by FLA </th>
+                <th className="AnEAC-th">Status of completion by SLA </th>
               </tr>
             </thead>
             <tbody>
-              {filteredData ? (
-                filteredData.map((user, index) => (
+              {user ? (
+                user.map((element, index) => (
                   <tr className="AnEAC-tr" key={index}>
-                    <td className="AnEAC-td">{user.empId}</td>
-                    <td className="AnEAC-td">{user.userName}</td>
+                    <td className="AnEAC-td">{element.empId}</td>
+                    <td className="AnEAC-td">{element.userName}</td>
                     <td className="AnEAC-td">
                       {
-                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                          .selfAppraisalScore
+                        new Date(element.quarter[element.quarter.length - 1]
+                          .dateofIssueofAPAR).toLocaleDateString()
                       }
                     </td>
                     <td className="AnEAC-td">
                       {
-                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                          .achievementBeyondScore
+                       new Date( element.quarter[element.quarter.length - 1]
+                        .dateofSubmission).toLocaleDateString()
                       }
                     </td>
                     <td className="AnEAC-td">
-                      {user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                        .sc1 +
-                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                          .sc2 +
-                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                          .sc3 +
-                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                          .sc4 +
-                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                          .sc5 +
-                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                          .sc6}
+                      {
+                       new Date( element.quarter[element.quarter.length - 1]
+                        .dateofReviewbyRPO).toLocaleDateString()
+                      }
                     </td>
                     <td className="AnEAC-td">
-                      {user.quarter[user.quarter.length - 1].scoreOfEvaluation
-                        .totalScore < 40
-                        ? "Need Improvement"
-                        : user.quarter[user.quarter.length - 1]
-                            .scoreOfEvaluation.totalScore < 60
-                        ? "Satisfactory"
-                        : user.quarter[user.quarter.length - 1]
-                            .scoreOfEvaluation.totalScore < 80
-                        ? "Good"
-                        : "Excellent"}
+                      {
+                        element.quarter[element.quarter.length - 1]
+                          .SelfAppraisal_status
+                      }
                     </td>
+                    <td className="AnEAC-td">
+                      {
+                        element.quarter[element.quarter.length - 1]
+                          .Evalutation_status
+                      }
+                    </td>
+                    <td className="AnEAC-td">pending</td>
                   </tr>
                 ))
               ) : (
-                <tr>
+                <tr className="AnEAC-tr">
                   <td colSpan="6">Loading...</td>
                 </tr>
               )}
