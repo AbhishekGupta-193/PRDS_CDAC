@@ -4,19 +4,26 @@
   gap: 2rem;
   width: 100%;
   height: 100%;
-  border: 2px solid red;
+  background-color: #F0F2F5;
 }
+
 .notes-wrapper .Total_Employee {
-  border-radius: 10px;
   cursor: pointer;
-  border: 2px solid red;
-  display: flex;
+  /* border: 2px solid red; */
   flex-direction: column;
-  width: 20%;
-  height: 20%;
   align-items: center;
   justify-content: center;
+  gap: 3rem;
+  display: flex;
+  width: 13rem;
+  height: 18rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 15px 15px 30px #bebebe,
+    -15px -15px 30px #ffffff;
 }
+
 .notes-wrapper .Total_Employee .EmployeeIcon {
   font-size: 3em;
-}/*# sourceMappingURL=notes.css.map */
+}
+

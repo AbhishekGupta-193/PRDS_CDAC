@@ -19,7 +19,7 @@ export const Evaluation_form = () => {
   const navigate = useNavigate();
   const [Remark, setRemark] = useState("");
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
   const { CurEmp, setCurEmp } = useGlobalContext();
 
 

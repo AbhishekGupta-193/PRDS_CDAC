@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./Grid.css"; // Import the CSS file for styling
 import { bgcolor } from "@mui/system";
+import { logDOM } from "@testing-library/react";
 
 const Grid = ({CurEmp,setCurEmp}) => {
+  console.log(CurEmp, " grid wala curemp");
   const [selectedGrid, setSelectedGrid] = useState(null);
 
    const updateGridStatus = (grid)=>{
-    console.log("this is eslected grid" , selectedGrid);
-    console.log("this grid" , grid);
     setCurEmp({
       ...CurEmp,
       quarter: [
@@ -17,12 +17,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
         ),
         {
           ...CurEmp.quarter[CurEmp.quarter.length - 1],
-          scoreOfEvaluation: {
-            ...CurEmp.quarter[CurEmp.quarter.length - 1]
-              .scoreOfEvaluation,
-              employeeFinalRemark:grid,
-            
-          },
+          employeeFinalRemark:grid
         },
       ],
     })
@@ -31,6 +26,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
   const handleMouseclick = (grid) => {
     setSelectedGrid(grid);
     updateGridStatus(grid);
+    console.log({grid});
   };
 
   return (
@@ -64,7 +60,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "1c Poor Performance High potential"
+          selectedGrid === "1c"
             ? "darkyellow"
             : "yellow"
         }`}
@@ -75,7 +71,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "1b Good performance High potential"
+          selectedGrid === "1b"
             ? "darkgreen"
             : "green"
         }`}
@@ -86,7 +82,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "1a Outstanding performance High potential"
+          selectedGrid === "1a"
             ? "darkblue"
             : "blue"
         }`}
@@ -105,7 +101,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "2c Poor Performance Moderate potential"
+          selectedGrid === "2c"
             ? "darkorange"
             : "orange"
         }`}
@@ -118,7 +114,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "2b Good performance Moderate potential"
+          selectedGrid === "2b"
             ? "darkyellow"
             : "yellow"
         }`}
@@ -131,7 +127,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "2a Outstanding performance Moderate potential"
+          selectedGrid === "2a"
             ? "darkgreen"
             : "green"
         }`}
@@ -149,7 +145,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "3c Poor Performance low potential"
+          selectedGrid === "3c"
             ? "darkred"
             : "red"
         }`}
@@ -160,7 +156,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "3b Good performance low potential"
+          selectedGrid === "3b"
             ? "darkorange"
             : "orange"
         }`}
@@ -171,7 +167,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
       </div>
       <div
         className={`grid-item ${
-          selectedGrid === "3a Outstanding performance low potential"
+          selectedGrid === "3a"
             ? "darkyellow"
             : "yellow"
         }`}

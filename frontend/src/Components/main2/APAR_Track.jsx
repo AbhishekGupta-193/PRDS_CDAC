@@ -18,71 +18,80 @@ const APAR_Track = ({ data }) => {
   };
 
   return (
-    <div className="note_wrapper">
-      <input
-        type="text"
-        id="search"
-        placeholder="Search by employee ID"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      <table className="APAR_track_table">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Employee ID</th>
-            <th>Group Name</th>
-            <th>Issue Date</th>
-            <th>Date of Completion by Employee</th>
-            <th>Date of Completion of Reporting</th>
-            <th>Status of Completion by Employee</th>
-            <th>Status of Completion by Reporting Officer</th>
-            <th>APAR Initiated</th>
-          </tr>
-        </thead>
-        <tbody className="APAR_track_table">
-          {filteredData.map((item, index) => {
-            const dateofSubmission = new Date(
-              item.dateofSubmission
-            ).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            });
-            const dateofIssueofAPAR = new Date(
-              item.dateofIssueofAPAR
-            ).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            });
-            const dateofReviewbyRPO = new Date(
-              item.dateofReviewbyRPO
-            ).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            });
-
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.empId}</td>
-                <td>{item.group}</td>
-                <td>{dateofSubmission}</td>
-                <td>{dateofIssueofAPAR}</td>
-                <td>{dateofReviewbyRPO}</td>
-                <td>{item.SelfAppraisal_status}</td>
-                <td>{item.Evalutation_status}</td>
-                <td>{item.aparInitiated}</td>
+    <div className="AnEmployeeAnalyticsContainer">
+      <caption className="Ancp">EMPLOYEE's PERFORMANCE</caption>
+      {
+        <div className="AnEAC">
+          <table className="AnEAC-table">
+            <thead className="Ansticky-header">
+              <tr className="AnEAC-tr1">
+                <th className="AnEAC-th">Emp ID</th>
+                <th className="AnEAC-th">Name</th>
+                <th className="AnEAC-th">Self Appraisal</th>
+                <th className="AnEAC-th">
+                  Achievement Beyond Normal Scope Of Work
+                </th>
+                <th className="AnEAC-th">Reporting Officer Score</th>
+                <th className="AnEAC-th">Overall Performance</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {filteredData ? (
+                filteredData.map((user, index) => (
+                  <tr className="AnEAC-tr" key={index}>
+                    <td className="AnEAC-td">{user.empId}</td>
+                    <td className="AnEAC-td">{user.userName}</td>
+                    <td className="AnEAC-td">
+                      {
+                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                          .selfAppraisalScore
+                      }
+                    </td>
+                    <td className="AnEAC-td">
+                      {
+                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                          .achievementBeyondScore
+                      }
+                    </td>
+                    <td className="AnEAC-td">
+                      {user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                        .sc1 +
+                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                          .sc2 +
+                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                          .sc3 +
+                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                          .sc4 +
+                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                          .sc5 +
+                        user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                          .sc6}
+                    </td>
+                    <td className="AnEAC-td">
+                      {user.quarter[user.quarter.length - 1].scoreOfEvaluation
+                        .totalScore < 40
+                        ? "Need Improvement"
+                        : user.quarter[user.quarter.length - 1]
+                            .scoreOfEvaluation.totalScore < 60
+                        ? "Satisfactory"
+                        : user.quarter[user.quarter.length - 1]
+                            .scoreOfEvaluation.totalScore < 80
+                        ? "Good"
+                        : "Excellent"}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6">Loading...</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      }
     </div>
   );
 };
 
 export default APAR_Track;
-

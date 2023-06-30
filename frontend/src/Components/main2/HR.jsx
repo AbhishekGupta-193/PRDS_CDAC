@@ -12,7 +12,6 @@ import {AiOutlineIssuesClose} from 'react-icons/ai'
 export const HR = () => {
   const navigate = useNavigate();
   const { user,setuser } = useGlobalContext();
-  // const [show, setShow] = useState([]);
   const {alluser, setalluser} = useGlobalContext();
   
   const [rows, setRows] = useState(JSON.parse(localStorage.getItem("allusers")));
@@ -44,22 +43,25 @@ export const HR = () => {
     <div className='notes-wrapper'>
       <div className='Total_Employee'>
            <span className='EmployeeIcon'><IoIosPeople/></span>
-           <span>Total Employee are : </span>
+           <span>Total Employee are  </span>
+           <span>20</span>
        </div>
       <div className='Total_Employee'>
            <span className='EmployeeIcon'><GrDocumentPerformance/></span>
-           <span>Performance Evaluation Completed: </span>
+           <span>Performance Evaluation Completed </span>
+           <span>30</span>
        </div>
       <div className='Total_Employee'>
            <span className='EmployeeIcon'><MdPendingActions/></span>
-           <span>Performance Evaluation Pending : </span>
+           <span>Performance Evaluation Pending  </span>
+           <span>40 </span>
        </div>
       <div className='Total_Employee'>
            <span className='EmployeeIcon'><AiOutlineIssuesClose/></span>
            <span>APAR Issued : </span>
+           <span>50 </span>
        </div>
     
-      
     </div>
   )
 }
