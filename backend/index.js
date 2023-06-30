@@ -42,5 +42,19 @@ app.post("/getCurUser", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+app.post("/getCurUserforForms", async (req, res) => {
+  try {
+    const { EmployeeId } = req.body;
+    const user = await User.findOne({ empId:EmployeeId });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 app.listen(PORT, () => console.log(`server running at Port : ${PORT}`));

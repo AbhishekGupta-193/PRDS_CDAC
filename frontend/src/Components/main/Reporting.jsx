@@ -3,6 +3,7 @@ import axios from "axios";
 import { useGlobalContext } from "../../StateContext.js";
 import { useNavigate } from "react-router-dom";
 import "./Reporting.css";
+import { useLocation } from "react-router-dom";
 
 export const Reporting = () => {
   const { user, setuser, curuser, setcuruser, setCurEmp, loading } =
@@ -12,14 +13,7 @@ export const Reporting = () => {
   // var usersForEvaluation = [];
 
   const getuserforreporting = () => {
-    console.log(
-      usersForEvaluation,
-      " User for reporting ",
-      curuser,
-      "Cur User",
-      user,
-      "Total user array"
-    );
+  
       const Reporting_emp = user.filter((userData) => {
         const lastQuarter = userData.quarter[userData.quarter.length - 1]; 
         return (
@@ -51,37 +45,56 @@ export const Reporting = () => {
 
   const EvaluationFormHandler = (User) => {
     setCurEmp(User);
+    localStorage.setItem("EmployeeId", JSON.stringify(User.empId))
 
-    navigate("/form/Evaluation");
+    navigate("/form/Evaluation" );
   };
 
   return (
-    <>
+    <div className="REmployeeAnalyticsContainer">
       {!loading ? (
-        <div className="Reporting_Section">
+        <div className='Rtable-down'>
           {curuser?.Role.Reporting_Officer ? (
-            <>
-              <p>Evaluation request for </p>
+            <div className="REAC">
+              <div className="REAC-head">Evaluation request for</div>
               {usersForEvaluation ? (
-                usersForEvaluation.map((user) => (
-                  <div key={user._id}>
-                    <p>Name: {user.userName}</p>
-                    <button onClick={() => EvaluationFormHandler(user)}>
-                      Fill Evaluation form
-                    </button>
-                  </div>
-                ))
+                <table className="REAC-table">
+                  <thead>
+                    <tr className="REAC-tr1">
+                      <th className="REAC-th">Employee Id</th>
+                      <th className="REAC-th">Name</th>
+                      <th className="REAC-th">Last Date to fill Form</th>
+                      <th className="REAC-th">Form</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {usersForEvaluation.map((user) => (
+                      <tr key={user._id} className="REAC-tr">
+                        <td className="REAC-td">{user.empId}</td>
+                        <td className="REAC-td">{user.userName}</td>
+                        <td className="REAC-td">{new Date(user.quarter[user.quarter.length - 1].dateofReviewbyRPO).toLocaleDateString()}</td>
+                        <td className="REAC-td">
+                          <button onClick={() => EvaluationFormHandler(user)} className="REAC-button">
+                            Fill Evaluation form
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               ) : (
                 <p>No users for evaluation.</p>
               )}
-            </>
+            </div>
           ) : (
             "You don't have any access to view this page"
           )}
+
         </div>
       ) : (
         "Loading the data"
       )}
-    </>
+    </div>
   );
 };

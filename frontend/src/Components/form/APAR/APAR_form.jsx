@@ -83,11 +83,11 @@ function APAR_form() {
 
 
   const handleSubmit1 = async (e) => {
-    CurrentUser.quarter.push(user)
+  
+    console.log(user, " updated current user");
     try {
-      const { data } = await axios.post("http://localhost:5000/submitAparForm", CurrentUser);
+      const { data } = await axios.post("http://localhost:5000/submitAparForm", {empId : CurrentUser.empId , user});
       // await axios.post("http://localhost:5000/send-email", CurrentUser);
-      setcuruser(data.user);
       navigate("/main2/HR");
     } catch (error) {
       console.error("Error sending request:", error);

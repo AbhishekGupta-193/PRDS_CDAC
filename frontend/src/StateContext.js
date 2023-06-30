@@ -22,7 +22,7 @@ const AppProvider = ({ children }) => {
     setisSubmitted,
   };
   const [alluser, setalluser] = useState(null);
-  const [ CurEmp,setCurEmp ] = useState({});
+  const [ CurEmp,setCurEmp ] = useState(null);
   useEffect(() => {
     getusers();
   }, []);

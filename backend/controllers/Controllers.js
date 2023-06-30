@@ -86,29 +86,28 @@ export const submitSelfAppraisel = async (req, res) => {
 
 
 export const submitAparForm = async (req, res) => {
-  const { empId } = req.body;
-
   try {
-    const user = await User.findOneAndUpdate(
-      { empId },
-      { $set: { APAR_status: true, ...req.body } },
+    console.log(req.body);
+    const filter = { empId: req.body.empId };
+    const updatedUser = await User.findOneAndUpdate(
+      filter,
+      { $push: { quarter: req.body.user } },
       { new: true }
     );
-
-    if (user) {
-      res.send({ msg: "successfully registered" });
-    } else {
-      res.status(404).send({ msg: "User not found" });
-    }
+    res.send({msg : "user updated " , updatedUser})
+    // return res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred");
+     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
 
 export const submitEvalutaionForm = async (req, res) => {
   const { empId } = req.body;
   console.log("data receivesd");
+  console.log(req.body);
   try {
     const user = await User.findOneAndUpdate(
       { empId: empId },

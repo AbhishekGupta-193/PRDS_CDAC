@@ -1,4 +1,59 @@
-.Reporting_Section{
-    border: 2px solid red;
+.REmployeeAnalyticsContainer {
+    background-color: #F0F2F5;
     width: 100%;
+    height: auto;
+}
+
+.Rtable-down {
+    width: 90%;
+    background-color: white;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.REAC {}
+
+.REAC-head {
+    font-size: 1.5rem;
+    margin: 1rem;
+}
+
+.REAC-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.REAC-tr:nth-child(even) {
+    background-color: #D5F5E8;
+}
+
+.REAC-tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.REAC-th {
+    background-color: #D6E3FD;
+    color: black;
+    outline: none;
+    border: none;
+}
+
+.REAC-td {
+    height: 2rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.REAC-tr:hover {
+    background-color: #F0F2F5;
+    cursor: pointer;
+}
+.REAC-button{
+    height: 2rem;
+    width: 10rem;
+    background-color: #D5F5E8;
+    border: none;
+    border-radius: .5rem;
 }
