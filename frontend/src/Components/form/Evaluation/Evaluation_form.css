@@ -17,7 +17,6 @@
   font-weight: 400;
   letter-spacing: -.022em;
   line-height: 1.47059;
-  min-width: 30px;
   overflow: visible;
   padding: 4px 15px;
   text-align: center;
@@ -26,7 +25,10 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  margin: 1rem 13rem;
+  margin: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
 }
 
 .SelfAppdatabtn:disabled {
@@ -67,7 +69,6 @@
 
 .inpt_tag {
   width: 50%;
-  /* height: 90%; */
   padding: 0.5rem;
   border: 1px solid #9fc8fe;
   background: #ffffff;
@@ -102,7 +103,6 @@
 
   color: white;
   padding: 14px 20px;
-  /* margin-left: 25%; */
   border: none;
   border-radius: 4px;
   cursor: pointer;

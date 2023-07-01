@@ -1,6 +1,5 @@
 .side-bar {
   width: 18rem;
-  padding: 0.5rem;
   box-shadow: 0 1px 2px rgba(51, 51, 51, 0.397);
   display: flex;
   flex-direction: column;
@@ -8,7 +7,8 @@
   text-transform: capitalize;
   overflow: hidden;
   background-color: #404e67;
-  min-height: 100vh;
+  transition: all 0.2s ease-in-out;
+  min-height: 91vh;
 }
 .side-bar .sidebar-item {
   padding: 0 0.5rem;

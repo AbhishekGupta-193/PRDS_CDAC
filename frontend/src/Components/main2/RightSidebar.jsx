@@ -29,7 +29,7 @@ const RightSidebar = () => {
           <EmployeCard profileUser={profileUser} />
 
           <div
-            style={{ display: "flex", alignItems: "center", maxWidth: "300px" }}
+            style={{ display: "flex", alignItems: "center"}}
           >
             <input
               type="text"
@@ -38,7 +38,7 @@ const RightSidebar = () => {
                 borderRadius: "5px",
                 padding: "8px",
                 border: "1px solid #ccc",
-                width: "100%",
+                width: "80%",
                 margin: "0.2rem",
               }}
             />

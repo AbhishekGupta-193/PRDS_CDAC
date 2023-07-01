@@ -1,8 +1,15 @@
-.main-app {
-  min-height: 90vh;
+.main-app-hr {
+  height: 90vh;
   display: flex;
 }
-.main-app .outlet {
+.main-app-hr .outlet {
   width: 100vw;
-  border: 2px solid blue;
+}
+
+.main-app-emp {
+  height: 90vh;
+  display: flex;
+}
+.main-app-emp .outlet {
+  width: 100vw;
 }/*# sourceMappingURL=main.css.map */

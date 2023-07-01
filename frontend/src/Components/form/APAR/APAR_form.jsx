@@ -171,23 +171,23 @@ function APAR_form() {
                     message: "",
                   },
                   validate: {
-                    notExceedCurrentDate: (value) => {
-                      const fromDate = new Date(user.appraiselPeriodFrom);
-                      const toDate = new Date(value);
+                    // notExceedCurrentDate: (value) => {
+                    //   const fromDate = new Date(user.appraiselPeriodFrom);
+                    //   const toDate = new Date(value);
 
-                      if (toDate < fromDate) {
-                        return "Should not preceed from date";
-                      }
+                    //   if (toDate < fromDate) {
+                    //     return "Should not preceed from date";
+                    //   }
 
-                      const selectedDate = new Date(value);
-                      const currentDate = new Date();
+                    //   const selectedDate = new Date(value);
+                    //   const currentDate = new Date();
 
-                      if (selectedDate > currentDate) {
-                        return "";
-                      }
+                    //   if (selectedDate > currentDate) {
+                    //     return "";
+                    //   }
 
-                      return true;
-                    },
+                    //   return true;
+                    // },
                   },
 
                 }

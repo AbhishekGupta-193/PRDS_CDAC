@@ -46,6 +46,8 @@ const SelfAppraisalData = ({ isVisible, setisVisible }) => {
       CurEmp.quarter[CurEmp.quarter.length - 1].selfAppFormData1;
     var selfAppFormData2 =
       CurEmp.quarter[CurEmp.quarter.length - 1].selfAppFormData2;
+
+      console.log(selfAppFormData1 , selfAppFormData2);
   }
   return (
     <>
@@ -86,7 +88,7 @@ const SelfAppraisalData = ({ isVisible, setisVisible }) => {
                 <tr key={index}>
                   <td className="SNo">{++index}</td>
                   <td>{data.jobAssigned}</td>
-                  <td>{data.achievement}</td>
+                  <td>{data.Corresponding_Achievement}</td>
                 </tr>
               ))}
             </tbody>

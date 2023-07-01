@@ -9,11 +9,10 @@ export const Reporting = () => {
   const { user, setuser, curuser, setcuruser, setCurEmp, loading } =
     useGlobalContext();
   const navigate = useNavigate();
-  const [usersForEvaluation, setusersForEvaluation] = useState([]);
-  // var usersForEvaluation = [];
+  const [usersForEvaluation, setusersForEvaluation] = useState(null);
 
   const getuserforreporting = () => {
-    const Reporting_emp = user.filter((userData) => {
+    const Reporting_emp = user?.filter((userData) => {
       const lastQuarter = userData.quarter[userData.quarter.length - 1];
       return (
         lastQuarter.APAR_status === true &&
@@ -69,7 +68,7 @@ export const Reporting = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {usersForEvaluation.map((user) => (
+                      {usersForEvaluation?.map((user) => (
                         <tr key={user._id} className="REAC-tr">
                           <td className="REAC-td">{user.empId}</td>
                           <td className="REAC-td">{user.userName}</td>

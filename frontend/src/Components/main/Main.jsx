@@ -5,9 +5,9 @@ import { SideBar } from './SideBar'
 import '../../css/main.css'
 export const Main = () => {
   return (
-    <main>
+    <main className='main-class'>
         <MainNav/>
-        <section className='main-app'>
+        <section className='main-app-emp'>
             <SideBar/>
             <Outlet/>
         </section>

@@ -1,29 +1,109 @@
 .notes-wrapper {
+  position: relative;
   display: flex;
-  padding: 2rem 0 0 2rem;
-  gap: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
   width: 100%;
   height: 100%;
   background-color: #F0F2F5;
+  /* background-color: rgb(165, 113, 46); */
 }
 
-.notes-wrapper .Total_Employee {
+.HrProfile_up_in {
+  background-color: #ffffff;
+  height: 38vh;
+  margin: 2vh;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.HrProfile_up_in_left {
+  /* background-color: aquamarine; */
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.HrProfile_up_in_left_img {
+  border-radius: .5rem;
+}
+
+.HrProfile_up_in_right {
+  /* background-color: #ffffff; */
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1rem;
+  border-radius: 1rem;
+
+}
+
+.HrProfile_up_in_right1 {
+  /* background-color: aquamarine; */
+  width: 48%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.HrProfile_up_in_right2 {
+  background-color: aquamarine;
+  width: 48%;
+  height: 90%;
+}
+
+.HrProfile_up_in_right_small {
+  background-color: #F0F2F5;
+  border-radius: .3rem;
+  padding: .2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+}
+
+.HrProfile_up_in_right_small_in1 {
+  font-size: .6rem;
+  color: #585353;
+}
+
+.HrProfile_up_in_right_small_in2 {
+  font-size: .8rem;
+}
+
+.HrCards_down {
+  background-color: #ffffff;
+  height: 38vh;
+  margin: 0 1rem;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.Total_Employee {
   cursor: pointer;
   /* border: 2px solid red; */
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 3rem;
-  display: flex;
-  width: 13rem;
-  height: 18rem;
+  justify-content: space-between;
+  width: 9rem;
+  height: 80%;
   border-radius: 1rem;
-  background: #ffffff;
+  padding: 1rem;
+  background: #F0F2F5;
   box-shadow: 15px 15px 30px #bebebe,
     -15px -15px 30px #ffffff;
 }
 
 .notes-wrapper .Total_Employee .EmployeeIcon {
-  font-size: 3em;
+  font-size: 5rem;
+  color: #404e67;
 }
-

@@ -7,7 +7,6 @@ import validator from "validator";
 
 const SelfAppraisalForm = () => {
   const navigate = useNavigate();
-  // const [ curuser, setcuruser ] = useState(JSON.parse(localStorage.getItem("curuser")));
 
   const { curuser, setcuruser } = useGlobalContext();
 
@@ -28,19 +27,15 @@ const SelfAppraisalForm = () => {
   }, []);
 
   const [formErrors, setFormErrors] = useState({});
-  // const DateFrom = new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodFrom);
-  // const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-  // const From = DateFrom.toLocaleDateString(undefined, options);
-  // const DateTo = new Date(curuser.quarter[curuser.quarter.length-1].appraiselPeriodTo);
-  // const To = DateTo.toLocaleDateString(undefined, options);
+ 
 
   const [isEditable, setIsEditable] = useState(true);
   const [dateoffillingSA, setdateoffillingSA] = useState("");
   const [jobAssignments, setJobAssignments] = useState([
-    { serialNumber: "", jobAssigned: "", correspondingAchievement: "" },
+    {  jobAssigned: "", Corresponding_Achievement: "" },
   ]);
   const [achievements, setAchievements] = useState([
-    { serialNumber: "", achievement: "", deliverable: "" },
+    {  achievement: "", deliverables: "" },
   ]);
 
   const handleJobAssignmentChange = (index, event) => {
@@ -60,14 +55,14 @@ const SelfAppraisalForm = () => {
   const addJobAssignmentRow = () => {
     setJobAssignments([
       ...jobAssignments,
-      {  jobAssigned: "", correspondingAchievement: "" },
+      {  jobAssigned: "", Corresponding_Achievement: "" },
     ]);
   };
 
   const addAchievementRow = () => {
     setAchievements([
       ...achievements,
-      {  achievement: "", deliverable: "" },
+      {  achievement: "", deliverables: "" },
     ]);
   };
   const deleteJobAssignmentRow = (index) => {
@@ -229,13 +224,13 @@ const SelfAppraisalForm = () => {
                 <td>
                   <input
                     type="text"
-                    name="correspondingAchievement"
-                    value={assignment.correspondingAchievement}
+                    name="Corresponding_Achievement"
+                    value={assignment.Corresponding_Achievement}
                     onChange={(event) => handleJobAssignmentChange(index, event)}
                     disabled={!isEditable}
                   />
-                  {formErrors.correspondingAchievement && (
-                    <span className="error_saf">{formErrors.correspondingAchievement}</span>
+                  {formErrors.Corresponding_Achievement && (
+                    <span className="error_saf">{formErrors.Corresponding_Achievement}</span>
                   )}
                 </td>
                 {isEditable && (
@@ -268,7 +263,7 @@ const SelfAppraisalForm = () => {
             <tr>
               <th className="small-column">S. No.</th>
               <th>Achievement</th>
-              <th>Deliverable</th>
+              <th>deliverables</th>
               {isEditable && <th></th>}
             </tr>
           </thead>
@@ -296,8 +291,8 @@ const SelfAppraisalForm = () => {
                 <td>
                   <input
                     type="text"
-                    name="deliverable"
-                    value={achievement.deliverable}
+                    name="deliverables"
+                    value={achievement.deliverables}
                     onChange={(event) => handleAchievementChange(index, event)}
                     disabled={!isEditable}
                   />

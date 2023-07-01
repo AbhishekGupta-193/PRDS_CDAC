@@ -6,9 +6,9 @@ import { SideBar2 } from './SideBar2'
 import RightSidebar from './RightSidebar'
 export const Main2 = () => {
   return (
-    <main>
+    <main className='main-class'> 
         <MainNav2/>
-        <section className='main-app'>
+        <section className='main-app-hr'>
             <SideBar2/>
             <div className="outlet">
               <Outlet/>

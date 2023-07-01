@@ -22,7 +22,6 @@ export const Evaluation_form = () => {
   const [isEditing, setIsEditing] = useState(true);
   const { CurEmp, setCurEmp } = useGlobalContext();
 
-
   const [isVisible, setisVisible] = useState(false);
 
   if (CurEmp) {
@@ -74,12 +73,17 @@ export const Evaluation_form = () => {
   }
 
   const handleSubmit1 = async (e) => {
-    console.log({ CurEmp });
     setCurEmp({
       ...CurEmp,
-      Evalutation_status: true,
+      quarter: [
+        {
+          ...CurEmp.quarter[CurEmp.quarter.length - 1],
+
+          Evalutation_status: true,
+        },
+      ],
     });
-    console.log(CurEmp , "Curemp before submitting");
+    console.log(CurEmp, "Curemp before submitting");
     const { data } = axios.post(
       "http://localhost:5000/submitEvalutaionForm",
       CurEmp
@@ -98,7 +102,7 @@ export const Evaluation_form = () => {
           "http://localhost:5000/getCurUserforForms",
           { EmployeeId }
         );
-  
+
         setCurEmp(data);
       } catch (error) {
         console.error(error);
@@ -131,10 +135,10 @@ export const Evaluation_form = () => {
           .querySelector(".container_eval")
           .classList.remove("container_eval-tl");
       }
-      setRemark(()=>PerformanceRemark());
+      setRemark(() => PerformanceRemark());
       console.log("current remark ", Remark);
     }
-  }, [isVisible ,final_score ]);
+  }, [isVisible, final_score]);
 
   return (
     <>
@@ -678,7 +682,9 @@ export const Evaluation_form = () => {
               ) : (
                 <div className="Edit_lock_Submit">
                   <button
-                    onClick={() => setIsEditing(!isEditing)}
+                    onClick={(e) => {
+                      setIsEditing(!isEditing);
+                    }}
                     type="submit"
                     className="submitbtn_Eval"
                   >

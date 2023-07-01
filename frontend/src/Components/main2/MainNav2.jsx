@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { BiLogOutCircle } from "react-icons/bi";
 import "../../css/mainNav.css";
 import { useGlobalContext } from "../../StateContext";
 import axios from "axios";
+import { ReactComponent as CDAC } from '../../Assets/CDAC_LOGO.svg';
 
 
 export const MainNav2 = () => {
@@ -48,15 +50,18 @@ export const MainNav2 = () => {
           <GiHamburgerMenu />
         </i>
         <div className="logo">
-          <span>PRIS</span>
+             <CDAC/>
         </div>
+          <span>PRIS</span>
       </div>
 
       <div className="nav-right">
         <div className="user-profile-container">
           
-          {/* <span>Hi {curuser && curuser.userName}</span> */}
-          <button onClick={handleLogout} className="logout_btn">Logout</button>
+          <button onClick={handleLogout} className="logout_btn">Logout  
+          <BiLogOutCircle/>
+          </button>
+
         
         </div>
       </div>

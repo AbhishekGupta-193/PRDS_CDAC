@@ -6,17 +6,24 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    height: auto;
+    overflow: scroll;
 }
+.EmployeeAnalyticsContainer::-webkit-scrollbar {
+        display: none; 
+     }
 
 .graph-up {
+   height: 55%;
     width: 90%;
     background-color: white;
-    margin: 1rem auto;
+    margin: 5rem auto ;
     padding: 2rem;
     border-radius: 1rem;
 }
 
 .table-down {
+    top: 90%;
     width: 90%;
     background-color: white;
     margin: 1rem auto;
