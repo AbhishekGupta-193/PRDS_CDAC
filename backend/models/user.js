@@ -11,7 +11,16 @@ const quarterSchema = new mongoose.Schema({
     sc6: Number,
     selfAppraisalScore: Number,
     achievementBeyondScore: Number,
-    totalScore: Number
+    totalScore: Number,
+    sc1_bySLA: Number,
+    sc2_bySLA: Number,
+    sc3_bySLA: Number,
+    sc4_bySLA: Number,
+    sc5_bySLA: Number,
+    sc6_bySLA: Number,
+    selfAppraisalScore_bySLA: Number,
+    achievementBeyondScore_bySLA: Number,
+    totalScore_bySLA: Number
   },
   designation: String,
   presentPay: String,
@@ -46,7 +55,9 @@ const quarterSchema = new mongoose.Schema({
   dateOfFillingSelfAppraisalForm: Date,
   dateOfFillingEvaluationForm: Date,
   additionalComments: String,
-  employeeFinalRemark: String
+  employeeFinalRemark: String,
+  additionalComments_bySLA: String,
+  employeeFinalRemark_bySLA: String
 });
 
 const userSchema = new mongoose.Schema({
