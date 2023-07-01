@@ -4,6 +4,7 @@ import { useGlobalContext } from "../../StateContext.js";
 import { useNavigate } from "react-router-dom";
 import "./EmployeeSection.css";
 
+
 export const EmployeeSection = () => {
   const navigate = useNavigate();
   const { curuser, setcuruser, user, loading } = useGlobalContext();

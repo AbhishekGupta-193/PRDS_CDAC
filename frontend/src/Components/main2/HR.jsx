@@ -8,6 +8,7 @@ import { BiTask } from 'react-icons/bi'
 import { MdPendingActions } from 'react-icons/md'
 import { IoIosCloudDone } from 'react-icons/io'
 import { FaUserEdit } from 'react-icons/fa'
+import '../Loader/Loader1.css'
 
 export const HR = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export const HR = () => {
 
   return (
     <>
-      {!loading && curuser ? (
+      {!loading && curuser? (
         <div className='notes-wrapper'>
         {/* <div className='HrProfile_up'> */}
         <div className='HrProfile_up_in'>
@@ -143,7 +144,7 @@ export const HR = () => {
   
       </div>
       ) : (
-        "Loading"
+        <span class="loader1"></span>
       )}
     </>
   );

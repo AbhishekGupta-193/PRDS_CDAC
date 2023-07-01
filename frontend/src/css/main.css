@@ -1,6 +1,8 @@
 .main-app-hr {
   height: 90vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main-app-hr .outlet {
   width: 100vw;

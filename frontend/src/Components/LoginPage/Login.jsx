@@ -12,16 +12,19 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useGlobalContext } from "../../StateContext";
+import '../Loader/Loader2.css'
 
 const theme = createTheme();
 
 export default function SignIn() {
   const { curuser, setcuruser, setuser } = useGlobalContext();
+  const [loading, setLoading] = React.useState(false)
 
   console.log(curuser, "curuser ");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
+    setLoading(true)
     event.preventDefault();
     const Data = new FormData(event.currentTarget);
     const userData = {
@@ -105,8 +108,10 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled = {loading}
             >
-              Login
+             {loading ? <span className="loader2"></span>
+                : "Login"}
             </Button>
             {/* <Grid container>
               <Grid item xs>
