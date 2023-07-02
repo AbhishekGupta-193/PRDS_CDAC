@@ -32,53 +32,72 @@ function APAR_form() {
     getData();
   }, []);
 
-  const [user, setuser] = useState({
-    scoreOfEvaluation: {
-      "sc1": 0,
-      "sc2": 0,
-      "sc3": 0,
-      "sc4": 0,
-      "sc5": 0,
-      "sc6": 0,
-      "selfAppraisalScore": 0,
-      "achievementBeyondScore": 0,
-      "totalScore": 0
-    },
-    "designation": '',
-    "presentPay": '',
-    "group": 'AB',
-    "groupHead": '',
-    "groupHead_email": 'rpo1@gmail.com',
-    "dateOfEntryToCurrentDesignation": null,
-    "leaveAvailed": 0,
-    "absenceOtherThanLeave": 0,
-    "appraiselPeriodFrom": null,
-    "appraiselPeriodTo": null,
-    "projectName": '',
-    "APAR_status": true,
-    "SelfAppraisal_status": false,
-    "Evalutation_status": false,
-    "dateofIssueofAPAR": null,
-    "dateofSubmission": null,
-    "dateofReviewbyRPO": null,
-    "selfAppFormData1": [
-      {
-        "jobAssigned": '',
-        "Corresponding_Achievement": ''
-      }
-    ],
-    "selfAppFormData2": [
-      {
-        "achievement": '',
-        "deliverables": ''
-      }
-    ],
-    "dateOfFillingAparForm": new Date(),
-    "dateOfFillingSelfAppraisalForm": new Date(),
-    "dateOfFillingEvaluationForm": new Date(),
-    "additionalComments": '',
-    "employeeFinalRemark": ''
-  });
+  const [user, setuser] = useState(
+    {
+      "scoreOfEvaluation": {
+        "sc1": 0,
+        "sc2": 0,
+        "sc3": 0,
+        "sc4": 0,
+        "sc5": 0,
+        "sc6": 0,
+        "selfAppraisalScore": 0,
+        "achievementBeyondScore": 0,
+        "totalScore": 0,
+        "sc1_bySLA": 0,
+        "sc2_bySLA": 0,
+        "sc3_bySLA": 0,
+        "sc4_bySLA": 0,
+        "sc5_bySLA": 0,
+        "sc6_bySLA": 0,
+        "selfAppraisalScore_bySLA": 0,
+        "achievementBeyondScore_bySLA": 0,
+        "totalScore_bySLA": 0
+      },
+      "designation": "",
+      "presentPay": "",
+      "group": "",
+      "groupHead": "",
+      "groupHead_email": "",
+      "SLA_name": "",
+      "SLA_email": "",
+      "dateOfEntryToCurrentDesignation": null,
+      "leaveAvailed": 0,
+      "absenceOtherThanLeave": 0,
+      "appraiselPeriodFrom": null,
+      "appraiselPeriodTo": null,
+      "projectName": "",
+      "APAR_status": false,
+      "SelfAppraisal_status": false,
+      "Evalutation_status": false,
+      "Evalutation_status_bySLA": false,
+      "dateofIssueofAPAR": null,
+      "dateofSubmission": null,
+      "dateofReviewbyRPO": null,
+      "dateofReviewbySLA": null,
+      "selfAppFormData1": [
+        {
+          "jobAssigned": "",
+          "Corresponding_Achievement": ""
+        }
+      ],
+      "selfAppFormData2": [
+        {
+          "achievement": "",
+          "deliverables": ""
+        }
+      ],
+      "dateOfFillingAparForm": null,
+      "dateOfFillingSelfAppraisalForm": null,
+      "dateOfFillingEvaluationForm": null,
+      "dateOfFillingEvaluationForm_bySLA": null,
+      "additionalComments": "",
+      "employeeFinalRemark": "",
+      "additionalComments_bySLA": "",
+      "employeeFinalRemark_bySLA": ""
+    }
+    
+  );
 
 
 
