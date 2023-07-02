@@ -77,11 +77,7 @@
   border-radius: 5px;
   margin: 8px 0;
 }
-.inpt_tag::-webkit-inner-spin-button,
-.inpt_tag::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+
 
 .inpt_tag:focus {
   outline: 0;

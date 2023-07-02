@@ -3,18 +3,22 @@ import cors from "cors";
 import mongoose from "mongoose";
 import userRoutes from "./routes/routes.js";
 import User from "./models/user.js";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 const PORT = 5000;
 
-const URL =
-  "mongodb+srv://anurag174:yNfoQuFCK1wHqPGi@cluster0.pzqlvtr.mongodb.net/?retryWrites=true&w=majority";
+const URL = process.env.MONGODB_URI;
 mongoose.connect(URL, () => {
   console.log("connected");
 });
-
+app.get("/", async (req, res) => {
+  res.send({msg : "Welcome"});
+});
 app.use("/", userRoutes);
 app.post("/register", async (req, res) => {
   const userdata = req.body;

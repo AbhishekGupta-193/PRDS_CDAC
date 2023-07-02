@@ -12,7 +12,7 @@ import '../Loader/Loader1.css'
 
 export const HR = () => {
   const navigate = useNavigate();
-  const { curuser, setcuruser,user, loading } = useGlobalContext();
+  const { curuser, setcuruser,user, loading, TotalEmployee , APAR_issued , APAR_not_initiated , APAR_completed , Self_Appraisal_filled} = useGlobalContext();
 
   useEffect(() => {
     const getData = async () => {
@@ -31,11 +31,7 @@ export const HR = () => {
     }
   }, [user]);
 
-  const TotalEmployee = user?.length
-  const APAR_issued = user?.filter((element) => (element.Role.HR === false && element.APAR_status === true)).length;
-  const APAR_not_initiated = user?.filter((element) => (element.Role.HR === false && element.APAR_status === false)).length;
-  const APAR_completed = user?.filter((element) => (element.Role.HR === false && element.APAR_status === false && element.SelfAppraisal_status === false && element.Evalutation_status === false)).length;
-
+ 
   return (
     <>
       {!loading && curuser? (
@@ -123,23 +119,30 @@ export const HR = () => {
           <div className='Total_Employee'>
             <span className='EmployeeIcon'><IoIosPeople /></span>
             <span>Total Employee</span>
-            <span>{TotalEmployee}</span>
-          </div>
-          <div className='Total_Employee'>
-            <span className='EmployeeIcon'><BiTask /></span>
-            <span>Evaluation Completed</span>
-            <span>{APAR_completed}</span>
-          </div>
-          <div className='Total_Employee'>
-            <span className='EmployeeIcon'><MdPendingActions /></span>
-            <span>APAR not filled</span>
-            <span>{APAR_not_initiated}</span>
+            <span>{TotalEmployee.length}</span>
           </div>
           <div className='Total_Employee'>
             <span className='EmployeeIcon'><IoIosCloudDone /></span>
             <span>APAR Issued</span>
-            <span>{APAR_issued} </span>
+            <span>{APAR_issued.length} </span>
           </div>
+          <div className='Total_Employee'>
+            <span className='EmployeeIcon'><MdPendingActions /></span>
+            <span>APAR to be Issued</span>
+            <span>{APAR_not_initiated.length}</span>
+          </div>
+          <div className='Total_Employee'>
+            <span className='EmployeeIcon'><MdPendingActions /></span>
+            <span>Self Appraisal filled by Employee</span>
+            <span>{Self_Appraisal_filled.length}</span>
+          </div>
+          <div className='Total_Employee'>
+            <span className='EmployeeIcon'><BiTask /></span>
+            <span>Evaluation Completed</span>
+            <span>{APAR_completed.length}</span>
+          </div>
+        
+         
         </div>
   
       </div>

@@ -106,8 +106,6 @@ export const submitAparForm = async (req, res) => {
 
 export const submitEvalutaionForm = async (req, res) => {
   const { empId } = req.body;
-  console.log("data receivesd");
-  console.log(req.body);
   try {
     const user = await User.findOneAndUpdate(
       { empId: empId },

@@ -21,6 +21,12 @@ const AppProvider = ({ children }) => {
     isSubmitted,
     setisSubmitted,
   };
+  const TotalEmployee = user
+  const APAR_issued = user?.filter((element) => (element.Role.HR === false && element.APAR_status === true))
+  const APAR_not_initiated = user?.filter((element) => (element.Role.HR === false && element.APAR_status === false));
+  const APAR_completed = user?.filter((element) => (element.Role.HR === false && element.APAR_status === true && element.SelfAppraisal_status === true && element.Evalutation_status === true));
+  const Self_Appraisal_filled = user?.filter((element) => (element.Role.HR === false && element.APAR_status === true && element.SelfAppraisal_status === true));
+
   const [alluser, setalluser] = useState(null);
   const [ CurEmp,setCurEmp ] = useState(null);
   useEffect(() => {
@@ -40,7 +46,13 @@ const AppProvider = ({ children }) => {
         contextValue,
         CurEmp,
         setCurEmp,
-        loading
+        loading,
+        TotalEmployee,
+        APAR_not_initiated,
+        APAR_completed,
+        Self_Appraisal_filled,
+        APAR_issued
+
       }}
     >
       {children}

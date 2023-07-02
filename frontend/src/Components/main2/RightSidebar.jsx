@@ -10,7 +10,7 @@ import axios from "axios";
 const RightSidebar = () => {
   const [profileUser, setProfileUser] = useState({});
   const navigate = useNavigate();
-  const {user} = useGlobalContext();
+  const {user , TotalEmployee , APAR_issued , APAR_not_initiated , APAR_completed , Self_Appraisal_filled} = useGlobalContext();
 
  
 

@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Evaluation_form2 } from "./Components/form/Evaluation/Evaluation_form2";
 import { Evaluation_form } from "./Components/form/Evaluation/Evaluation_form";
 import Login from "./Components/LoginPage/Login";
 import { Main } from "./Components/main/Main";
@@ -34,6 +35,7 @@ function App() {
 
           <Route path="/form/selfappraisal" element={<SelfAppraisalForm />} />
           <Route path="/form/APAR" element={<APAR_form />} />
+          <Route path="/form/Evaluation2" element={<Evaluation_form2 />} />
           <Route path="/form/Evaluation" element={<Evaluation_form />} />
           <Route path="/Homescreen_LP" element={<Homescreen_LP />} />
         </Routes>
