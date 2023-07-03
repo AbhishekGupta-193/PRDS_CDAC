@@ -4,7 +4,6 @@ import { bgcolor } from "@mui/system";
 import { logDOM } from "@testing-library/react";
 
 const Grid = ({CurEmp,setCurEmp}) => {
-  console.log(CurEmp, " grid wala curemp");
   const [selectedGrid, setSelectedGrid] = useState(null);
 
    const updateGridStatus = (grid)=>{

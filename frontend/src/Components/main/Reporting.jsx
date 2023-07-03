@@ -18,7 +18,7 @@ export const Reporting = () => {
       return (
         lastQuarter.APAR_status === true &&
         lastQuarter.SelfAppraisal_status === true &&
-        lastQuarter.groupHead_email === curuser.email
+        lastQuarter.groupHead_email === curuser?.email
       );
     });
     setusersForEvaluation(Reporting_emp);
@@ -28,7 +28,7 @@ export const Reporting = () => {
         lastQuarter.APAR_status === true &&
         lastQuarter.SelfAppraisal_status === true &&
         lastQuarter.Evalutation_status === true &&
-        lastQuarter.SLA_email === curuser.email
+        lastQuarter.SLA_email === curuser?.email
       );
     });
     setusersForEvaluationbySLA(Reporting_emp_bySLA);
@@ -50,13 +50,19 @@ export const Reporting = () => {
       getData();
     }
     getuserforreporting();
-  }, [user]);
+  }, [user,curuser]);
 
   const EvaluationFormHandler = (User) => {
     setCurEmp(User);
     localStorage.setItem("EmployeeId", JSON.stringify(User.empId));
 
     navigate("/form/Evaluation");
+  };
+  const EvaluationFormHandlerbySLA = (User) => {
+    setCurEmp(User);
+    localStorage.setItem("EmployeeId", JSON.stringify(User.empId));
+
+    navigate("/form/Evaluation2");
   };
 
   return (
@@ -140,7 +146,7 @@ export const Reporting = () => {
                           </td>
                           <td className="REAC-td">
                             <button
-                              onClick={() => EvaluationFormHandler(user)}
+                              onClick={() => EvaluationFormHandlerbySLA(user)}
                               className="REAC-button"
                             >
                               view Evaluation form
