@@ -32,80 +32,77 @@ function APAR_form() {
     getData();
   }, []);
 
-  const [user, setuser] = useState(
-    {
-      "scoreOfEvaluation": {
-        "sc1": 0,
-        "sc2": 0,
-        "sc3": 0,
-        "sc4": 0,
-        "sc5": 0,
-        "sc6": 0,
-        "selfAppraisalScore": 0,
-        "achievementBeyondScore": 0,
-        "totalScore": 0,
-        "sc1_bySLA": 0,
-        "sc2_bySLA": 0,
-        "sc3_bySLA": 0,
-        "sc4_bySLA": 0,
-        "sc5_bySLA": 0,
-        "sc6_bySLA": 0,
-        "selfAppraisalScore_bySLA": 0,
-        "achievementBeyondScore_bySLA": 0,
-        "totalScore_bySLA": 0
+  const [user, setuser] = useState({
+    scoreOfEvaluation: {
+      sc1: 0,
+      sc2: 0,
+      sc3: 0,
+      sc4: 0,
+      sc5: 0,
+      sc6: 0,
+      selfAppraisalScore: 0,
+      achievementBeyondScore: 0,
+      totalScore: 0,
+      sc1_bySLA: 0,
+      sc2_bySLA: 0,
+      sc3_bySLA: 0,
+      sc4_bySLA: 0,
+      sc5_bySLA: 0,
+      sc6_bySLA: 0,
+      selfAppraisalScore_bySLA: 0,
+      achievementBeyondScore_bySLA: 0,
+      totalScore_bySLA: 0,
+    },
+    designation: "",
+    presentPay: "",
+    group: "",
+    groupHead: "",
+    groupHead_email: "",
+    SLA_name: "",
+    SLA_email: "",
+    dateOfEntryToCurrentDesignation: null,
+    leaveAvailed: 0,
+    absenceOtherThanLeave: 0,
+    appraiselPeriodFrom: null,
+    appraiselPeriodTo: null,
+    projectName: "",
+    APAR_status: true,
+    SelfAppraisal_status: false,
+    Evalutation_status: false,
+    Evalutation_status_bySLA: false,
+    dateofIssueofAPAR: null,
+    dateofSubmission: null,
+    dateofReviewbyRPO: null,
+    dateofReviewbySLA: null,
+    selfAppFormData1: [
+      {
+        jobAssigned: "",
+        Corresponding_Achievement: "",
       },
-      "designation": "",
-      "presentPay": "",
-      "group": "",
-      "groupHead": "",
-      "groupHead_email": "",
-      "SLA_name": "",
-      "SLA_email": "",
-      "dateOfEntryToCurrentDesignation": null,
-      "leaveAvailed": 0,
-      "absenceOtherThanLeave": 0,
-      "appraiselPeriodFrom": null,
-      "appraiselPeriodTo": null,
-      "projectName": "",
-      "APAR_status": false,
-      "SelfAppraisal_status": false,
-      "Evalutation_status": false,
-      "Evalutation_status_bySLA": false,
-      "dateofIssueofAPAR": null,
-      "dateofSubmission": null,
-      "dateofReviewbyRPO": null,
-      "dateofReviewbySLA": null,
-      "selfAppFormData1": [
-        {
-          "jobAssigned": "",
-          "Corresponding_Achievement": ""
-        }
-      ],
-      "selfAppFormData2": [
-        {
-          "achievement": "",
-          "deliverables": ""
-        }
-      ],
-      "dateOfFillingAparForm": null,
-      "dateOfFillingSelfAppraisalForm": null,
-      "dateOfFillingEvaluationForm": null,
-      "dateOfFillingEvaluationForm_bySLA": null,
-      "additionalComments": "",
-      "employeeFinalRemark": "",
-      "additionalComments_bySLA": "",
-      "employeeFinalRemark_bySLA": ""
-    }
-    
-  );
-
-
+    ],
+    selfAppFormData2: [
+      {
+        achievement: "",
+        deliverables: "",
+      },
+    ],
+    dateOfFillingAparForm: null,
+    dateOfFillingSelfAppraisalForm: null,
+    dateOfFillingEvaluationForm: null,
+    dateOfFillingEvaluationForm_bySLA: null,
+    additionalComments: "",
+    employeeFinalRemark: "",
+    additionalComments_bySLA: "",
+    employeeFinalRemark_bySLA: "",
+  });
 
   const handleSubmit1 = async (e) => {
-  
     console.log(user, " updated current user");
     try {
-      const { data } = await axios.post("http://localhost:5000/submitAparForm", {empId : CurrentUser.empId , user});
+      const { data } = await axios.post(
+        "http://localhost:5000/submitAparForm",
+        { empId: CurrentUser.empId, user }
+      );
       // await axios.post("http://localhost:5000/send-email", CurrentUser);
       navigate("/main2/HR");
     } catch (error) {
@@ -122,12 +119,12 @@ function APAR_form() {
         </div>
 
         <div className="Table_rows_APAR2">
-
           <span className="spantype">Report for the Period :</span>
           <div className="inpt_periodbox">
             <div
-              className={`from_apar ${errors.appraiselPeriodFrom ? "error" : ""
-                }`}
+              className={`from_apar ${
+                errors.appraiselPeriodFrom ? "error" : ""
+              }`}
             >
               <input
                 type="date"
@@ -144,18 +141,14 @@ function APAR_form() {
                     // notExceedCurrentDate: (value) => {
                     //   const fromDate = new Date(user.appraiselPeriodFrom);
                     //   const toDate = new Date(value);
-
                     //   if (toDate < fromDate) {
                     //     return "";
                     //   }
-
                     //   const selectedDate = new Date(value);
                     //   const currentDate = new Date();
-
                     //   if (selectedDate > currentDate) {
                     //     return "";
                     //   }
-
                     //   return true;
                     // },
                   },
@@ -193,24 +186,18 @@ function APAR_form() {
                     // notExceedCurrentDate: (value) => {
                     //   const fromDate = new Date(user.appraiselPeriodFrom);
                     //   const toDate = new Date(value);
-
                     //   if (toDate < fromDate) {
                     //     return "Should not preceed from date";
                     //   }
-
                     //   const selectedDate = new Date(value);
                     //   const currentDate = new Date();
-
                     //   if (selectedDate > currentDate) {
                     //     return "";
                     //   }
-
                     //   return true;
                     // },
                   },
-
-                }
-                )}
+                })}
                 onChange={(e) =>
                   setuser({ ...user, appraiselPeriodTo: e.target.value })
                 }
@@ -254,7 +241,6 @@ function APAR_form() {
                 value={CurrentUser.empId}
                 className="inpt"
                 disabled={true}
-
               ></input>
             </div>
           </div>
@@ -293,16 +279,16 @@ function APAR_form() {
               ></input>
             </div>
           </div>
-          <div className={`Table_rows_APAR ${errors.presentPay ? "error" : ""}`}>
+          <div
+            className={`Table_rows_APAR ${errors.presentPay ? "error" : ""}`}
+          >
             <div className="Table_rows_APAR-1">
               <span className="spantype">Present Pay :</span>
               <input
                 type="text"
                 placeholder="Present Pay"
                 name="pay"
-                value={
-                  user.presentPay
-                }
+                value={user.presentPay}
                 {...register("presentPay", {
                   required: "This field is required.",
                   pattern: {
@@ -314,7 +300,9 @@ function APAR_form() {
                     message: "",
                   },
                 })}
-                onChange={(e) => setuser({ ...user, presentPay: e.target.value })}
+                onChange={(e) =>
+                  setuser({ ...user, presentPay: e.target.value })
+                }
                 className="inpt"
                 disabled={!isEditing}
               ></input>
@@ -333,15 +321,93 @@ function APAR_form() {
                 type="text"
                 placeholder="Section/Group"
                 name="grp"
-                value={CurrentUser.quarter[CurrentUser.quarter.length - 1].group}
+                value={
+                 user.group
+                }
+                onChange={(e) =>
+                  setuser({ ...user, group: e.target.value })
+                }
                 className="inpt"
-                disabled={true}
+                disabled={!isEditing}
+              ></input>
+            </div>
+          </div>
+          <div className={`Table_rows_APAR ${errors.group ? "error" : ""}`}>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">FLA's Name :</span>
+              <input
+                type="text"
+                placeholder="FLA's Name"
+                name="grp"
+                className="inpt"
+                value={
+                  user.groupHead
+                 }
+                 onChange={(e) =>
+                   setuser({ ...user, groupHead: e.target.value })
+                 }
+                 disabled={!isEditing}
+              ></input>
+            </div>
+          </div>
+          <div className={`Table_rows_APAR ${errors.group ? "error" : ""}`}>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">FLA's email :</span>
+              <input
+                type="text"
+                placeholder="Group Head's email"
+                name="grp"
+                className="inpt"
+                value={
+                  user.groupHead_email
+                 }
+                 onChange={(e) =>
+                   setuser({ ...user, groupHead_email: e.target.value })
+                 }
+                 disabled={!isEditing}
+              ></input>
+            </div>
+          </div>
+          <div className={`Table_rows_APAR ${errors.group ? "error" : ""}`}>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">SLA's Name :</span>
+              <input
+                type="text"
+                placeholder="SLA's Name"
+                name="grp"
+                className="inpt"
+                value={
+                  user.SLA_name
+                 }
+                 onChange={(e) =>
+                   setuser({ ...user, SLA_name: e.target.value })
+                 }
+                 disabled={!isEditing}
+              ></input>
+            </div>
+          </div>
+          <div className={`Table_rows_APAR ${errors.group ? "error" : ""}`}>
+            <div className="Table_rows_APAR-1">
+              <span className="spantype">SLA's email :</span>
+              <input
+                type="text"
+                placeholder="SLA's email"
+                name="grp"
+                className="inpt"
+                value={
+                  user.SLA_email
+                 }
+                 onChange={(e) =>
+                   setuser({ ...user, SLA_email: e.target.value })
+                 }
+                 disabled={!isEditing}
               ></input>
             </div>
           </div>
           <div
-            className={`Table_rows_APAR ${errors.dateOfEntryInCdac ? "error" : ""
-              }`}
+            className={`Table_rows_APAR ${
+              errors.dateOfEntryInCdac ? "error" : ""
+            }`}
           >
             <div className="Table_rows_APAR-1">
               <span className="spantype">Date of entry in CDAC :</span>
@@ -349,15 +415,18 @@ function APAR_form() {
                 type="text"
                 placeholder=" DD / MM / YYYY"
                 name="entrydate"
-                value={new Date(CurrentUser.dateOfEntryInCdac).toLocaleDateString()}
+                value={new Date(
+                  CurrentUser.dateOfEntryInCdac
+                ).toLocaleDateString()}
                 className="inpt"
                 disabled={true}
               ></input>
             </div>
           </div>
           <div
-            className={`Table_rows_APAR ${errors.dateOfFillingAparForm ? "error" : ""
-              }`}
+            className={`Table_rows_APAR ${
+              errors.dateOfFillingAparForm ? "error" : ""
+            }`}
           >
             <div className="Table_rows_APAR-1">
               <span className="spantype">
@@ -379,17 +448,20 @@ function APAR_form() {
                 //     notExceedCurrentDate: (value) => {
                 //       const selectedDate = new Date(value);
                 //       const currentDate = new Date();
-  
+
                 //       if (selectedDate > currentDate) {
                 //         return "Exceeded current date";
                 //       }
-  
+
                 //       return true;
                 //     },
                 //   },
                 // })}
                 onChange={(e) =>
-                  setuser({ ...user, dateOfEntryToCurrentDesignation: e.target.value })
+                  setuser({
+                    ...user,
+                    dateOfEntryToCurrentDesignation: e.target.value,
+                  })
                 }
                 disabled={!isEditing}
               ></input>
@@ -429,7 +501,6 @@ function APAR_form() {
                 }
                 className="inpt"
                 disabled={!isEditing}
-
               ></input>
             </div>
             {errors.leaveAvailed && (
@@ -440,8 +511,9 @@ function APAR_form() {
             )}
           </div>
           <div
-            className={`Table_rows_APAR ${errors.absenceOtherThanLeave ? "error" : ""
-              }`}
+            className={`Table_rows_APAR ${
+              errors.absenceOtherThanLeave ? "error" : ""
+            }`}
           >
             <div className="Table_rows_APAR-1">
               <span className="spantype">
@@ -481,8 +553,9 @@ function APAR_form() {
           </div>
         </div>
         <div
-          className={`Table_rows_APAR ${errors.dateofIssueofAPAR ? "error" : ""
-            }`}
+          className={`Table_rows_APAR ${
+            errors.dateofIssueofAPAR ? "error" : ""
+          }`}
         >
           <div className="Table_rows_APAR-1">
             <span className="spantype">Date of Issue:</span>
@@ -515,7 +588,6 @@ function APAR_form() {
               }
               className="inpt"
               disabled={!isEditing}
-
             ></input>
           </div>
           {errors.dateofIssueofAPAR && (
@@ -528,8 +600,9 @@ function APAR_form() {
           )}
         </div>
         <div
-          className={`Table_rows_APAR ${errors.dateofSubmission ? "error" : ""
-            }`}
+          className={`Table_rows_APAR ${
+            errors.dateofSubmission ? "error" : ""
+          }`}
         >
           <div className="Table_rows_APAR-1">
             <div className="Table_rows_APAR-1">
@@ -563,7 +636,6 @@ function APAR_form() {
                 }
                 className="inpt"
                 disabled={!isEditing}
-
               ></input>
             </div>
           </div>
@@ -575,8 +647,9 @@ function APAR_form() {
           )}
         </div>
         <div
-          className={`Table_rows_APAR ${errors.dateofReviewbyRPO ? "error" : ""
-            }`}
+          className={`Table_rows_APAR ${
+            errors.dateofReviewbyRPO ? "error" : ""
+          }`}
         >
           <div className="Table_rows_APAR-1">
             <span className="spantype">Date for review by FLA:</span>
@@ -609,7 +682,6 @@ function APAR_form() {
               }
               className="inpt"
               disabled={!isEditing}
-
             ></input>
           </div>
           {errors.dateofReviewbyRPO && (
@@ -642,7 +714,7 @@ function APAR_form() {
               <button
                 type="submit"
                 className="submitbtn_apar"
-              // onClick={handleSubmit1}
+                // onClick={handleSubmit1}
               >
                 Lock & Submit
               </button>

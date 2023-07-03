@@ -6,10 +6,11 @@ import { GrFormClose } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
 export const EmployeCard = ({ profileUser }) => {
+  console.log(profileUser, "profuile user");
   const [CurrentUser,setCurrentUser] = useState(profileUser);
   useEffect(()=>{
     setCurrentUser(profileUser);
-  },[])
+  },[profileUser])
   const navigate = useNavigate();
 
   const handleExit = () => {
@@ -40,9 +41,9 @@ export const EmployeCard = ({ profileUser }) => {
           <GrFormClose/>
         </i>
       </div>
-      <div className="name">{CurrentUser.userName}</div>
+      <div className="name">{CurrentUser?.userName}</div>
       <div className="about">
-        {/* {CurrentUser.quarter[CurrentUser.quarter.length - 1].designation} */}
+        {CurrentUser?.quarter[CurrentUser?.quarter?.length - 1]?.designation}
         </div>
       <div className="social-icons">
         <a href="#" className="Git">
@@ -59,7 +60,7 @@ export const EmployeCard = ({ profileUser }) => {
       </div>
       <div className="buttons">
         <button>Message</button>
-        <button onClick={()=>fillForrm(profileUser)}>APAR</button>
+        <button onClick={()=>fillForrm(profileUser)} >APAR</button>
       </div>
       <div className="social-share">
         <div className="row">
@@ -74,7 +75,6 @@ export const EmployeCard = ({ profileUser }) => {
         </div>
         <div className="row">
           <i className="fas fa-share"></i>
-          {/* <span>12.8k</span> */}
         </div>
       </div>
     </div>

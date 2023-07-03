@@ -7,12 +7,15 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [user, setuser] = useState(null);
+  const [filteredarray, setfilteredarray] = useState(null);
   var [curuser, setcuruser] = useState(null);
   const [loading,setloading] = useState(false);
   const getusers = async () => {
     setloading(true)
     const { data } = await axios.get("http://localhost:5000/getUsers");
-    setuser(data);
+    const allemp = data.filter((element)=>element.Role.HR === false)
+    setfilteredarray(allemp)
+    setuser(allemp);
     setloading(false)
     console.log(data);
   };
@@ -21,11 +24,7 @@ const AppProvider = ({ children }) => {
     isSubmitted,
     setisSubmitted,
   };
-  const TotalEmployee = user
-  const APAR_issued = user?.filter((element) => (element.Role.HR === false && element.APAR_status === true))
-  const APAR_not_initiated = user?.filter((element) => (element.Role.HR === false && element.APAR_status === false));
-  const APAR_completed = user?.filter((element) => (element.Role.HR === false && element.APAR_status === true && element.SelfAppraisal_status === true && element.Evalutation_status === true));
-  const Self_Appraisal_filled = user?.filter((element) => (element.Role.HR === false && element.APAR_status === true && element.SelfAppraisal_status === true));
+
 
   const [alluser, setalluser] = useState(null);
   const [ CurEmp,setCurEmp ] = useState(null);
@@ -39,19 +38,14 @@ const AppProvider = ({ children }) => {
         setuser,
         alluser,
         setalluser,
-        isSubmitted,
-        setisSubmitted,
         curuser,
         setcuruser,
         contextValue,
         CurEmp,
         setCurEmp,
         loading,
-        TotalEmployee,
-        APAR_not_initiated,
-        APAR_completed,
-        Self_Appraisal_filled,
-        APAR_issued
+        filteredarray,
+        setfilteredarray   
 
       }}
     >

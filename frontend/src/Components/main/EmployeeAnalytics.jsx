@@ -99,7 +99,6 @@ export const EmployeeAnalytics = () => {
                       <th className="EAC-th">From</th>
                       <th className="EAC-th">To</th>
                       <th className="EAC-th">Total Score</th>
-                      <th className="EAC-th">Remark</th>
                       <th className="EAC-th">Final Remark</th>
                     </tr>
                   </thead>
@@ -126,7 +125,6 @@ export const EmployeeAnalytics = () => {
                               <td className="EAC-td">
                                 {user.scoreOfEvaluation.totalScore}
                               </td>
-                              <td className="EAC-td">{user.remark}</td>
                               <td className="EAC-td">
                                 {user.employeeFinalRemark}
                               </td>

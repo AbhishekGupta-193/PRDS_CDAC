@@ -36,8 +36,14 @@ const Analytics = () => {
                     <th className="AnEAC-th">Issue date of APAR</th>
                     <th className="AnEAC-th">Completion date by employee</th>
                     <th className="AnEAC-th">Completion date by FLA</th>
-                    <th className="AnEAC-th">Overall Performance</th>
-                    <th className="AnEAC-th">Remark</th>
+                    <th className="AnEAC-th">
+                      Overall Performance evalutaed by FLA
+                    </th>
+                    <th className="AnEAC-th">
+                      Overall Performance evalutaed by SLA
+                    </th>
+                    <th className="AnEAC-th">Remark by FLA</th>
+                    <th className="AnEAC-th">Remark by SLA</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -50,48 +56,110 @@ const Analytics = () => {
                           {new Date(
                             user.quarter[
                               user.quarter.length - 1
-                            ].scoreOfEvaluation.dateofIssueofAPAR
+                            ].dateofIssueofAPAR
                           ).toLocaleDateString()}
                         </td>
                         <td className="AnEAC-td">
                           {new Date(
                             user.quarter[
                               user.quarter.length - 1
-                            ].scoreOfEvaluation.dateOfFillingSelfAppraisalForm
+                            ].dateOfFillingSelfAppraisalForm
                           ).toLocaleDateString()}
                         </td>
                         <td className="AnEAC-td">
                           {new Date(
                             user.quarter[
                               user.quarter.length - 1
-                            ].scoreOfEvaluation.dateOfFillingEvaluationForm
+                            ].dateOfFillingEvaluationForm
                           ).toLocaleDateString()}
                         </td>
                         <td className="AnEAC-td">
-                          {user.quarter[user.quarter.length - 1]
-                            .scoreOfEvaluation.sc1 +
+                          {
                             user.quarter[user.quarter.length - 1]
-                              .scoreOfEvaluation.sc2 +
+                              .scoreOfEvaluation.totalScore
+                          }
+                        </td>
+                        <td className="AnEAC-td">
+                          {
                             user.quarter[user.quarter.length - 1]
-                              .scoreOfEvaluation.sc3 +
-                            user.quarter[user.quarter.length - 1]
-                              .scoreOfEvaluation.sc4 +
-                            user.quarter[user.quarter.length - 1]
-                              .scoreOfEvaluation.sc5 +
-                            user.quarter[user.quarter.length - 1]
-                              .scoreOfEvaluation.sc6}
+                              .scoreOfEvaluation.totalScore_bySLA
+                          }
                         </td>
                         <td className="AnEAC-td">
                           {user.quarter[user.quarter.length - 1]
-                            .scoreOfEvaluation.totalScore < 40
+                            .employeeFinalRemark
                             ? "Need Improvement"
                             : user.quarter[user.quarter.length - 1]
-                                .scoreOfEvaluation.totalScore < 60
+                                .employeeFinalRemark
                             ? "Satisfactory"
                             : user.quarter[user.quarter.length - 1]
-                                .scoreOfEvaluation.totalScore < 80
+                                .employeeFinalRemark
                             ? "Good"
                             : "Excellent"}
+                          <br />
+                          {user.quarter[user.quarter.length - 1]
+                            .employeeFinalRemark === "1c"
+                            ? "Poor Performance High potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark === "1b"
+                            ? "Good performance High potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark === "1a"
+                            ? "Outstanding performance High potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark === "2c"
+                            ? "Poor Performance Moderate potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark === "2b"
+                            ? "Good performance Moderate potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark === "2a"
+                            ? "Outstanding performance Moderate potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark === "3c"
+                            ? "Poor performance limited potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark === "3b"
+                            ? "Good performance limited potential"
+                            : "Outstanding performance limited potential"}
+                        </td>
+                        <td className="AnEAC-td">
+                          {user.quarter[user.quarter.length - 1]
+                            .employeeFinalRemark_bySLA
+                            ? "Need Improvement"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA
+                            ? "Satisfactory"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA
+                            ? "Good"
+                            : "Excellent"}
+                          <br />
+                          {user.quarter[user.quarter.length - 1]
+                            .employeeFinalRemark_bySLA === "1c"
+                            ? "Poor Performance High potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA === "1b"
+                            ? "Good performance High potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA === "1a"
+                            ? "Outstanding performance High potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA === "2c"
+                            ? "Poor Performance Moderate potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA === "2b"
+                            ? "Good performance Moderate potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA === "2a"
+                            ? "Outstanding performance Moderate potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA === "3c"
+                            ? "Poor performance limited potential"
+                            : user.quarter[user.quarter.length - 1]
+                                .employeeFinalRemark_bySLA === "3b"
+                            ? "Good performance limited potential"
+                            : "Outstanding performance limited potential"}
                         </td>
                       </tr>
                     ))

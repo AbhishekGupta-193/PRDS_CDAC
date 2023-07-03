@@ -9,20 +9,23 @@ export const EmployeeSection = () => {
   const navigate = useNavigate();
   const { curuser, setcuruser, user, loading } = useGlobalContext();
 
-  const getData = async () => {
-    try {
-      const empId = JSON.parse(localStorage.getItem("empId"));
-      const { data } = await axios.post("http://localhost:5000/getCurUser", {
-        empId,
-      });
-      setcuruser(data);
-      console.log(curuser);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+ 
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const empId = JSON.parse(localStorage.getItem("empId"));
+        const { data } = await axios.post("http://localhost:5000/getCurUser", {
+          empId,
+        });
+        setcuruser(data);
+        console.log(curuser);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+   if(!curuser){
     getData();
+   }
   }, []);
 
   const SelfAppraisalFormHandler = () => {

@@ -1,24 +1,36 @@
 import User from "../models/user.js";
-import nodemailer from "nodemailer"
-import htmlTemplate from '.././EmailTemplate.js';
+import nodemailer from "nodemailer";
+import htmlTemplate from ".././EmailTemplate.js";
 
 export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    const allusers = await User.find({ });
 
     if (user) {
-      if (password === user.password ) {
-        if (user.Role && user.Role.HR === true) {
-          res.send({ status: 200, message: "HR Login", user, allusers, empId: user.empId });
+      if (password === user.password) {
+        if (user.Role.HR === true) {
+
+          res.send({
+            status: 200,
+            message: "HR Login", 
+            empId: user.empId,
+          });
+        } else {
+          res.send({
+            status: 200,
+            message: "Emp Login",
+            empId: user.empId,
+          });
         }
-        
-        else { res.send({ status: 200, message: "Emp Login", user , allusers , empId: user.empId });}
-      } else {
+      } 
+      else {
+
         res.send({ message: "Password didn't match" });
       }
-    } else {
+    } 
+    
+    else {
       res.send({ message: "User not registered" });
     }
   } catch (err) {
@@ -55,7 +67,6 @@ export const getRequests = async (req, res) => {
   }
 };
 
-
 export const submitSelfAppraisel = async (req, res) => {
   const { empId, quarterId, selfAppraisalData } = req.body;
 
@@ -66,9 +77,10 @@ export const submitSelfAppraisel = async (req, res) => {
         $set: {
           "quarter.$.selfAppFormData1": selfAppraisalData.selfAppFormData1,
           "quarter.$.selfAppFormData2": selfAppraisalData.selfAppFormData2,
-          "quarter.$.dateOfFillingSelfAppraisalForm": selfAppraisalData.dateOfFillingSelfAppraisalForm,
-          "quarter.$.SelfAppraisal_status": true
-        }
+          "quarter.$.dateOfFillingSelfAppraisalForm":
+            selfAppraisalData.dateOfFillingSelfAppraisalForm,
+          "quarter.$.SelfAppraisal_status": true,
+        },
       },
       { new: true }
     );
@@ -84,36 +96,39 @@ export const submitSelfAppraisel = async (req, res) => {
   }
 };
 
-
 export const submitAparForm = async (req, res) => {
   try {
-    console.log(req.body);
     const filter = { empId: req.body.empId };
     const updatedUser = await User.findOneAndUpdate(
       filter,
       { $push: { quarter: req.body.user } },
       { new: true }
     );
-    res.send({msg : "user updated " , updatedUser})
-    // return res.status(200).json(updatedUser);
+    const updatedReporting = await User.findOneAndUpdate(
+      { email: req.body.user.groupHead_email },
+      { $set: { "Role.Reporting_Officer": true } },
+      { new: true }
+    );
+    
+    const updatedReportingSLA = await User.findOneAndUpdate(
+      { email: req.body.user.SLA_email },
+      { $set: { "Role.SLA": true } },
+      { new: true }
+    );
+    
+    res.send({ msg: "user updated ", updatedUser });
   } catch (error) {
     console.error(error);
-     res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
-
-
 
 export const submitEvalutaionForm = async (req, res) => {
   const { empId } = req.body;
   try {
-    const user = await User.findOneAndUpdate(
-      { empId: empId },
-      req.body,
-      {
-        new: true,
-      }
-    );
+    const user = await User.findOneAndUpdate({ empId: empId }, req.body, {
+      new: true,
+    });
 
     if (user) {
       res.send({ msg: "successfully registered", user });
@@ -126,46 +141,59 @@ export const submitEvalutaionForm = async (req, res) => {
   }
 };
 
-export const sendMail = ((req, res) => {
-  const { email, userName, dateOfBirth, empId, dateOfEntryInCdac, quarter } = req.body;
+export const sendMail = (req, res) => {
+  const { email, userName, dateOfBirth, empId, dateOfEntryInCdac, quarter } =
+    req.body;
   // console.log("userofemail", req.body,"detail",quarter);
   const formattedTemplate = htmlTemplate
-    .replace('{userName}', userName)
-    .replace('{userName1}', userName)
-    .replace('{appraiselPeriodTo}', quarter[quarter.length - 1].appraiselPeriodTo.split('T')[0])
-    .replace('{appraiselPeriodFrom}', quarter[quarter.length - 1].appraiselPeriodFrom.split('T')[0])
-    .replace('{dateofSubmission}', quarter[quarter.length - 1].dateofSubmission.split('T')[0])
-    .replace('{empId}', empId)
-    .replace('{dateOfBirth}', dateOfBirth.split('T')[0])
-    .replace('{designation}', quarter[quarter.length - 1].designation)
-    .replace('{presentPay}', quarter[quarter.length - 1].presentPay)
-    .replace('{dateOfEntryInCdac}', dateOfEntryInCdac)
-    .replace('{absenceOtherThanLeave}', quarter[quarter.length - 1].absenceOtherThanLeave)
-    .replace('{leaveAvailed}', quarter[quarter.length - 1].leaveAvailed);
+    .replace("{userName}", userName)
+    .replace("{userName1}", userName)
+    .replace(
+      "{appraiselPeriodTo}",
+      quarter[quarter.length - 1].appraiselPeriodTo.split("T")[0]
+    )
+    .replace(
+      "{appraiselPeriodFrom}",
+      quarter[quarter.length - 1].appraiselPeriodFrom.split("T")[0]
+    )
+    .replace(
+      "{dateofSubmission}",
+      quarter[quarter.length - 1].dateofSubmission.split("T")[0]
+    )
+    .replace("{empId}", empId)
+    .replace("{dateOfBirth}", dateOfBirth.split("T")[0])
+    .replace("{designation}", quarter[quarter.length - 1].designation)
+    .replace("{presentPay}", quarter[quarter.length - 1].presentPay)
+    .replace("{dateOfEntryInCdac}", dateOfEntryInCdac)
+    .replace(
+      "{absenceOtherThanLeave}",
+      quarter[quarter.length - 1].absenceOtherThanLeave
+    )
+    .replace("{leaveAvailed}", quarter[quarter.length - 1].leaveAvailed);
 
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
-      user: 'akashchauhan72520@gmail.com',
-      pass: 'mmdaudzbxrotscir',
+      user: "akashchauhan72520@gmail.com",
+      pass: "mmdaudzbxrotscir",
     },
   });
   // Define the email details
   const mailOptions = {
     from: '"PRDS Team CDAC"<akashchauhan72520@gmail.com>',
     to: email,
-    subject: 'Reminder!',
+    subject: "Reminder!",
     html: formattedTemplate,
   };
 
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error('Error sending email:', error);
-      res.status(500).send('Error sending email');
+      console.error("Error sending email:", error);
+      res.status(500).send("Error sending email");
     } else {
-      console.log('Email sent successfully:', info.response);
-      res.send('Email sent successfully');
+      console.log("Email sent successfully:", info.response);
+      res.send("Email sent successfully");
     }
   });
-});
+};

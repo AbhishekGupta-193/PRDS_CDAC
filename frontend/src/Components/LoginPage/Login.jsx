@@ -11,16 +11,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import { useGlobalContext } from "../../StateContext";
 import '../Loader/Loader2.css'
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const { curuser, setcuruser, setuser } = useGlobalContext();
   const [loading, setLoading] = React.useState(false)
 
-  console.log(curuser, "curuser ");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -35,19 +32,14 @@ export default function SignIn() {
 
     try {
       const { data } = await axios.post(myurl, userData);
-      console.log(data);
       const code = data.status;
-      // localStorage.setItem("allusers", JSON.stringify(data.allusers));
       if (code === 400) alert("All inputs are required");
       else if (code === 401) alert("Invalid Credientials");
       else if ((code === 200) & (data.message === "Emp Login")) {
-        setcuruser(data.user);
 
-        // localStorage.setItem("curuser", JSON.stringify(data.user));
         localStorage.setItem("empId", JSON.stringify(data.empId));
         navigate("/main/EmployeeSection");
       } else if ((code === 200) & (data.message === "HR Login")) {
-        setcuruser(data.user);
         localStorage.setItem("curuser", JSON.stringify(data.user));
         localStorage.setItem("empId", JSON.stringify(data.empId));
 
@@ -113,18 +105,7 @@ export default function SignIn() {
              {loading ? <span className="loader2"></span>
                 : "Login"}
             </Button>
-            {/* <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="/register">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
+           
           </Box>
         </Box>
       </Container>

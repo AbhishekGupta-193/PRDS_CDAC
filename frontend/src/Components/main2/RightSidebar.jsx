@@ -6,14 +6,29 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../StateContext";
 import axios from "axios";
 
-
 const RightSidebar = () => {
-  const [profileUser, setProfileUser] = useState({});
+  const [profileUser, setProfileUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const {user , TotalEmployee , APAR_issued , APAR_not_initiated , APAR_completed , Self_Appraisal_filled} = useGlobalContext();
+  const { user, filteredarray, setfilteredarray } = useGlobalContext();
 
- 
+  useEffect(() => {
+    setfilteredarray(user);
+  }, [user, setfilteredarray]);
 
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (query === "") {
+      setfilteredarray(user);
+    } else {
+      const filteredUsers = user.filter((user) =>
+        user.userName.includes(query)
+      );
+      setfilteredarray(filteredUsers);
+    }
+  };
 
   const handleMouseEnter = (element) => {
     setProfileUser(element);
@@ -21,41 +36,38 @@ const RightSidebar = () => {
     profile.style.opacity = "1";
   };
 
-  
-
   return (
     <>
-       <div className={user? "Right_sidebar" : "Right_sidebar_empty"}>
-          <EmployeCard profileUser={profileUser} />
+      <div className={filteredarray ? "Right_sidebar" : "Right_sidebar_empty"}>
+        <EmployeCard profileUser={profileUser} />
 
-          <div
-            style={{ display: "flex", alignItems: "center"}}
-          >
-            <input
-              type="text"
-              placeholder="Search"
-              style={{
-                borderRadius: "5px",
-                padding: "8px",
-                border: "1px solid #ccc",
-                width: "80%",
-                margin: "0.2rem",
-              }}
-            />
-            <FaSearch
-              style={{
-                marginLeft: "-30px",
-                fontSize: "18px",
-                color: "#888",
-                cursor: "pointer",
-              }}
-            />
-          </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            style={{
+              borderRadius: "5px",
+              padding: "8px",
+              border: "1px solid #ccc",
+              width: "80%",
+              margin: "0.2rem",
+            }}
+            onChange={handleSearch}
+          />
+          <FaSearch
+            style={{
+              marginLeft: "-30px",
+              fontSize: "18px",
+              color: "#888",
+              cursor: "pointer",
+            }}
+          />
+        </div>
 
-          <div className="EmployeeNames"
-          //  onMouseLeave={handleMouseLeave}
-           >
-            {user && user.map((element) => (
+        <div className="EmployeeNames">
+          {filteredarray &&
+            filteredarray.map((element) => (
               <p
                 onClick={() => handleMouseEnter(element)}
                 className="emp-name"
@@ -64,9 +76,8 @@ const RightSidebar = () => {
                 {element.userName}
               </p>
             ))}
-          </div>
         </div>
-    
+      </div>
     </>
   );
 };

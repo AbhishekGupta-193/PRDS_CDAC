@@ -64,16 +64,22 @@ const APAR_Track = ({ data }) => {
                     <td className="AnEAC-td">
                       {
                         element.quarter[element.quarter.length - 1]
-                          .SelfAppraisal_status
+                          .SelfAppraisal_status === false ? "Pending" : "Completed"
                       }
                     </td>
                     <td className="AnEAC-td">
                       {
                         element.quarter[element.quarter.length - 1]
-                          .Evalutation_status
+                          .Evalutation_status === false ? "Pending" : "Completed"
                       }
                     </td>
-                    <td className="AnEAC-td">pending</td>
+                    <td className="AnEAC-td">
+                    {
+                        element.quarter[element.quarter.length - 1]
+                          .Evalutation_status_bySLA === false ? "Pending" : "Completed"
+                      }
+
+                    </td>
                   </tr>
                 ))
               ) : (

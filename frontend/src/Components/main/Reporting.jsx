@@ -10,6 +10,7 @@ export const Reporting = () => {
     useGlobalContext();
   const navigate = useNavigate();
   const [usersForEvaluation, setusersForEvaluation] = useState(null);
+  const [usersForEvaluationbySLA, setusersForEvaluationbySLA] = useState(null);
 
   const getuserforreporting = () => {
     const Reporting_emp = user?.filter((userData) => {
@@ -20,8 +21,17 @@ export const Reporting = () => {
         lastQuarter.groupHead_email === curuser.email
       );
     });
-
     setusersForEvaluation(Reporting_emp);
+    const Reporting_emp_bySLA = user?.filter((userData) => {
+      const lastQuarter = userData.quarter[userData.quarter.length - 1];
+      return (
+        lastQuarter.APAR_status === true &&
+        lastQuarter.SelfAppraisal_status === true &&
+        lastQuarter.Evalutation_status === true &&
+        lastQuarter.SLA_email === curuser.email
+      );
+    });
+    setusersForEvaluationbySLA(Reporting_emp_bySLA);
   };
 
   useEffect(() => {
@@ -92,16 +102,63 @@ export const Reporting = () => {
                     </tbody>
                   </table>
                 ) : (
-                  <p>No users for evaluation.</p>
+                  <tr>No users for evaluation.</tr>
                 )}
               </div>
             </div>
           ) : (
-            "Loading the data"
+            " .............Loading.............. "
           )}
         </div>
       ) : (
-        " You don't have any access "
+        <div className="REmployeeAnalyticsContainer">
+          {!loading ? (
+            <div className="Rtable-down">
+              <div className="REAC">
+                <div className="REAC-head">Evaluation request for</div>
+                {usersForEvaluation ? (
+                  <table className="REAC-table">
+                    <thead>
+                      <tr className="REAC-tr1">
+                        <th className="REAC-th">Employee Id</th>
+                        <th className="REAC-th">Name</th>
+                        <th className="REAC-th">Last Date to Review Form</th>
+                        <th className="REAC-th">Form</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {usersForEvaluationbySLA?.map((user) => (
+                        <tr key={user._id} className="REAC-tr">
+                          <td className="REAC-td">{user.empId}</td>
+                          <td className="REAC-td">{user.userName}</td>
+                          <td className="REAC-td">
+                            {new Date(
+                              user.quarter[
+                                user.quarter.length - 1
+                              ].dateofReviewbyRPO
+                            ).toLocaleDateString()}
+                          </td>
+                          <td className="REAC-td">
+                            <button
+                              onClick={() => EvaluationFormHandler(user)}
+                              className="REAC-button"
+                            >
+                              view Evaluation form
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <tr>No users for evaluation.</tr>
+                )}
+              </div>
+            </div>
+          ) : (
+            " .............Loading.............. "
+          )}
+        </div>
       )}
     </>
   );
