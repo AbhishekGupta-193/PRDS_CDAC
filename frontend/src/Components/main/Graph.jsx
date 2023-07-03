@@ -6,19 +6,19 @@ export const Graph = () => {
 	const { curuser } = useGlobalContext();
 	const data = [];
 
-	const aObjects = curuser.quarter.map((quarter, index) => ({
+	const aObjects = curuser?.quarter.map((quarter, index) => ({
 		type: "Total Score",
 		date: `Quarter ${index + 1}`,
 		value: quarter.scoreOfEvaluation.totalScore
 	}));
 
-	const bObjects = curuser.quarter.map((quarter, index) => ({
+	const bObjects = curuser?.quarter.map((quarter, index) => ({
 		type: "Self Appraisal Score",
 		date: `Quarter ${index + 1}`,
 		value: quarter.scoreOfEvaluation.selfAppraisalScore
 	}));
 
-	const cObjects = curuser.quarter.map((quarter, index) => ({
+	const cObjects = curuser?.quarter.map((quarter, index) => ({
 		type: "Achievement Beyond Scope Score",
 		date: `Quarter ${index + 1}`,
 		value: quarter.scoreOfEvaluation.achievementBeyondScore

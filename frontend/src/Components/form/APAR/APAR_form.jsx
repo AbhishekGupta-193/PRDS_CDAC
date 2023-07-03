@@ -100,10 +100,10 @@ function APAR_form() {
     console.log(user, " updated current user");
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/submitAparForm",
+        "https://prds.onrender.com/submitAparForm",
         { empId: CurrentUser.empId, user }
       );
-      // await axios.post("http://localhost:5000/send-email", CurrentUser);
+      // await axios.post("https://prds.onrender.com/send-email", CurrentUser);
       navigate("/main2/HR");
     } catch (error) {
       console.error("Error sending request:", error);

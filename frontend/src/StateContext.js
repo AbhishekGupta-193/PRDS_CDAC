@@ -12,7 +12,7 @@ const AppProvider = ({ children }) => {
   const [loading,setloading] = useState(false);
   const getusers = async () => {
     setloading(true)
-    const { data } = await axios.get("http://localhost:5000/getUsers");
+    const { data } = await axios.get("https://prds.onrender.com/getUsers");
     const allemp = data.filter((element)=>element.Role.HR === false)
     setfilteredarray(allemp)
     setuser(allemp);
