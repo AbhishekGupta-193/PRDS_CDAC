@@ -62,19 +62,15 @@
   }
   
   .arrows button{
-      background-color: #f2f4f5;
-      color: #333;
+    cursor: pointer;
       font-size: 1.2rem;
-      border: 2px solid #333;
       padding: 13px 15px;
-      border-radius: 0.6rem;
+      border-style: none;
+      margin: 1rem;
+      background-color: #fff;
   }
   
-  .arrows button:hover{
-      background-color: #333;
-      color: white;
-      transition: all 0.6s ease-in-out;
-  }
+ 
   
   .next {
     right: 0;

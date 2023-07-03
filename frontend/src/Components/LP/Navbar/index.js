@@ -18,7 +18,7 @@ const Navbar = () => {
             <div className={styles['navbar']}>
                 <div className={styles['logo-container']}>
                     <img className={styles['logo']} src={logo} />
-                    <span className={styles['title']}>HRMIS</span>
+                    <span className={styles['title']}>PRDS</span>
                 </div>
                 <div className={styles['links']}>
                     

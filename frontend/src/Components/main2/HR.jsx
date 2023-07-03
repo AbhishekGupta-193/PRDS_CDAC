@@ -17,20 +17,20 @@ export const HR = () => {
 
   const handle_APAR_issued = () => {
     const APAR_issued = user?.filter(
-      (element) => element.Role.HR === false && element.APAR_status === true
+      (element) => element.quarter.length === 3 && element.Role.HR === false && element.APAR_status === true
     );
     setfilteredarray(APAR_issued);
   };
   const handle_APAR_tobeIssued = () => {
     const APAR_not_initiated = user?.filter(
-      (element) => element.Role.HR === false && element.APAR_status === false
+      (element) => element.quarter.length === 2 && element.Role.HR === false 
     );
     setfilteredarray(APAR_not_initiated);
   };
   const handle_Self_Appraisal = () => {
     const Self_Appraisal_filled = user?.filter(
       (element) =>
-        element.Role.HR === false &&
+        element.quarter.length === 3 && element.Role.HR === false &&
         element.APAR_status === true &&
         element.SelfAppraisal_status === true
     );
@@ -39,7 +39,7 @@ export const HR = () => {
   const handle_Evaluation_completed = () => {
     const APAR_completed = user?.filter(
       (element) =>
-        element.Role.HR === false &&
+        element.quarter.length === 3 && element.Role.HR === false &&
         element.APAR_status === true &&
         element.SelfAppraisal_status === true &&
         element.Evalutation_status === true
