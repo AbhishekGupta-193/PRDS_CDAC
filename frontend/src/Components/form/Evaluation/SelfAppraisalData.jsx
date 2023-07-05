@@ -12,7 +12,7 @@ const SelfAppraisalData = ({ isVisible, setisVisible }) => {
     try {
       const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
       const { data } = await axios.post(
-        "https://prds.onrender.com/getCurUserforForms",
+        "http://localhost:5000/getCurUserforForms",
         { EmployeeId }
       );
 

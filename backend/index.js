@@ -47,13 +47,14 @@ app.post("/getCurUser", async (req, res) => {
   }
 });
 app.post("/getCurUserforForms", async (req, res) => {
+  console.log(req.body, " request");
   try {
     const { EmployeeId } = req.body;
     const user = await User.findOne({ empId:EmployeeId });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-
+    console.log("ye user baackend ne diya" , user);
     res.send(user);
   } catch (error) {
     console.error(error);

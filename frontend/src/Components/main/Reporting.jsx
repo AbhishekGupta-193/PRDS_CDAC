@@ -38,7 +38,7 @@ export const Reporting = () => {
     const getData = async () => {
       try {
         const empId = JSON.parse(localStorage.getItem("empId"));
-        const { data } = await axios.post("https://prds.onrender.com/getCurUser", {
+        const { data } = await axios.post("http://localhost:5000/getCurUser", {
           empId,
         });
         setcuruser(data);

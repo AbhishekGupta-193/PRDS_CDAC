@@ -28,7 +28,7 @@ export const EmployeCard = ({ profileUser }) => {
       <div className="img-area">
         <div className="inner-area">
           <img
-            src="https://images.unsplash.com/photo-1492288991661-058aa541ff43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            src="http://images.unsplash.com/photo-1492288991661-058aa541ff43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
             alt=""
           />
         </div>

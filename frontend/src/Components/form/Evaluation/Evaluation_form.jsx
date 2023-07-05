@@ -83,9 +83,9 @@ export const Evaluation_form = () => {
         },
       ],
     });
-    console.log(CurEmp, "Curemp before submitting");
+    console.log(CurEmp, "Curemp bedsfasdfsdafasdfsda");
     const { data } = axios.post(
-      "https://prds.onrender.com/submitEvalutaionForm",
+      "http://localhost:5000/submitEvalutaionForm",
       CurEmp
     );
     localStorage.removeItem("EmployeeId");
@@ -99,18 +99,20 @@ export const Evaluation_form = () => {
       try {
         const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
         const { data } = await axios.post(
-          "https://prds.onrender.com/getCurUserforForms",
+          "http://localhost:5000/getCurUserforForms",
           { EmployeeId }
         );
-
+        console.log(data , "ye backend se aaya data hai jo curemp me set kr rhe");
         setCurEmp(data);
       } catch (error) {
         console.error(error);
       }
     };
-    if (!CurEmp) {
-      getData();
-    }
+    console.log("csdjkfkldas" , CurEmp == null);
+      if(CurEmp === null){
+        getData();
+      }
+    
 
     const PerformanceRemark = () => {
       let performance = "";

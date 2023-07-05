@@ -85,7 +85,7 @@ export const Evaluation_form2 = () => {
       ],
     });
     const { data } = axios.post(
-      "https://prds.onrender.com/submitEvalutaionForm",
+      "http://localhost:5000/submitEvalutaionForm",
       CurEmp
     );
     localStorage.removeItem("EmployeeId");
@@ -99,7 +99,7 @@ export const Evaluation_form2 = () => {
       try {
         const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
         const { data } = await axios.post(
-          "https://prds.onrender.com/getCurUserforForms",
+          "http://localhost:5000/getCurUserforForms",
           { EmployeeId }
         );
 

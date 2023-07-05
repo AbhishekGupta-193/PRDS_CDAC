@@ -14,7 +14,7 @@ export const EmployeeSection = () => {
     const getData = async () => {
       try {
         const empId = JSON.parse(localStorage.getItem("empId"));
-        const { data } = await axios.post("https://prds.onrender.com/getCurUser", {
+        const { data } = await axios.post("http://localhost:5000/getCurUser", {
           empId,
         });
         setcuruser(data);
@@ -41,7 +41,7 @@ export const EmployeeSection = () => {
             <h3> Welcome {curuser.userName} !</h3>
           </div>
           <div>
-            <img src="https://picsum.photos/210
+            <img src="http://picsum.photos/210
   " alt="Profile pic" className='HrProfile_up_in_left_img' />
           </div>
           <div className='EmpProfile_details_down'>
