@@ -10,10 +10,9 @@ export const Login = async (req, res) => {
     if (user) {
       if (password === user.password) {
         if (user.Role.HR === true) {
-
           res.send({
             status: 200,
-            message: "HR Login", 
+            message: "HR Login",
             empId: user.empId,
           });
         } else {
@@ -23,14 +22,10 @@ export const Login = async (req, res) => {
             empId: user.empId,
           });
         }
-      } 
-      else {
-
+      } else {
         res.send({ message: "Password didn't match" });
       }
-    } 
-    
-    else {
+    } else {
       res.send({ message: "User not registered" });
     }
   } catch (err) {
@@ -109,13 +104,13 @@ export const submitAparForm = async (req, res) => {
       { $set: { "Role.Reporting_Officer": true } },
       { new: true }
     );
-    
+
     const updatedReportingSLA = await User.findOneAndUpdate(
       { email: req.body.user.SLA_email },
       { $set: { "Role.SLA": true } },
       { new: true }
     );
-    
+
     res.send({ msg: "user updated ", updatedUser });
   } catch (error) {
     console.error(error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import "./Evaluation_form.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -83,7 +83,7 @@ export const Evaluation_form = () => {
         },
       ],
     });
-    console.log(CurEmp, "Curemp bedsfasdfsdafasdfsda");
+    console.log(CurEmp, "Curemp bejhne se phle");
     const { data } = axios.post(
       "http://localhost:5000/submitEvalutaionForm",
       CurEmp
@@ -108,8 +108,8 @@ export const Evaluation_form = () => {
         console.error(error);
       }
     };
-    console.log("csdjkfkldas" , CurEmp == null);
-      if(CurEmp === null){
+      if(!CurEmp ){
+    console.log("funcction dcalled ");
         getData();
       }
     
@@ -170,8 +170,8 @@ export const Evaluation_form = () => {
                     placeholder="FROM : DD / MM / YYYY"
                     name="Aparfrom"
                     value={new Date(
-                      CurEmp.quarter[
-                        CurEmp.quarter.length - 1
+                      CurEmp?.quarter[
+                        CurEmp?.quarter?.length - 1
                       ].appraiselPeriodFrom
                     ).toLocaleDateString()}
                     disabled={true}
@@ -184,8 +184,8 @@ export const Evaluation_form = () => {
                     placeholder="TO : DD / MM / YYYY"
                     name="Aparupto"
                     value={new Date(
-                      CurEmp.quarter[
-                        CurEmp.quarter.length - 1
+                      CurEmp?.quarter[
+                        CurEmp?.quarter?.length - 1
                       ].appraiselPeriodTo
                     ).toLocaleDateString()}
                     disabled={true}
@@ -285,10 +285,15 @@ export const Evaluation_form = () => {
                             setCurEmp({
                               ...CurEmp,
                               quarter: [
+                                ...CurEmp.quarter.slice(
+                                  0,
+                                  CurEmp.quarter.length - 1
+                                ),
                                 {
+                                  ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc1: e.target.value,
                                   },
                                 },
@@ -318,10 +323,15 @@ export const Evaluation_form = () => {
                             setCurEmp({
                               ...CurEmp,
                               quarter: [
+                                ...CurEmp.quarter.slice(
+                                  0,
+                                  CurEmp.quarter.length - 1
+                                ),
                                 {
+                                  ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc2: e.target.value,
                                   },
                                 },
@@ -362,7 +372,7 @@ export const Evaluation_form = () => {
                                   ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc3: e.target.value,
                                   },
                                 },
@@ -400,7 +410,7 @@ export const Evaluation_form = () => {
                                   ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc4: e.target.value,
                                   },
                                 },
@@ -438,7 +448,7 @@ export const Evaluation_form = () => {
                                   ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc5: e.target.value,
                                   },
                                 },
@@ -702,6 +712,7 @@ export const Evaluation_form = () => {
           <SelfAppraisalData
             isVisible={isVisible}
             setisVisible={setisVisible}
+            final_score = {final_score}
           />
         </div>
       ) : (

@@ -288,10 +288,15 @@ export const Evaluation_form2 = () => {
                             setCurEmp({
                               ...CurEmp,
                               quarter: [
+                                ...CurEmp.quarter.slice(
+                                  0,
+                                  CurEmp.quarter.length - 1
+                                ),
                                 {
+                                  ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc1_bySLA: e.target.value,
                                   },
                                 },
@@ -328,10 +333,15 @@ export const Evaluation_form2 = () => {
                             setCurEmp({
                               ...CurEmp,
                               quarter: [
+                                ...CurEmp.quarter.slice(
+                                  0,
+                                  CurEmp.quarter.length - 1
+                                ),
                                 {
+                                  ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc2_bySLA: e.target.value,
                                   },
                                 },
@@ -378,7 +388,7 @@ export const Evaluation_form2 = () => {
                                   ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc3_bySLA: e.target.value,
                                   },
                                 },
@@ -422,7 +432,7 @@ export const Evaluation_form2 = () => {
                                   ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc4_bySLA: e.target.value,
                                   },
                                 },
@@ -466,7 +476,7 @@ export const Evaluation_form2 = () => {
                                   ...CurEmp.quarter[CurEmp.quarter.length - 1],
                                   scoreOfEvaluation: {
                                     ...CurEmp.quarter[CurEmp.quarter.length - 1]
-                                      .scoreOfEvaluation,
+                                      ?.scoreOfEvaluation,
                                     sc5_bySLA: e.target.value,
                                   },
                                 },

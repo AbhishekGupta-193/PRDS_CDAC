@@ -13,6 +13,7 @@ app.use(cors());
 const PORT = 5000;
 
 const URL = process.env.MONGODB_URI;
+console.log(URL);
 mongoose.connect(URL, () => {
   console.log("connected");
 });
@@ -47,7 +48,7 @@ app.post("/getCurUser", async (req, res) => {
   }
 });
 app.post("/getCurUserforForms", async (req, res) => {
-  console.log(req.body, " request");
+  // console.log(req.body, " request");
   try {
     const { EmployeeId } = req.body;
     const user = await User.findOne({ empId:EmployeeId });

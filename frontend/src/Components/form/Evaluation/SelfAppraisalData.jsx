@@ -5,28 +5,31 @@ import { Evaluation_form } from "./Evaluation_form";
 import { useGlobalContext } from "../../../StateContext.js";
 import axios from "axios";
 
-const SelfAppraisalData = ({ isVisible, setisVisible }) => {
+const SelfAppraisalData = ({ isVisible, setisVisible ,final_score}) => {
   const navigate = useNavigate();
   const { CurEmp, setCurEmp } = useGlobalContext();
-  const getData = async () => {
-    try {
-      const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
-      const { data } = await axios.post(
-        "http://localhost:5000/getCurUserforForms",
-        { EmployeeId }
-      );
-
-      setCurEmp(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+ 
 
   const handleGoBack = () => {
     setisVisible(!isVisible);
   };
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
+        const { data } = await axios.post(
+          "http://localhost:5000/getCurUserforForms",
+          { EmployeeId }
+        );
+  
+        setCurEmp(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+     if(!CurEmp){
     getData();
+     }
     if (CurEmp) {
       if (isVisible) {
         document
@@ -39,7 +42,7 @@ const SelfAppraisalData = ({ isVisible, setisVisible }) => {
           .classList.remove("SelfAppraisalData_wrapper-tr");
       }
     }
-  }, [isVisible]);
+  }, [isVisible,CurEmp,final_score]);
 
   if (CurEmp) {
     var selfAppFormData1 =
