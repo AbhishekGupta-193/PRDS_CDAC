@@ -12,6 +12,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import '../Loader/Loader2.css'
+import { BASE_URL } from '../Config.js';
+
 
 const theme = createTheme();
 
@@ -28,7 +30,7 @@ export default function SignIn() {
       email: Data.get("email"),
       password: Data.get("password"),
     };
-    const myurl = "http://localhost:5000/login";
+    const myurl = BASE_URL + "login";
 
     try {
       const { data } = await axios.post(myurl, userData);

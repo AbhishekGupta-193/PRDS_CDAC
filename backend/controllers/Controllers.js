@@ -118,15 +118,40 @@ export const submitAparForm = async (req, res) => {
   }
 };
 
+
 export const submitEvalutaionForm = async (req, res) => {
   const { empId } = req.body;
   try {
+    req.body.quarter[req.body.quarter.length-1].Evalutation_status = true; 
+
+
     const user = await User.findOneAndUpdate({ empId: empId }, req.body, {
       new: true,
     });
 
     if (user) {
-      res.send({ msg: "successfully registered", user });
+      res.send({ msg: "Successfully registered", user });
+    } else {
+      res.status(404).send({ msg: "User not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred");
+  }
+};
+export const submitEvalutaionFormSLA = async (req, res) => {
+  const { empId } = req.body;
+  try {
+    req.body.quarter[req.body.quarter.length-1].Evalutation_status_bySLA = true; 
+  console.log(req.body);
+
+
+    const user = await User.findOneAndUpdate({ empId: empId }, req.body, {
+      new: true,
+    });
+
+    if (user) {
+      res.send({ msg: "Successfully registered", user });
     } else {
       res.status(404).send({ msg: "User not found" });
     }
@@ -136,10 +161,10 @@ export const submitEvalutaionForm = async (req, res) => {
   }
 };
 
+
 export const sendMail = (req, res) => {
   const { email, userName, dateOfBirth, empId, dateOfEntryInCdac, quarter } =
     req.body;
-  // console.log("userofemail", req.body,"detail",quarter);
   const formattedTemplate = htmlTemplate
     .replace("{userName}", userName)
     .replace("{userName1}", userName)

@@ -4,6 +4,8 @@ import { useGlobalContext } from "../../StateContext.js";
 import { useNavigate } from "react-router-dom";
 import "./Reporting.css";
 import { useLocation } from "react-router-dom";
+import { BASE_URL } from '../Config.js';
+
 
 export const Reporting = () => {
   const { user, setuser, curuser, setcuruser, setCurEmp, loading } =
@@ -38,7 +40,7 @@ export const Reporting = () => {
     const getData = async () => {
       try {
         const empId = JSON.parse(localStorage.getItem("empId"));
-        const { data } = await axios.post("http://localhost:5000/getCurUser", {
+        const { data } = await axios.post( BASE_URL + "getCurUser", {
           empId,
         });
         setcuruser(data);
@@ -122,7 +124,7 @@ export const Reporting = () => {
             <div className="Rtable-down">
               <div className="REAC">
                 <div className="REAC-head">Evaluation request for</div>
-                {usersForEvaluation ? (
+                {usersForEvaluationbySLA ? (
                   <table className="REAC-table">
                     <thead>
                       <tr className="REAC-tr1">

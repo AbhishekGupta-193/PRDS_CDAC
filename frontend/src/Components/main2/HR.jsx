@@ -9,6 +9,9 @@ import { MdPendingActions } from "react-icons/md";
 import { IoIosCloudDone } from "react-icons/io";
 import { FaUserEdit } from "react-icons/fa";
 import "../Loader/Loader1.css";
+import { BASE_URL } from '../Config.js';
+
+
 
 export const HR = () => {
   const navigate = useNavigate();
@@ -54,7 +57,7 @@ export const HR = () => {
     const getData = async () => {
       try {
         const empId = JSON.parse(localStorage.getItem("empId"));
-        const { data } = await axios.post("http://localhost:5000/getCurUser", {
+        const { data } = await axios.post(BASE_URL + "getCurUser", {
           empId,
         });
         setcuruser(data);

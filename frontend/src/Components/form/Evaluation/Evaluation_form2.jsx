@@ -7,6 +7,8 @@ import Grid from "./Grid";
 import SelfAppraisalData from "./SelfAppraisalData";
 import e from "cors";
 import { useForm } from "react-hook-form";
+import { BASE_URL } from '../../Config.js';
+
 
 export const Evaluation_form2 = () => {
   const {
@@ -42,7 +44,7 @@ export const Evaluation_form2 = () => {
       parseInt(
         CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc5_bySLA
       ) +
-      parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc6);
+      parseInt(CurEmp.quarter[CurEmp.quarter.length - 1].scoreOfEvaluation.sc6_bySLA);
 
     var final_score =
       parseInt(
@@ -74,21 +76,12 @@ export const Evaluation_form2 = () => {
   }
 
   const handleSubmit1 = async (e) => {
-    setCurEmp({
-      ...CurEmp,
-      quarter: [
-        {
-          ...CurEmp.quarter[CurEmp.quarter.length - 1],
-
-          Evalutation_status_bySLA: true,
-        },
-      ],
-    });
+  
+    
     const { data } = axios.post(
-      "http://localhost:5000/submitEvalutaionForm",
+     BASE_URL +  "submitEvalutaionFormSLA",
       CurEmp
     );
-    localStorage.removeItem("EmployeeId");
     navigate("/main/Reporting");
   };
 
@@ -99,10 +92,10 @@ export const Evaluation_form2 = () => {
       try {
         const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
         const { data } = await axios.post(
-          "http://localhost:5000/getCurUserforForms",
+          BASE_URL + "getCurUserforForms",
           { EmployeeId }
         );
-
+        console.log(data, "curuser user leke aaya me bakcend se ");
         setCurEmp(data);
       } catch (error) {
         console.error(error);
@@ -537,6 +530,12 @@ export const Evaluation_form2 = () => {
                     <tr>
                       <td></td>
                       <td>TOTAL MARKS OUT OF 60 : </td>
+                      <td>
+                        {parseInt(
+                          CurEmp.quarter[CurEmp.quarter.length - 1]
+                            ?.scoreOfEvaluation?.totalScore
+                        )}
+                      </td>
                       <td>
                         {parseInt(
                           CurEmp.quarter[CurEmp.quarter.length - 1]

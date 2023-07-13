@@ -8,6 +8,8 @@ import Grid from "./Grid";
 import SelfAppraisalData from "./SelfAppraisalData";
 import e from "cors";
 import { useForm } from "react-hook-form";
+import { BASE_URL } from '../../Config.js';
+
 
 export const Evaluation_form = () => {
   const {
@@ -73,19 +75,11 @@ export const Evaluation_form = () => {
   }
 
   const handleSubmit1 = async (e) => {
-    setCurEmp({
-      ...CurEmp,
-      quarter: [
-        {
-          ...CurEmp.quarter[CurEmp.quarter.length - 1],
-
-          Evalutation_status: true,
-        },
-      ],
-    });
+ 
+    
     console.log(CurEmp, "Curemp bejhne se phle");
     const { data } = axios.post(
-      "http://localhost:5000/submitEvalutaionForm",
+     BASE_URL + "submitEvalutaionForm",
       CurEmp
     );
     localStorage.removeItem("EmployeeId");
@@ -99,17 +93,15 @@ export const Evaluation_form = () => {
       try {
         const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
         const { data } = await axios.post(
-          "http://localhost:5000/getCurUserforForms",
+          BASE_URL+"getCurUserforForms",
           { EmployeeId }
         );
-        console.log(data , "ye backend se aaya data hai jo curemp me set kr rhe");
         setCurEmp(data);
       } catch (error) {
         console.error(error);
       }
     };
       if(!CurEmp ){
-    console.log("funcction dcalled ");
         getData();
       }
     
@@ -140,7 +132,7 @@ export const Evaluation_form = () => {
       setRemark(() => PerformanceRemark());
       console.log("current remark ", Remark);
     }
-  }, [isVisible, final_score]);
+  }, [isVisible, final_score,CurEmp]);
 
   return (
     <>

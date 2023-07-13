@@ -7,6 +7,8 @@ import "../../css/mainNav.css";
 import { useGlobalContext } from "../../StateContext";
 import axios from "axios";
 import { ReactComponent as CDAC } from '../../Assets/CDAC_LOGO.svg';
+import { BASE_URL } from '../Config.js';
+
 
 
 export const MainNav2 = () => {
@@ -25,7 +27,7 @@ export const MainNav2 = () => {
   const getData = async () => {
     try {
       const empId = JSON.parse(localStorage.getItem("empId"));
-      const { data } = await axios.post("http://localhost:5000/getCurUser", {
+      const { data } = await axios.post(BASE_URL + "getCurUser", {
         empId,
       });
       setcuruser(data);

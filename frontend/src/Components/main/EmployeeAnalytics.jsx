@@ -3,6 +3,8 @@ import { useGlobalContext } from "../../StateContext";
 import { Graph } from "./Graph";
 import axios from "axios";
 import "./EmployeeAnalytics.css";
+import { BASE_URL } from '../Config.js';
+
 
 export const EmployeeAnalytics = () => {
   const { curuser, setcuruser } = useGlobalContext();
@@ -12,7 +14,7 @@ export const EmployeeAnalytics = () => {
     const getData = async () => {
       try {
         const empId = JSON.parse(localStorage.getItem("empId"));
-        const { data } = await axios.post("http://localhost:5000/getCurUser", {
+        const { data } = await axios.post( BASE_URL + "getCurUser", {
           empId,
         });
         setcuruser(data);

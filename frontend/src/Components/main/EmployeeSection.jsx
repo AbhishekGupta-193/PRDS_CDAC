@@ -3,6 +3,8 @@ import axios from "axios";
 import { useGlobalContext } from "../../StateContext.js";
 import { useNavigate } from "react-router-dom";
 import "./EmployeeSection.css";
+import { BASE_URL } from '../Config.js';
+
 
 
 export const EmployeeSection = () => {
@@ -14,7 +16,7 @@ export const EmployeeSection = () => {
     const getData = async () => {
       try {
         const empId = JSON.parse(localStorage.getItem("empId"));
-        const { data } = await axios.post("http://localhost:5000/getCurUser", {
+        const { data } = await axios.post(BASE_URL + "getCurUser", {
           empId,
         });
         setcuruser(data);

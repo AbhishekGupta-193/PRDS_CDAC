@@ -4,6 +4,8 @@ import { useGlobalContext } from "../../../StateContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
+import { BASE_URL } from '../../Config.js';
+
 
 const SelfAppraisalForm = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const SelfAppraisalForm = () => {
   const getData = async () => {
     try {
       const empId = JSON.parse(localStorage.getItem("empId"));
-      const {data} = await axios.post("http://localhost:5000/getCurUser", {empId});
+      const {data} = await axios.post( BASE_URL + "getCurUser", {empId});
       setcuruser(data);
       console.log("curuser inside getdatat",curuser);
 
@@ -105,7 +107,7 @@ const SelfAppraisalForm = () => {
      
 
     const { data } = await axios.post(
-      "http://localhost:5000/submitSelfAppraisel",
+      BASE_URL + "submitSelfAppraisel",
       {empId:curuser.empId,quarterId:curuser.quarter[curuser.quarter.length-1]._id, selfAppraisalData}
     );
     navigate("/main/EmployeeSection");

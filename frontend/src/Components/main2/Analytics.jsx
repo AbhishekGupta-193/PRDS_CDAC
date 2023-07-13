@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import { useGlobalContext } from "../../StateContext";
 import "./Analytics.css";
 import axios from "axios";
+import { BASE_URL } from '../Config.js';
+
 
 const Analytics = () => {
   const { curuser, setcuruser, user, loading } = useGlobalContext();
   const getData = async () => {
     try {
       const empId = JSON.parse(localStorage.getItem("empId"));
-      const { data } = await axios.post("http://localhost:5000/getCurUser", {
+      const { data } = await axios.post(BASE_URL + "getCurUser", {
         empId,
       });
       setcuruser(data);
-      console.log(curuser);
     } catch (error) {
       console.error(error);
     }

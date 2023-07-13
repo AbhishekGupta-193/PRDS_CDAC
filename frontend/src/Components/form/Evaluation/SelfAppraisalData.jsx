@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Evaluation_form } from "./Evaluation_form";
 import { useGlobalContext } from "../../../StateContext.js";
 import axios from "axios";
+import { BASE_URL } from '../../Config.js';
+
 
 const SelfAppraisalData = ({ isVisible, setisVisible ,final_score}) => {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const SelfAppraisalData = ({ isVisible, setisVisible ,final_score}) => {
       try {
         const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
         const { data } = await axios.post(
-          "http://localhost:5000/getCurUserforForms",
+         BASE_URL + "getCurUserforForms",
           { EmployeeId }
         );
   

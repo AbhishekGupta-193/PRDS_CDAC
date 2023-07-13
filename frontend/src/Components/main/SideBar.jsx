@@ -7,6 +7,7 @@ import "../../css/side-bar.css";
 import axios from "axios";
 
 import { useGlobalContext } from "../../StateContext.js";
+import { BASE_URL } from "../Config";
 
 export const SideBar = () => {
   const [active, setActive] = useState("employee");
@@ -16,7 +17,7 @@ export const SideBar = () => {
     const getData = async () => {
       try {
         const empId = JSON.parse(localStorage.getItem("empId"));
-        const { data } = await axios.post("http://localhost:5000/getCurUser", {
+        const { data } = await axios.post(BASE_URL + "getCurUser", {
           empId,
         });
         setcuruser(data);

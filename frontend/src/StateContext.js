@@ -2,6 +2,8 @@ import axios from "axios";
 
 import { useContext, useEffect } from "react";
 import React, { useState } from "react";
+import { BASE_URL } from './Components/Config.js';
+
 
 const AppContext = React.createContext();
 
@@ -12,7 +14,7 @@ const AppProvider = ({ children }) => {
   const [loading,setloading] = useState(false);
   const getusers = async () => {
     setloading(true)
-    const { data } = await axios.get("http://localhost:5000/getUsers");
+    const { data } = await axios.get(BASE_URL + "getUsers");
     const allemp = data.filter((element)=>element.Role.HR === false)
     setfilteredarray(allemp)
     setuser(allemp);

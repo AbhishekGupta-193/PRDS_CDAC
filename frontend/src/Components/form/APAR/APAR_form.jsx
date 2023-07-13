@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../StateContext";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
+import { BASE_URL } from '../../Config.js';
 
 function APAR_form() {
   const {
@@ -100,7 +101,7 @@ function APAR_form() {
     console.log(user, " updated current user");
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/submitAparForm",
+        BASE_URL + "submitAparForm",
         { empId: CurrentUser.empId, user }
       );
       // await axios.post("http://prds.onrender.com/send-email", CurrentUser);
