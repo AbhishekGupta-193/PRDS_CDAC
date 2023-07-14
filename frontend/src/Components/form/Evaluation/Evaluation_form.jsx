@@ -8,8 +8,7 @@ import Grid from "./Grid";
 import SelfAppraisalData from "./SelfAppraisalData";
 import e from "cors";
 import { useForm } from "react-hook-form";
-import { BASE_URL } from '../../Config.js';
-
+import { BASE_URL } from "../../Config.js";
 
 export const Evaluation_form = () => {
   const {
@@ -75,13 +74,8 @@ export const Evaluation_form = () => {
   }
 
   const handleSubmit1 = async (e) => {
- 
-    
     console.log(CurEmp, "Curemp bejhne se phle");
-    const { data } = axios.post(
-     BASE_URL + "submitEvalutaionForm",
-      CurEmp
-    );
+    const { data } = axios.post(BASE_URL + "submitEvalutaionForm", CurEmp);
     localStorage.removeItem("EmployeeId");
     navigate("/main/Reporting");
   };
@@ -92,19 +86,17 @@ export const Evaluation_form = () => {
     const getData = async () => {
       try {
         const EmployeeId = JSON.parse(localStorage.getItem("EmployeeId"));
-        const { data } = await axios.post(
-          BASE_URL+"getCurUserforForms",
-          { EmployeeId }
-        );
+        const { data } = await axios.post(BASE_URL + "getCurUserforForms", {
+          EmployeeId,
+        });
         setCurEmp(data);
       } catch (error) {
         console.error(error);
       }
     };
-      if(!CurEmp ){
-        getData();
-      }
-    
+    if (!CurEmp) {
+      getData();
+    }
 
     const PerformanceRemark = () => {
       let performance = "";
@@ -132,7 +124,7 @@ export const Evaluation_form = () => {
       setRemark(() => PerformanceRemark());
       console.log("current remark ", Remark);
     }
-  }, [isVisible, final_score,CurEmp]);
+  }, [isVisible, final_score, CurEmp]);
 
   return (
     <>
@@ -244,6 +236,54 @@ export const Evaluation_form = () => {
                   </div>
                 )}
               </div>
+              <div
+                className={`Table_rows ${errors.designation ? "error" : ""}`}
+              >
+                <span className="spantype_eva">Date of Filling Evaluation form :</span>
+                <input
+                  type="Date"
+                  placeholder="designation"
+                  name="designation"
+                  value={CurEmp.quarter[CurEmp.quarter.length - 1].dateOfFillingEvaluationForm}
+                  className="inpt_tag"
+                  disabled={!isEditing}
+                  onChange={(e) =>
+                    setCurEmp({
+                      ...CurEmp,
+                      quarter: [
+                        ...CurEmp.quarter.slice(
+                          0,
+                          CurEmp.quarter.length - 1
+                        ),
+                        {
+                          ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                          dateOfFillingEvaluationForm : e.target.value
+                        },
+                      ],
+                    })
+                  }
+                  // {...register("designation", {
+                  //   required: "",
+                  //   pattern: {
+                  //     value: /^[A-Za-z\s]+$/,
+                  //     message: "",
+                  //   },
+                  //   maxLength: {
+                  //     value: 20,
+                  //     message: "",
+                  //   },
+                  // })}
+                ></input>
+                {errors.designation && (
+                  <div className="error-container">
+                    <p className="error-message">
+                      {errors.designation.message}
+                    </p>
+                    <div className="error-icon">!</div>
+                  </div>
+                )}
+              </div>
+              
               <h4>PART - I</h4>
               <div className="table-mid">
                 <table>
@@ -654,9 +694,7 @@ export const Evaluation_form = () => {
                       ?.totalScore
                   )}
               </p>
-              <h3>
-                Overall performance of the Employee "{Remark}"
-              </h3>
+              <h3>Overall performance of the Employee "{Remark}"</h3>
             </div>
 
             <textarea
@@ -704,7 +742,7 @@ export const Evaluation_form = () => {
           <SelfAppraisalData
             isVisible={isVisible}
             setisVisible={setisVisible}
-            final_score = {final_score}
+            final_score={final_score}
           />
         </div>
       ) : (

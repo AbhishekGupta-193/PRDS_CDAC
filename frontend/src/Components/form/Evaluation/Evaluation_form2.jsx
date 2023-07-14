@@ -232,6 +232,53 @@ export const Evaluation_form2 = () => {
                     },
                   })}
                 ></input>
+                            <div
+                className={`Table_rows ${errors.designation ? "error" : ""}`}
+              >
+                <span className="spantype_eva">Date of Filling Evaluation form :</span>
+                <input
+                  type="Date"
+                  placeholder="designation"
+                  name="designation"
+                  value={CurEmp.quarter[CurEmp.quarter.length - 1].dateOfFillingEvaluationForm}
+                  className="inpt_tag"
+                  disabled={!isEditing}
+                  onChange={(e) =>
+                    setCurEmp({
+                      ...CurEmp,
+                      quarter: [
+                        ...CurEmp.quarter.slice(
+                          0,
+                          CurEmp.quarter.length - 1
+                        ),
+                        {
+                          ...CurEmp.quarter[CurEmp.quarter.length - 1],
+                          dateOfFillingEvaluationForm : e.target.value
+                        },
+                      ],
+                    })
+                  }
+                  // {...register("designation", {
+                  //   required: "",
+                  //   pattern: {
+                  //     value: /^[A-Za-z\s]+$/,
+                  //     message: "",
+                  //   },
+                  //   maxLength: {
+                  //     value: 20,
+                  //     message: "",
+                  //   },
+                  // })}
+                ></input>
+                {errors.designation && (
+                  <div className="error-container">
+                    <p className="error-message">
+                      {errors.designation.message}
+                    </p>
+                    <div className="error-icon">!</div>
+                  </div>
+                )}
+              </div>
                 {errors.designation && (
                   <div className="error-container">
                     <p className="error-message">
