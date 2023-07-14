@@ -20,29 +20,47 @@ export const HR = () => {
 
   const handle_APAR_issued = () => {
     const APAR_issued = user?.filter(
-      (element) => element.quarter.length === 3 && element.Role.HR === false && element.APAR_status === true
+      (element) =>  element.quarter.length!==0 && element.Role.HR === false && element.quarter[element.quarter.length-1].APAR_status === true
     );
     setfilteredarray(APAR_issued);
   };
+
   const handle_APAR_tobeIssued = () => {
-    const APAR_not_initiated = user?.filter(
-      (element) => element.quarter.length === 2 && element.Role.HR === false 
-    );
+    const APAR_not_initiated = user?.filter((element) => {
+      if (element.quarter.length !== 0) {
+        const appraiselPeriodTo = element.quarter[element.quarter.length - 1].appraiselPeriodTo;
+        
+        const timeDiff = appraiselPeriodTo.getTime() - new Date().getTime();
+        
+        const monthsDiff = timeDiff / (1000 * 60 * 60 * 24 * 30.4375);
+        
+        if (Math.abs(monthsDiff - 4) < 0.01) {
+          return (
+            element.Role.HR === false 
+          );
+        }
+      }
+      
+      return false;
+    });
+  
     setfilteredarray(APAR_not_initiated);
   };
+  
+  
   const handle_Self_Appraisal = () => {
     const Self_Appraisal_filled = user?.filter(
       (element) =>
-        element.quarter.length === 3 && element.Role.HR === false &&
-        element.APAR_status === true &&
-        element.SelfAppraisal_status === true
+         element.Role.HR === false &&
+         element.quarter[element.quarter.length-1].APAR_status === true &&
+         element.quarter[element.quarter.length-1].SelfAppraisal_status === true
     );
     setfilteredarray(Self_Appraisal_filled);
   };
   const handle_Evaluation_completed = () => {
     const APAR_completed = user?.filter(
       (element) =>
-        element.quarter.length === 3 && element.Role.HR === false &&
+        element.quarter.length !== 0  && element.Role.HR === false &&
         element.APAR_status === true &&
         element.SelfAppraisal_status === true &&
         element.Evalutation_status === true
