@@ -100,7 +100,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               }`}
             onClick={() => handleMouseclick("1c")}
           >
-            <span> <strong>1c</strong> </span><br />
+            <span> <strong>Progressing Performer</strong> </span><br />
             <span>Poor Performance High potential</span>
           </div>
           <div
@@ -110,7 +110,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               }`}
             onClick={() => handleMouseclick("1b")}
           >
-            <span> <strong>1b</strong> </span><br />
+            <span> <strong>Emerging Talent</strong> </span><br />
             <span>Good performance High potential</span>
           </div>
           <div
@@ -122,7 +122,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               handleMouseclick("1a")
             }
           >
-            <span> <strong>1a</strong> </span><br />
+            <span> <strong>High Achiever</strong> </span><br />
             <span>Outstanding performance High potential</span>
           </div>
           <div
@@ -134,7 +134,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               handleMouseclick("2c")
             }
           >
-            <span> <strong>2c</strong> </span><br />
+            <span> <strong>Growth-oriented Individual</strong> </span><br />
             <span>Poor Performance Moderate potential</span>
           </div>
           <div
@@ -146,7 +146,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               handleMouseclick("2b")
             }
           >
-            <span> <strong>2b</strong> </span><br />
+            <span> <strong>Competence Builder</strong> </span><br />
             <span> Good performance Moderate potential</span>
           </div>
           <div
@@ -158,7 +158,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               handleMouseclick("2a")
             }
           >
-            <span> <strong>2a</strong> </span><br />
+            <span> <strong>Capable Trainee</strong> </span><br />
             <span> Outstanding performance Moderate potential</span>
           </div>
           <div
@@ -168,7 +168,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               }`}
             onClick={() => handleMouseclick("3c")}
           >
-            <span> <strong>3a</strong> </span><br />
+            <span> <strong>Potential for Skill Advancement</strong> </span><br />
             <span>Poor Performance low potential</span>
           </div>
           <div
@@ -178,7 +178,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               }`}
             onClick={() => handleMouseclick("3b")}
           >
-            <span> <strong>3b</strong> </span><br />
+            <span> <strong>Learning Enthusiast</strong> </span><br />
             <span> Good performance low potential</span>
           </div>
           <div
@@ -190,7 +190,7 @@ const Grid = ({CurEmp,setCurEmp}) => {
               handleMouseclick("3a")
             }
           >
-            <span> <strong>3a</strong> </span><br />
+            <span> <strong>Seasoned Expert</strong> </span><br />
             <span>Outstanding performance low potential</span>
           </div>
         </div>

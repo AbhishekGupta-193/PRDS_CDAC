@@ -54,7 +54,7 @@ export const MainNav2 = () => {
         <div className="logo">
              <CDAC/>
         </div>
-          <span>PRIS</span>
+          <span>PRDS</span>
       </div>
 
       <div className="nav-right">

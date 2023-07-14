@@ -348,7 +348,7 @@ const SelfAppraisalForm = () => {
               Edit
             </button>
             <button type="button" onClick={lockAndSubmit}>
-              Lock
+              Review and Submit
             </button>
           </>
         )}

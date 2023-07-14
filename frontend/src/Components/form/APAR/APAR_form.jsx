@@ -717,7 +717,7 @@ function APAR_form() {
                 className="submitbtn_apar"
                 // onClick={handleSubmit1}
               >
-                Lock & Submit
+                Review & Submit
               </button>
             </div>
           )}

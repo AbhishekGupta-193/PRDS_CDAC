@@ -746,7 +746,7 @@ export const Evaluation_form2 = () => {
                     Edit
                   </button>
                   <button type="submit" className="submitbtn_Eval">
-                    Lock & Submit
+                    Review & Submit
                   </button>
                 </div>
               )}

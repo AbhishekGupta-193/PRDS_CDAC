@@ -60,12 +60,12 @@ export const EmployeeAnalytics = () => {
           </p>
         </div>
         <div className="EAC-extra-details-row-td-2">
-          <p>
+          {/* <p>
             <strong>Remark :</strong> {curuser.quarter[index].remark}{" "}
-          </p>
+          </p> */}
           <p>
             <strong>Employee Final Remark :</strong>{" "}
-            {curuser.quarter[index].employeeFinalRemark}
+            {curuser.quarter[index].employeeFinalRemark === "1a" ?"High Achiever" : ""}
           </p>
           <div className="EAC-extra-details-row-td-21">
             <p>
@@ -125,7 +125,7 @@ export const EmployeeAnalytics = () => {
                                 ).toLocaleDateString()}
                               </td>
                               <td className="EAC-td">
-                                {user.scoreOfEvaluation.totalScore}
+                                {user.scoreOfEvaluation.totalScore + user.scoreOfEvaluation.selfAppraisalScore + user.scoreOfEvaluation.achievementBeyondScore }
                               </td>
                               <td className="EAC-td">
                                 {user.employeeFinalRemark}

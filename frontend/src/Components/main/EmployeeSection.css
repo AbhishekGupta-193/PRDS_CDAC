@@ -58,34 +58,76 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
     border-radius: .6rem;
     padding: 1rem;
+    height: 80%;
+    gap: 1%;
+
 }
 
 .APAR_details-inside {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    height: 10%;
+    background-color: #D6E3FD;
+    border-radius: .5rem;
+    padding: 2%;
+
+}
+.details_apar{
+    display: flex;
+    flex-direction: column;
+    height: 62%;
+    margin-top: 5%;
+    width: 80%;
+
     
 }
 
 .APAR_details-inside-1 {
-    font-weight: 1000;
-    color: #04ed90;
+    font-weight: 600;
+    /* color: #04ed90; */
 }
 .APAR_details-inside-12 {
-    font-weight: 1000;
-    color: #1d63ef;
+    font-weight: 500;
+    /* color: #1d63ef; */
 }
 
 .APAR_details-inside-2 {
-    font-size: 1rem;
-    font-weight: 500;
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: 400;
+    gap: 2%;
+    margin-bottom: 1%;
+    height: 12%;
+
+    
+}
+.title_dash{
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F0F2F5;
+    border-radius: 5px;
+}
+.res_dash{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F0F2F5;
+    border-radius: 5px;
+
 }
 
 .SAbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 60%;
-    margin: 1rem;
+    margin-top: 4%;
     background-color: #D6E3FD;
     height: auto;
     border-radius: .5rem;
@@ -93,6 +135,8 @@
     outline: none;
     border: none;
     cursor: pointer;
+    height: 8%;
+
 }
 
 .self-appraisal-filled {

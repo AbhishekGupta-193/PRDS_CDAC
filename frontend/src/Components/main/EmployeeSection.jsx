@@ -40,7 +40,7 @@ export const EmployeeSection = () => {
         <div className="EmployeeDashContainer">
         <div className="EmployeeDashContainer_left">
           <div className="APAR_details-head">
-            <h3> Welcome {curuser.userName} !</h3>
+            <h3> Welcome !! {curuser.userName} </h3>
           </div>
           <div>
             <img src="http://picsum.photos/210
@@ -145,49 +145,88 @@ export const EmployeeSection = () => {
                       ).toLocaleDateString()}
                   </span>
                 </div>
+                <div className="details_apar">
                 <div className="APAR_details-inside-2">
-                  Name: {curuser.userName}
+                  <span className="title_dash">Name:</span>
+                  <span className="res_dash">{curuser.userName}</span>
+
+                  {/* Name:{curuser.userName}  */}
                 </div>
                 <div className="APAR_details-inside-2">
-                  Employee Id: {curuser.empId}
+                <span className="title_dash">Employee Id:</span>
+                  <span className="res_dash">{curuser.empId}</span>
+                   
                 </div>
                 <div className="APAR_details-inside-2">
-                  Date of Birth:{" "}
+                <span className="title_dash">Date of Birth:</span>
+                  <span className="res_dash">
+                  {" "}
                   {new Date(curuser.dateOfBirth).toLocaleDateString()}
+                  </span>
+                  
                 </div>
                 <div className="APAR_details-inside-2">
-                  Designation:{" "}
+                <span className="title_dash">Designation:</span>
+                  <span className="res_dash">
+                  {" "}
                   {curuser.quarter[curuser.quarter.length - 1].designation}
+                  </span>
+                  
                 </div>
                 <div className="APAR_details-inside-2">
-                  Present Pay:{" "}
+                <span className="title_dash">Present Pay:</span>
+                  <span className="res_dash">
+                  {" "}
                   {curuser.quarter[curuser.quarter.length - 1].presentPay}
+                  </span>
+                  
                 </div>
                 <div className="APAR_details-inside-2">
-                  Date of entry in CDAC:{" "}
+                <span className="title_dash">Date of entry in CDAC:</span>
+                  <span className="res_dash">
+                  {" "}
                   {new Date(curuser.dateOfEntryInCdac).toLocaleDateString()}
+                  </span>
+                  
                 </div>
                 <div className="APAR_details-inside-2">
-                  Absence other than leave:{" "}
+                <span className="title_dash">Absence other than leave:</span>
+                  <span className="res_dash">
+                  {" "}
                   {
                     curuser.quarter[curuser.quarter.length - 1]
                       .absenceOtherThanLeave
                   }
+                  </span>
+                  
                 </div>
                 <div className="APAR_details-inside-2">
-                  Leave availed:{" "}
+                <span className="title_dash">Leave availed:</span>
+                  <span className="res_dash">
+                  {" "}
                   {curuser.quarter[curuser.quarter.length - 1].leaveAvailed}
+                  </span>
+                  
                 </div>
                 <div className="APAR_details-inside-2">
-                  Date of filling APAR form:{" "}
+                <span className="title_dash">Date of filling APAR form:</span>
+                  <span className="res_dash">
+                  {" "}
                   {new Date(
                     curuser.quarter[
                       curuser.quarter.length - 1
                     ].dateOfFillingAparForm
                   ).toLocaleDateString()}
+                  </span>
+                 
                 </div>
                 <div className="APAR_details-inside-2">
-                  Group: {curuser.quarter[curuser.quarter.length - 1].group}
+                <span className="title_dash">Group:</span>
+                  <span className="res_dash">
+                  {curuser.quarter[curuser.quarter.length - 1].group}
+                  </span>
+                  
+                </div>
                 </div>
                 <button onClick={SelfAppraisalFormHandler} className="SAbtn">
                   Fill Self Appraisal
